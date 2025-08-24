@@ -5,6 +5,10 @@ Este repositório contém scripts e documentação para o gerenciamento de um ba
 ## Contexto
 O projeto utiliza um dataset real de vacinação, contendo informações detalhadas sobre pacientes, vacinas, estabelecimentos de saúde, doses aplicadas e outros dados relevantes para o controle e análise da imunização.
 
+## Fonte do Dataset
+
+Dados Gov: [https://dados.gov.br/dados/conjuntos-dados/doses-aplicadas-pelo-programa-de-nacional-de-imunizacoes-pni-2025](https://dados.gov.br/dados/conjuntos-dados/doses-aplicadas-pelo-programa-de-nacional-de-imunizacoes-pni-2025)
+
 ### Exemplo de colunas do dataset:
 - co_documento
 - co_paciente
@@ -84,3 +88,75 @@ O objetivo deste projeto é facilitar o armazenamento, consulta e análise dos d
 ---
 
 Projeto acadêmico para a disciplina de Gerenciamento de Banco de Dados.
+
+
+## Perguntas que agregam o dataset
+
+**1. Pacientes**
+- Qual o perfil demográfico dos vacinados (idade, sexo, localização)?
+
+<br>
+
+**2. Vacinas**
+- Qual vacina é mais utilizada em cada região?
+ 
+<br>
+
+**3. Doses**
+- Quantos pacientes completaram o ciclo vacinal?
+- Qual o intervalo médio entre as doses?
+
+<br>
+
+**4. Unidades_Saude**
+- Quais unidades de saúde aplicaram mais doses?
+ 
+<br>
+
+**5. Profissionais**
+- Qual profissional aplicou mais vacinas?
+
+<br>
+
+**6. Eventos_Adversos**
+- Qual a taxa de eventos adversos por tipo de vacina?
+
+<br>
+
+**7. Campanhas_Vacinacao**
+- Qual campanha resultou em maior adesão?
+
+<br>
+
+**8. Participacao_Campanha**
+- Quantos pacientes participaram de cada campanha?
+
+<br>
+
+**9. Estoque_Vacinas**
+- Qual o nível de estoque atual de cada vacina por unidade?
+
+<br>
+
+**10. Lotes_Vacinas**
+- Algum lote de vacina está próximo do vencimento?
+
+<br>
+
+**11. Movimentacao_Estoque**
+- Qual unidade teve maior movimentação de vacinas no último mês?
+
+<br>
+
+**12. Enderecos_Pacientes**
+- Qual bairro/cidade tem maior cobertura vacinal?
+
+<br>
+
+**13. Grupos_Risco**
+- Qual grupo de risco foi mais vacinado?
+
+<br>
+
+**14. Paciente_Grupo_Risco**
+- Qual a taxa de vacinação entre pacientes de grupos de risco?
