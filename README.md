@@ -9,6 +9,10 @@ O projeto utiliza um dataset real de vacinação, contendo informações detalha
 
 Dados Gov: [https://dados.gov.br/dados/conjuntos-dados/doses-aplicadas-pelo-programa-de-nacional-de-imunizacoes-pni-2025](https://dados.gov.br/dados/conjuntos-dados/doses-aplicadas-pelo-programa-de-nacional-de-imunizacoes-pni-2025)
 
+## Dicionário de dados do Dataset
+
+Dicionário: [https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/dbbni/Dicionario_tb_ria_rotina.pdf](https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/dbbni/Dicionario_tb_ria_rotina.pdf)
+
 ### Exemplo de colunas do dataset:
 - co_documento
 - co_paciente
