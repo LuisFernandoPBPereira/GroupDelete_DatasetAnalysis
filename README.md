@@ -11,7 +11,7 @@ Dados Gov: [https://dados.gov.br/dados/conjuntos-dados/doses-aplicadas-pelo-prog
 
 ## Planner
 
-Trello: [https://trello.com/b/12suGTkF/delete-storytelling)
+Trello: https://trello.com/b/12suGTkF/delete-storytelling
 
 ## Dicionário de dados do Dataset
 
