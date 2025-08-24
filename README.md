@@ -9,7 +9,7 @@ O projeto utiliza um dataset real de vacinação, contendo informações detalha
 
 Dados Gov: [https://dados.gov.br/dados/conjuntos-dados/doses-aplicadas-pelo-programa-de-nacional-de-imunizacoes-pni-2025](https://dados.gov.br/dados/conjuntos-dados/doses-aplicadas-pelo-programa-de-nacional-de-imunizacoes-pni-2025)
 
-## Trello
+## Planner
 
 Trello: [https://trello.com/b/12suGTkF/delete-storytelling)
 
