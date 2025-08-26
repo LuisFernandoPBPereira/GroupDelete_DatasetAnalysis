@@ -2,148 +2,153 @@ CREATE DATABASE DB_VACINACAO;
 
 USE DB_VACINACAO;
 
+
 CREATE TABLE RacaCorPaciente (
-    co_raca_cor_paciente INT PRIMARY KEY,
-    no_raca_cor_paciente VARCHAR(100)
+    CodigoRacaCorPaciente INT PRIMARY KEY,
+    NomeRacaCorPaciente VARCHAR(100)
 );
+
 
 CREATE TABLE PaisPaciente (
-    co_pais_paciente INT PRIMARY KEY,
-    no_pais_paciente VARCHAR(100)
+    CodigoPaisPaciente INT PRIMARY KEY,
+    NomePaisPaciente VARCHAR(100)
 );
+
 
 CREATE TABLE EtniaIndigenaPaciente (
-    co_etnia_indigena_paciente INT PRIMARY KEY,
-    no_etnia_indigena_paciente VARCHAR(150)
+    CodigoEtniaIndigenaPaciente INT PRIMARY KEY,
+    NomeEtniaIndigenaPaciente VARCHAR(150)
 );
 
+
 CREATE TABLE CondicaoMaternal (
-    co_condicao_maternal INT PRIMARY KEY,
-    ds_condicao_maternal VARCHAR(150)
+    CodigoCondicaoMaternal INT PRIMARY KEY,
+    DescricaoCondicaoMaternal VARCHAR(150)
 );
 
 CREATE TABLE MunicipioPaciente (
-    co_municipio_paciente INT PRIMARY KEY,
-    no_municipio_paciente VARCHAR(150),
-    sg_uf_paciente CHAR(2),
-    no_uf_paciente VARCHAR(100),
-    nu_cep_paciente VARCHAR(20)
+    CodigoMunicipioPaciente INT PRIMARY KEY,
+    NomeMunicipioPaciente VARCHAR(150),
+    SgUfPaciente CHAR(2),
+    NomeUfPaciente VARCHAR(100),
+    NumeroCepPaciente VARCHAR(20)
 );
 
 CREATE TABLE Paciente (
-    co_paciente BIGINT PRIMARY KEY,
-    tp_sexo_paciente CHAR(1),
-    co_raca_cor_paciente INT FOREIGN KEY REFERENCES RacaCorPaciente(co_raca_cor_paciente),
-    co_municipio_paciente INT FOREIGN KEY REFERENCES MunicipioPaciente(co_municipio_paciente),
-    co_pais_paciente INT FOREIGN KEY REFERENCES PaisPaciente(co_pais_paciente),
-    co_etnia_indigena_paciente INT NULL FOREIGN KEY REFERENCES EtniaIndigenaPaciente(co_etnia_indigena_paciente),
-    nu_idade_paciente INT,
-    co_condicao_maternal INT NULL FOREIGN KEY REFERENCES CondicaoMaternal(co_condicao_maternal),
-    ds_nacionalidade_paciente VARCHAR(100)
+    CodigoPaciente BIGINT PRIMARY KEY,
+    TipoSexoPaciente CHAR(1),
+    CodigoRacaCorPaciente INT FOREIGN KEY REFERENCES RacaCorPaciente(CodigoRacaCorPaciente),
+    CodigoMunicipioPaciente INT FOREIGN KEY REFERENCES MunicipioPaciente(CodigoMunicipioPaciente),
+    CodigoPaisPaciente INT FOREIGN KEY REFERENCES PaisPaciente(CodigoPaisPaciente),
+    CodigoEtniaIndigenaPaciente INT NULL FOREIGN KEY REFERENCES EtniaIndigenaPaciente(CodigoEtniaIndigenaPaciente),
+    NumeroIdadePaciente INT,
+    CodigoCondicaoMaternal INT NULL FOREIGN KEY REFERENCES CondicaoMaternal(CodigoCondicaoMaternal),
+    DescricaoNacionalidadePaciente VARCHAR(100)
 );
 
 CREATE TABLE MunicipioEstabelecimento (
-    co_municipio_estabelecimento INT PRIMARY KEY,
-    no_municipio_estabelecimento VARCHAR(150),
-    sg_uf_estabelecimento CHAR(2),
-    no_uf_estabelecimento VARCHAR(100)
+    CodigoMunicipioEstabelecimento INT PRIMARY KEY,
+    NomeMunicipioEstabelecimento VARCHAR(150),
+    SgUfEstabelecimento CHAR(2),
+    NomeUfEstabelecimento VARCHAR(100)
 );
 
 CREATE TABLE TipoEstabelecimento (
-    co_tipo_estabelecimento INT PRIMARY KEY,
-    ds_tipo_estabelecimento VARCHAR(150)
+    CodigoTipoEstabelecimento INT PRIMARY KEY,
+    DescricaoTipoEstabelecimento VARCHAR(150)
 );
 
 CREATE TABLE NaturezaEstabelecimento (
-    co_natureza_estabelecimento INT PRIMARY KEY,
-    ds_natureza_estabelecimento VARCHAR(150)
+    CodigoNaturezaEstabelecimento INT PRIMARY KEY,
+    DescricaoNaturezaEstabelecimento VARCHAR(150)
 );
 
 CREATE TABLE Estabelecimento (
-    co_cnes_estabelecimento BIGINT PRIMARY KEY,
-    no_razao_social_estabelecimento VARCHAR(255),
-    no_fantasia_estalecimento VARCHAR(255),
-    co_municipio_estabelecimento INT FOREIGN KEY REFERENCES MunicipioEstabelecimento(co_municipio_estabelecimento),
-    co_tipo_estabelecimento INT FOREIGN KEY REFERENCES TipoEstabelecimento(co_tipo_estabelecimento),
-    co_natureza_estabelecimento INT FOREIGN KEY REFERENCES NaturezaEstabelecimento(co_natureza_estabelecimento)
+    CodigoCnesEstabelecimento BIGINT PRIMARY KEY,
+    NomeRazaoSocialEstabelecimento VARCHAR(255),
+    NomeFantasiaEstalecimento VARCHAR(255),
+    CodigoMunicipioEstabelecimento INT FOREIGN KEY REFERENCES MunicipioEstabelecimento(CodigoMunicipioEstabelecimento),
+    CodigoTipoEstabelecimento INT FOREIGN KEY REFERENCES TipoEstabelecimento(CodigoTipoEstabelecimento),
+    CodigoNaturezaEstabelecimento INT FOREIGN KEY REFERENCES NaturezaEstabelecimento(CodigoNaturezaEstabelecimento)
 );
 
 CREATE TABLE SistemaOrigem (
-    co_sistema_origem INT PRIMARY KEY,
-    ds_sistema_origem VARCHAR(150)
+    CodigoSistemaOrigem INT PRIMARY KEY,
+    DescricaoSistemaOrigem VARCHAR(150)
 );
 
 CREATE TABLE OrigemRegistro (
-    co_origem_registro INT PRIMARY KEY,
-    ds_origem_registro VARCHAR(150)
+    CodigoOrigemRegistro INT PRIMARY KEY,
+    DescricaoOrigemRegistro VARCHAR(150)
 );
 
 CREATE TABLE EstrategiaVacinacao (
-    co_estrategia_vacinacao INT PRIMARY KEY,
-    ds_estrategia_vacinacao VARCHAR(150)
+    CodigoEstrategiaVacinacao INT PRIMARY KEY,
+    DescricaoEstrategiaVacinacao VARCHAR(150)
 );
 
 CREATE TABLE Documento (
-    co_documento BIGINT PRIMARY KEY,
-    co_paciente BIGINT FOREIGN KEY REFERENCES Paciente(co_paciente),
-    co_troca_documento BIGINT NULL,
-    st_documento BIT,
-    dt_entrada_rnds DATETIME,
-    dt_deletado_rnds DATETIME NULL,
-    co_sistema_origem INT FOREIGN KEY REFERENCES SistemaOrigem(co_sistema_origem),
-    co_origem_registro INT FOREIGN KEY REFERENCES OrigemRegistro(co_origem_registro),
-    co_estrategia_vacinacao INT FOREIGN KEY REFERENCES EstrategiaVacinacao(co_estrategia_vacinacao)
+    CodigoDocumento BIGINT PRIMARY KEY,
+    CodigoPaciente BIGINT FOREIGN KEY REFERENCES Paciente(CodigoPaciente),
+    CodigoTrocaDocumento BIGINT NULL,
+    StDocumento BIT,
+    DataEntradaRnDescricao DATETIME,
+    DataDeletadoRnDescricao DATETIME NULL,
+    CodigoSistemaOrigem INT FOREIGN KEY REFERENCES SistemaOrigem(CodigoSistemaOrigem),
+    CodigoOrigemRegistro INT FOREIGN KEY REFERENCES OrigemRegistro(CodigoOrigemRegistro),
+    CodigoEstrategiaVacinacao INT FOREIGN KEY REFERENCES EstrategiaVacinacao(CodigoEstrategiaVacinacao)
 );
 
+
 CREATE TABLE DoseVacina (
-    co_dose_vacina INT PRIMARY KEY,
-    ds_dose_vacina VARCHAR(100)
+    CodigoDoseVacina INT PRIMARY KEY,
+    DescricaoDoseVacina VARCHAR(100)
 );
 
 CREATE TABLE LocalAplicacao (
-    co_local_aplicacao INT PRIMARY KEY,
-    ds_local_aplicacao VARCHAR(150)
+    CodigoLocalAplicacao INT PRIMARY KEY,
+    DescricaoLocalAplicacao VARCHAR(150)
 );
 
 
 CREATE TABLE ViaAdministracao (
-    co_via_administracao INT PRIMARY KEY,
-    ds_via_administracao VARCHAR(150)
+    CodigoViaAdministracao INT PRIMARY KEY,
+    DescricaoViaAdministracao VARCHAR(150)
 );
 
 CREATE TABLE VacinaFabricante (
-    co_vacina_fabricante INT PRIMARY KEY,
-    ds_vacina_fabricante VARCHAR(150)
+    CodigoVacinaFabricante INT PRIMARY KEY,
+    DescricaoVacinaFabricante VARCHAR(150)
 );
 
 CREATE TABLE GrupoAtendimento (
-    co_vacina_grupo_atendimento INT PRIMARY KEY,
-    ds_vacina_grupo_atendimento VARCHAR(150)
+    CodigoVacinaGrupoAtendimento INT PRIMARY KEY,
+    DescricaoVacinaGrupoAtendimento VARCHAR(150)
 );
 
 CREATE TABLE CategoriaAtendimento (
-    co_vacina_categoria_atendimento INT PRIMARY KEY,
-    ds_vacina_categoria_atendimento VARCHAR(150)
+    CodigoVacinaCategoriaAtendimento INT PRIMARY KEY,
+    DescricaoVacinaCategoriaAtendimento VARCHAR(150)
 );
 
 CREATE TABLE Vacina (
-    co_vacina BIGINT PRIMARY KEY,
-    sg_vacina VARCHAR(50),
-    co_dose_vacina INT FOREIGN KEY REFERENCES DoseVacina(co_dose_vacina),
-    co_local_aplicacao INT FOREIGN KEY REFERENCES LocalAplicacao(co_local_aplicacao),
-    co_via_administracao INT FOREIGN KEY REFERENCES ViaAdministracao(co_via_administracao),
-    co_vacina_fabricante INT FOREIGN KEY REFERENCES VacinaFabricante(co_vacina_fabricante),
-    co_vacina_grupo_atendimento INT FOREIGN KEY REFERENCES GrupoAtendimento(co_vacina_grupo_atendimento),
-    co_vacina_categoria_atendimento INT FOREIGN KEY REFERENCES CategoriaAtendimento(co_vacina_categoria_atendimento),
-    co_lote_vacina VARCHAR(100)
+    CodigoVacina BIGINT PRIMARY KEY,
+    SgVacina VARCHAR(50),
+    CodigoDoseVacina INT FOREIGN KEY REFERENCES DoseVacina(CodigoDoseVacina),
+    CodigoLocalAplicacao INT FOREIGN KEY REFERENCES LocalAplicacao(CodigoLocalAplicacao),
+    CodigoViaAdministracao INT FOREIGN KEY REFERENCES ViaAdministracao(CodigoViaAdministracao),
+    CodigoVacinaFabricante INT FOREIGN KEY REFERENCES VacinaFabricante(CodigoVacinaFabricante),
+    CodigoVacinaGrupoAtendimento INT FOREIGN KEY REFERENCES GrupoAtendimento(CodigoVacinaGrupoAtendimento),
+    CodigoVacinaCategoriaAtendimento INT FOREIGN KEY REFERENCES CategoriaAtendimento(CodigoVacinaCategoriaAtendimento),
+    CodigoLoteVacina VARCHAR(100)
 );
 
 CREATE TABLE AplicacaoVacina (
-    id_aplicacao BIGINT IDENTITY PRIMARY KEY,
-    co_documento BIGINT FOREIGN KEY REFERENCES Documento(co_documento),
-    co_paciente BIGINT FOREIGN KEY REFERENCES Paciente(co_paciente),
-    co_cnes_estabelecimento BIGINT FOREIGN KEY REFERENCES Estabelecimento(co_cnes_estabelecimento),
-    co_vacina BIGINT FOREIGN KEY REFERENCES Vacina(co_vacina),
-    dt_vacina DATE
+    IdAplicacao BIGINT IDENTITY PRIMARY KEY,
+    CodigoDocumento BIGINT FOREIGN KEY REFERENCES Documento(CodigoDocumento),
+    CodigoPaciente BIGINT FOREIGN KEY REFERENCES Paciente(CodigoPaciente),
+    CodigoCnesEstabelecimento BIGINT FOREIGN KEY REFERENCES Estabelecimento(CodigoCnesEstabelecimento),
+    CodigoVacina BIGINT FOREIGN KEY REFERENCES Vacina(CodigoVacina),
+    DataVacina DATE
 );
 
