@@ -36,7 +36,8 @@ O projeto utiliza um **dataset real de vacinação**, contendo informações det
 
 ## 🗂️ Planejamento
 
-- **Trello**: [Board do Projeto](https://trello.com/b/12suGTkF/delete-storytelling)  
+- **Trello**: [Board do Projeto](https://trello.com/b/12suGTkF/delete-storytelling)
+- **Notion**: [Plano de Análise de Dados](https://www.notion.so/Plano-de-An-lise-de-Dados-de-Vacina-o-fe0b0b8b117241698e82b01de8811714?t=25b56f88d137807a832c00a9f0ff9442)
 
 ---
 
