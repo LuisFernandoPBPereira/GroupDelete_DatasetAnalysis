@@ -66,7 +66,11 @@ O dataset possui diversas colunas representando informações sobre pacientes, v
 - Apoiar a tomada de decisão em saúde pública.
 
   
+## Modelo Lógico
+https://lucid.app/lucidchart/8ab629d2-3e6f-45cd-ae11-b1170bd3fe49/edit?invitationId=inv_bce83d8d-ac52-4c6e-9e82-f69fbf091324&page=0_0#
 
+## Modelo Físico
+https://lucid.app/lucidchart/35e4a992-cc23-4e8a-864d-f4b806ccbcfe/edit?viewport_loc=1626%2C-2755%2C5593%2C3316%2C0_0&invitationId=inv_6fc621f9-b140-4649-afcc-890d184f6fe1
 
 
 
