@@ -29,8 +29,10 @@ O projeto utiliza um **dataset real de vacinação**, contendo informações det
 
 ## 🔗 Fontes de Dados
 
-- **Dataset**: [PNI - Programa Nacional de Imunizações (2025)](https://dados.gov.br/dados/conjuntos-dados/doses-aplicadas-pelo-programa-de-nacional-de-imunizacoes-pni-2025)  
+- **Dataset**: Vacinação - Janeiro 2025 [PNI - Programa Nacional de Imunizações (2025)](https://dados.gov.br/dados/conjuntos-dados/doses-aplicadas-pelo-programa-de-nacional-de-imunizacoes-pni-2025)  
 - **Dicionário de Dados**: [Documento oficial PDF](https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/dbbni/Dicionario_tb_ria_rotina.pdf)  
+
+Para acessar o dataset, abra o link, vá até a aba **Recursos**, lá estará o dataset **Vacinação - Janeiro 2025**
 
 ---
 
