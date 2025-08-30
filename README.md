@@ -47,7 +47,7 @@ Para acessar o dataset, abra o link, vá até a aba **Recursos**, lá estará o 
 
 O dataset possui diversas colunas representando informações sobre pacientes, vacinas e unidades de saúde.  
 
-📄 Para a lista completa, consulte o [dicionário de dados](https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/dbbni/Dicionario_tb_ria_rotina.pdf).  
+📄 Para a lista completa, consulte o [dicionário de dados](https://www.notion.so/Dicion-rio-de-Dados-25cd1f25e22f80bd83dadac84c6566b2).  
 
 ### Exemplos de colunas:
 - `co_documento`  
@@ -67,6 +67,20 @@ O dataset possui diversas colunas representando informações sobre pacientes, v
 - Permitir estudos epidemiológicos e comparativos.  
 - Apoiar a tomada de decisão em saúde pública.
 
+## 📊 Plano De Análise De Dados
+(Perguntas resumidas para análise estratégica)
+
+1. Qual é o perfil demográfico da população vacinada?  
+2. Qual a proporção de pacientes indígenas vacinados e suas respectivas etnias?  
+3. Como está a distribuição de vacinas por Estado e município?  
+4. Quais municípios lideram e quais têm menor número de aplicações?  
+5. Qual a quantidade de cada dose aplicada (1ª, 2ª e reforço)?  
+6. Quais fabricantes de vacinas são mais utilizados?  
+7. Qual a distribuição de vacinas por tipo de estabelecimento (UBS, Hospital, etc.)?  
+8. Como evoluiu o número de doses aplicadas ao longo do tempo?
+
+📂 **Material completo**  
+Para acessar todas as perguntas detalhadas, junto com as tabelas e fontes de dados relacionadas, consulte o documento completo em: [Plano de Análise de Dados](https://www.notion.so/Plano-de-An-lise-de-Dados-de-Vacina-o-fe0b0b8b117241698e82b01de8811714?t=25b56f88d137807a832c00a9f0ff9442)
   
 ## Modelo Lógico
 🔗 [Abrir no Lucidchart](https://lucid.app/lucidchart/8ab629d2-3e6f-45cd-ae11-b1170bd3fe49/edit?invitationId=inv_bce83d8d-ac52-4c6e-9e82-f69fbf091324&page=0_0#)
