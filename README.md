@@ -7,18 +7,14 @@ O projeto visa **extrair insights valiosos e responder a perguntas de negócio c
 
 ## 📖 Índice
 
-## 📖 Índice
-
-## 📖 Índice
-
-1. [Contexto](#contexto)
-2. [Fontes de Dados](#fontes-de-dados)
-3. [Planejamento](#planejamento)
-4. [Estrutura do Dataset](#estrutura-do-dataset)
-5. [Objetivo](#objetivo)
-6. [Plano de Análise de Dados](#plano-de-análise-de-dados)
-7. [Modelagem de Dados](#modelagem-de-dados)
-8. [Guia de Importação de Dados com BULK INSERT](#guia-de-importao-de-dados-com-bulk-insert)
+1. [Contexto](#-contexto)
+2. [Fontes de Dados](#-fontes-de-dados)
+3. [Planejamento](#-planejamento)
+4. [Estrutura do Dataset](#-estrutura-do-dataset)
+5. [Objetivo](#-objetivo)
+6. [Plano de Análise de Dados](#-plano-de-análise-de-dados)
+7. [Modelagem de Dados](#-modelagem-de-dados)
+8. [Guia de Importação de Dados com BULK INSERT](#-guia-de-importao-de-dados-com-bulk-insert)
    
 ---
 
