@@ -14,7 +14,7 @@ O projeto visa **extrair insights valiosos e responder a perguntas de negócio c
 5. [Objetivo](#-objetivo)
 6. [Plano de Análise de Dados](#-plano-de-análise-de-dados)
 7. [Modelagem de Dados](#-modelagem-de-dados)
-8. [Guia de Importação de Dados com BULK INSERT](#-guia-de-importao-de-dados-com-bulk-insert)
+8. [Guia de Importação de Dados com BULK INSERT](#-Guia-de-Importação-de-Dados-com-BULK-INSERT)
    
 ---
 
