@@ -32,17 +32,28 @@ O projeto utiliza um **dataset real de vacinação**, contendo informações det
 
 ## 🔗 Fontes de Dados
 
-- **Dataset**: Vacinação - Janeiro 2025 [PNI - Programa Nacional de Imunizações (2025)](https://dados.gov.br/dados/conjuntos-dados/doses-aplicadas-pelo-programa-de-nacional-de-imunizacoes-pni-2025)  
+- **Dataset**: Vacinação - Janeiro 2025 [PNI - Programa Nacional de Imunizações (2025)](https://dados.gov.br/dados/conjuntos-dados/doses-aplicadas-pelo-programa-de-nacional-de-imunizacoes-pni-2025)
+- **Dicionário de Dados**: [Documento oficial PDF](https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/dbbni/Dicionario_tb_ria_rotina.pdf)  
 
-Para acessar o dataset, abra o link, vá até a aba **Recursos**, lá estará o dataset **Vacinação - Janeiro 2025**
+### 📂 Acesso ao Dataset
+
+Para acessar o dataset, siga um dos caminhos abaixo:
+
+- **Pelo site**:  
+  1. Abra o link do Dataset.  
+  2. Vá até a aba **Recursos**.  
+  3. Localize o dataset **Vacinação - Janeiro 2025**.  
+
+- **Download direto**:  
+  [📥 Baixar dataset no Google Drive](https://drive.google.com/file/d/1aBDNPhWdbf-iHiI8nzHYy9YqVGK7SyEw/view?usp=sharing)
+
 
 ---
 
 ## 🗂️ Planejamento
 
 - **Trello**: [Board do Projeto](https://trello.com/b/12suGTkF/delete-storytelling)
-- **Notion**: [Plano de Análise de Dados](https://www.notion.so/Plano-de-An-lise-de-Dados-de-Vacina-o-fe0b0b8b117241698e82b01de8811714?t=25b56f88d137807a832c00a9f0ff9442)
-
+  
 ---
 
 ## 🧩 Estrutura do Dataset
@@ -97,7 +108,7 @@ O dataset possui diversas colunas representando informações sobre pacientes, v
 📂 **Material completo**  
 Para acessar todas as perguntas detalhadas, junto com as tabelas e fontes de dados relacionadas, consulte o documento completo em: [Plano de Análise de Dados](https://www.notion.so/Plano-de-An-lise-de-Dados-de-Vacina-o-fe0b0b8b117241698e82b01de8811714?t=25b56f88d137807a832c00a9f0ff9442)
 
- ## 🗂️ Modelagem de Dados  
+ ## Modelagem de Dados  
 
 ### 📐 Modelo Lógico  
 🔗 [Abrir no Lucidchart](https://lucid.app/lucidchart/8ab629d2-3e6f-45cd-ae11-b1170bd3fe49/edit?invitationId=inv_bce83d8d-ac52-4c6e-9e82-f69fbf091324&page=0_0#)  
@@ -111,7 +122,7 @@ Para acessar todas as perguntas detalhadas, junto com as tabelas e fontes de dad
 
 <img width="800" alt="Diagrama Modelo Físico" src="https://github.com/user-attachments/assets/cb5ab105-6a20-4aec-882e-1d491fe1ff72" />  
 
-## 📥 Guia de Importação de Dados com BULK INSERT
+## Guia de Importação de Dados com BULK INSERT
 
 Este guia mostra como carregar dados de um arquivo **CSV** para uma tabela no **SQL Server** utilizando o comando `BULK INSERT`.
 
