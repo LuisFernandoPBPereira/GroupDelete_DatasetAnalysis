@@ -7,13 +7,16 @@ O projeto visa **extrair insights valiosos e responder a perguntas de negócio c
 
 ## 📖 Índice
 
+## 📖 Índice
+
 1. [Contexto](#-contexto)  
 2. [Fontes de Dados](#-fontes-de-dados)  
 3. [Planejamento](#️-planejamento)  
 4. [Estrutura do Dataset](#-estrutura-do-dataset)  
-5. [Objetivo](#-objetivo)
-6. [Plano de Análise de Dados](#-Plano-de-Análise-de-Dados)
-7. [Modelagem de Dados](#-Modelagem-de-Dados)
+5. [Objetivo](#-objetivo)  
+6. [Plano de Análise de Dados](#-plano-de-análise-de-dados)  
+7. [Modelagem de Dados](#-modelagem-de-dados)
+8. [Guia de Importação de Dados](#-Guia-de-Importação-de-Tabelas-com-BULK-INSERT)
    
 ---
 
@@ -110,6 +113,25 @@ Para acessar todas as perguntas detalhadas, junto com as tabelas e fontes de dad
 
 <img width="800" alt="Diagrama Modelo Físico" src="https://github.com/user-attachments/assets/cb5ab105-6a20-4aec-882e-1d491fe1ff72" />  
 
+## 📥 Guia de Importação de Dados com BULK INSERT
+
+Este guia mostra como carregar dados de um arquivo **CSV** para uma tabela no **SQL Server** utilizando o comando `BULK INSERT`.
+
+---
+
+### 🔹 Estrutura básica do comando
+
+```sql
+BULK INSERT vacinacao_jan_2025 -- Caso seja necessário alterar o nome da tabela, primeiro atualize o arquivo CreateGeral e, em seguida, ajuste também neste local.
+FROM 'C:\caminho\arquivo.csv'  -- Caminho do arquivo CSV
+WITH (
+    FIELDTERMINATOR = ';',   -- Separador de campos (padrão: `;`)
+    ROWTERMINATOR = '\n',    -- Separador de linhas
+    FIRSTROW = 2,            -- Ignora a primeira linha (cabeçalho)
+    TABLOCK                  -- Otimiza a inserção em lote
+);
+```
+📌 **Observação:** Antes de realizar a importação dos dados, certifique-se de executar o arquivo **CreateGeral.sql**, responsável pela criação da estrutura das tabelas no banco.
 
 
 
