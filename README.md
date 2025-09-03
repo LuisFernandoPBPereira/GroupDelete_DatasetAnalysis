@@ -12,6 +12,8 @@ O projeto visa **extrair insights valiosos e responder a perguntas de negócio c
 3. [Planejamento](#️-planejamento)  
 4. [Estrutura do Dataset](#-estrutura-do-dataset)  
 5. [Objetivo](#-objetivo)
+6. [Perguntas](#-Plano-de-Análise-de-Dados)
+7. [Modelagem de Dados](#-🗂️-Modelagem-de-Dados)
    
 ---
 
@@ -30,7 +32,6 @@ O projeto utiliza um **dataset real de vacinação**, contendo informações det
 ## 🔗 Fontes de Dados
 
 - **Dataset**: Vacinação - Janeiro 2025 [PNI - Programa Nacional de Imunizações (2025)](https://dados.gov.br/dados/conjuntos-dados/doses-aplicadas-pelo-programa-de-nacional-de-imunizacoes-pni-2025)  
-- **Dicionário de Dados**: [Documento oficial PDF](https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/dbbni/Dicionario_tb_ria_rotina.pdf)  
 
 Para acessar o dataset, abra o link, vá até a aba **Recursos**, lá estará o dataset **Vacinação - Janeiro 2025**
 
@@ -50,47 +51,64 @@ O dataset possui diversas colunas representando informações sobre pacientes, v
 📄 Para a lista completa, consulte o [dicionário de dados](https://www.notion.so/Dicion-rio-de-Dados-25cd1f25e22f80bd83dadac84c6566b2).  
 
 ### Exemplos de colunas:
-- `co_documento`  
-- `co_paciente`  
-- `tp_sexo_paciente`  
-- `co_municipio_paciente`  
-- `sg_uf_paciente`  
-- `ds_vacina`  
-- `co_dose_vacina`  
-- `ds_dose_vacina`  
-- `co_cnes_estabelecimento`  
-- `no_razao_social_estabelecimento`  
-- `dt_vacina`  
+- `CodigoRacaCorPaciente`  
+- `CodigoPaisPaciente `  
+- `CodigoEtniaIndigenaPaciente `  
+- `NomeMunicipioPaciente `  
+- `CodigoPaciente `  
+- `CodigoNaturezaEstabelecimento `  
+- `CodigoDocumento`  
+- `CodigoDoseVacina`  
+- `CodigoVacinaFabricante`  
 
 ## 🎯 Objetivo
 - Facilitar o armazenamento, consulta e análise dos dados de vacinação.  
 - Permitir estudos epidemiológicos e comparativos.  
 - Apoiar a tomada de decisão em saúde pública.
 
-## 📊 Plano De Análise De Dados
-(Perguntas resumidas para análise estratégica)
+## 📊 Plano de Análise de Dados  
+*Principais Perguntas e Questões a Serem Respondidas*  
 
-1. Qual é o perfil demográfico da população vacinada?  
-2. Qual a proporção de pacientes indígenas vacinados e suas respectivas etnias?  
-3. Como está a distribuição de vacinas por Estado e município?  
-4. Quais municípios lideram e quais têm menor número de aplicações?  
-5. Qual a quantidade de cada dose aplicada (1ª, 2ª e reforço)?  
-6. Quais fabricantes de vacinas são mais utilizados?  
-7. Qual a distribuição de vacinas por tipo de estabelecimento (UBS, Hospital, etc.)?  
-8. Como evoluiu o número de doses aplicadas ao longo do tempo?
+1. 👥 **Perfil Demográfico**  
+   - Quem são os vacinados em termos de idade, gênero e outras características populacionais?  
+
+2. 🪶 **População Indígena**  
+   - Qual a proporção de pacientes indígenas vacinados e como estão distribuídos por etnias?  
+
+3. 🌎 **Cobertura Geográfica**  
+   - Como está a distribuição das vacinas por estado e município?  
+
+4. 🏙️ **Municípios em Destaque**  
+   - Quais cidades apresentam os maiores e os menores números de aplicações?  
+
+5. 💉 **Etapas da Vacinação**  
+   - Qual a quantidade de doses aplicadas por fase (1ª, 2ª e reforço)?  
+
+6. 🏭 **Fabricantes**  
+   - Quais vacinas são mais utilizadas e qual a participação de cada fabricante?  
+
+7. 🏥 **Locais de Aplicação**  
+   - Como se distribuem as aplicações entre UBS, hospitais e outros estabelecimentos?  
+
+8. 📈 **Evolução Temporal**  
+   - Como o número de doses aplicadas evoluiu ao longo do tempo?  
 
 📂 **Material completo**  
 Para acessar todas as perguntas detalhadas, junto com as tabelas e fontes de dados relacionadas, consulte o documento completo em: [Plano de Análise de Dados](https://www.notion.so/Plano-de-An-lise-de-Dados-de-Vacina-o-fe0b0b8b117241698e82b01de8811714?t=25b56f88d137807a832c00a9f0ff9442)
-  
-## Modelo Lógico
-🔗 [Abrir no Lucidchart](https://lucid.app/lucidchart/8ab629d2-3e6f-45cd-ae11-b1170bd3fe49/edit?invitationId=inv_bce83d8d-ac52-4c6e-9e82-f69fbf091324&page=0_0#)
 
-<img width="6920" height="2716" alt="Diagrama Modelo Lógico" src="https://github.com/user-attachments/assets/dcddc081-3fa0-4eb2-95f3-6b81bf26c09f" />
+ ## 🗂️ Modelagem de Dados  
 
-## Modelo Físico
-🔗[Abrir no Lucidchart](https://lucid.app/lucidchart/35e4a992-cc23-4e8a-864d-f4b806ccbcfe/edit?viewport_loc=1626%2C-2755%2C5593%2C3316%2C0_0&invitationId=inv_6fc621f9-b140-4649-afcc-890d184f6fe1)
+### 📐 Modelo Lógico  
+🔗 [Abrir no Lucidchart](https://lucid.app/lucidchart/8ab629d2-3e6f-45cd-ae11-b1170bd3fe49/edit?invitationId=inv_bce83d8d-ac52-4c6e-9e82-f69fbf091324&page=0_0#)  
 
-<img width="6920" height="2716" alt="Diagrama  modelo Físico" src="https://github.com/user-attachments/assets/cb5ab105-6a20-4aec-882e-1d491fe1ff72" />
+<img width="800" alt="Diagrama Modelo Lógico" src="https://github.com/user-attachments/assets/dcddc081-3fa0-4eb2-95f3-6b81bf26c09f" />  
+
+---
+
+### 💾 Modelo Físico  
+🔗 [Abrir no Lucidchart](https://lucid.app/lucidchart/35e4a992-cc23-4e8a-864d-f4b806ccbcfe/edit?viewport_loc=1626%2C-2755%2C5593%2C3316%2C0_0&invitationId=inv_6fc621f9-b140-4649-afcc-890d184f6fe1)  
+
+<img width="800" alt="Diagrama Modelo Físico" src="https://github.com/user-attachments/assets/cb5ab105-6a20-4aec-882e-1d491fe1ff72" />  
 
 
 
