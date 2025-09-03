@@ -14,7 +14,7 @@ O projeto visa **extrair insights valiosos e responder a perguntas de negócio c
 5. [Objetivo](#-objetivo)
 6. [Plano de Análise de Dados](#-plano-de-análise-de-dados)
 7. [Modelagem de Dados](#modelagem-de-dados)
-8. [Guia de Importação de Dados com BULK INSERT](#guia-de-importacao-de-dados-com-bulk-insert)
+8. [Guia de Importação de Dados](#guia-de-importação-de-dados)
 
    
 ---
@@ -123,7 +123,7 @@ Para acessar todas as perguntas detalhadas, junto com as tabelas e fontes de dad
 
 <img width="800" alt="Diagrama Modelo Físico" src="https://github.com/user-attachments/assets/cb5ab105-6a20-4aec-882e-1d491fe1ff72" />  
 
-## Guia de Importação de Dados com BULK INSERT
+## Guia de Importação de Dados
 
 Este guia mostra como carregar dados de um arquivo **CSV** para uma tabela no **SQL Server** utilizando o comando `BULK INSERT`.
 
