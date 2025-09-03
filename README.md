@@ -12,8 +12,8 @@ O projeto visa **extrair insights valiosos e responder a perguntas de negócio c
 3. [Planejamento](#️-planejamento)  
 4. [Estrutura do Dataset](#-estrutura-do-dataset)  
 5. [Objetivo](#-objetivo)
-6. [Perguntas](#-Plano-de-Análise-de-Dados)
-7. [Modelagem de Dados](#-🗂️-Modelagem-de-Dados)
+6. [Plano de Análise de Dados](#-Plano-de-Análise-de-Dados)
+7. [Modelagem de Dados](#-Modelagem-de-Dados)
    
 ---
 
