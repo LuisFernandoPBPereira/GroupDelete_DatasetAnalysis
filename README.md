@@ -9,12 +9,13 @@ O projeto visa **extrair insights valiosos e responder a perguntas de negócio c
 
 1. [Contexto](#-contexto)
 2. [Fontes de Dados](#-fontes-de-dados)
-3. [Planejamento](#-planejamento)
+3. [Planejamento](-🗂️-Planejamento)
 4. [Estrutura do Dataset](#-estrutura-do-dataset)
 5. [Objetivo](#-objetivo)
 6. [Plano de Análise de Dados](#-plano-de-análise-de-dados)
-7. [Modelagem de Dados](#-modelagem-de-dados)
-8. [Guia de Importação de Dados com BULK INSERT](#-Guia-de-Importação-de-Dados-com-BULK-INSERT)
+7. [Modelagem de Dados](#modelagem-de-dados)
+8. [Guia de Importação de Dados com BULK INSERT](#guia-de-importacao-de-dados-com-bulk-insert)
+
    
 ---
 
@@ -42,10 +43,10 @@ Para acessar o dataset, siga um dos caminhos abaixo:
 - **Pelo site**:  
   1. Abra o link do Dataset.  
   2. Vá até a aba **Recursos**.  
-  3. Localize o dataset **Vacinação - Janeiro 2025**.  
+  3. Localize o dataset **Vacinação - Janeiro 2025 (CSV)**.  
 
 - **Download direto**:  
-  [📥 Baixar dataset no Google Drive](https://drive.google.com/file/d/1aBDNPhWdbf-iHiI8nzHYy9YqVGK7SyEw/view?usp=sharing)
+  [Baixar dataset no Google Drive](https://drive.google.com/file/d/1aBDNPhWdbf-iHiI8nzHYy9YqVGK7SyEw/view?usp=sharing)
 
 
 ---
@@ -108,7 +109,7 @@ O dataset possui diversas colunas representando informações sobre pacientes, v
 📂 **Material completo**  
 Para acessar todas as perguntas detalhadas, junto com as tabelas e fontes de dados relacionadas, consulte o documento completo em: [Plano de Análise de Dados](https://www.notion.so/Plano-de-An-lise-de-Dados-de-Vacina-o-fe0b0b8b117241698e82b01de8811714?t=25b56f88d137807a832c00a9f0ff9442)
 
- ## Modelagem de Dados  
+ ## Modelagem de Dados
 
 ### 📐 Modelo Lógico  
 🔗 [Abrir no Lucidchart](https://lucid.app/lucidchart/8ab629d2-3e6f-45cd-ae11-b1170bd3fe49/edit?invitationId=inv_bce83d8d-ac52-4c6e-9e82-f69fbf091324&page=0_0#)  
