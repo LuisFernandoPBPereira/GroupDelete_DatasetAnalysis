@@ -1,41 +1,67 @@
-CREATE DATABASE DB_VACINACAO;
+IF NOT EXISTS (
+    SELECT name 
+    FROM sys.databases 
+    WHERE name = 'DB_VACINACAO'
+)
+BEGIN
+    CREATE DATABASE DB_VACINACAO;
+END
 
 USE DB_VACINACAO;
 
+DROP TABLE IF EXISTS AplicacaoVacina;
+DROP TABLE IF EXISTS Vacina;
+DROP TABLE IF EXISTS CategoriaAtendimento;
+DROP TABLE IF EXISTS GrupoAtendimento;
+DROP TABLE IF EXISTS VacinaFabricante;
+DROP TABLE IF EXISTS ViaAdministracao;
+DROP TABLE IF EXISTS LocalAplicacao;
+DROP TABLE IF EXISTS DoseVacina;
+DROP TABLE IF EXISTS Documento;
+DROP TABLE IF EXISTS EstrategiaVacinacao;
+DROP TABLE IF EXISTS OrigemRegistro;
+DROP TABLE IF EXISTS SistemaOrigem;
+DROP TABLE IF EXISTS Estabelecimento;
+DROP TABLE IF EXISTS NaturezaEstabelecimento;
+DROP TABLE IF EXISTS TipoEstabelecimento;
+DROP TABLE IF EXISTS MunicipioEstabelecimento;
+DROP TABLE IF EXISTS Paciente;
+DROP TABLE IF EXISTS MunicipioPaciente;
+DROP TABLE IF EXISTS CondicaoMaternal;
+DROP TABLE IF EXISTS EtniaIndigenaPaciente;
+DROP TABLE IF EXISTS PaisPaciente;
+DROP TABLE IF EXISTS RacaCorPaciente;
 
 CREATE TABLE RacaCorPaciente (
     CodigoRacaCorPaciente INT PRIMARY KEY,
-    NomeRacaCorPaciente VARCHAR(100)
+    NomeRacaCorPaciente VARCHAR(50)
 );
-
 
 CREATE TABLE PaisPaciente (
     CodigoPaisPaciente INT PRIMARY KEY,
     NomePaisPaciente VARCHAR(100)
 );
 
-
 CREATE TABLE EtniaIndigenaPaciente (
     CodigoEtniaIndigenaPaciente INT PRIMARY KEY,
-    NomeEtniaIndigenaPaciente VARCHAR(150)
+    NomeEtniaIndigenaPaciente VARCHAR(100)
 );
-
 
 CREATE TABLE CondicaoMaternal (
     CodigoCondicaoMaternal INT PRIMARY KEY,
-    DescricaoCondicaoMaternal VARCHAR(150)
+    DescricaoCondicaoMaternal VARCHAR(100)
 );
 
 CREATE TABLE MunicipioPaciente (
     CodigoMunicipioPaciente INT PRIMARY KEY,
-    NomeMunicipioPaciente VARCHAR(150),
+    NomeMunicipioPaciente VARCHAR(100),
     SgUfPaciente CHAR(2),
     NomeUfPaciente VARCHAR(100),
-    NumeroCepPaciente VARCHAR(20)
+    NumeroCepPaciente VARCHAR(8)
 );
 
 CREATE TABLE Paciente (
-    CodigoPaciente BIGINT PRIMARY KEY,
+    CodigoPaciente UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     TipoSexoPaciente CHAR(1),
     CodigoRacaCorPaciente INT FOREIGN KEY REFERENCES RacaCorPaciente(CodigoRacaCorPaciente),
     CodigoMunicipioPaciente INT FOREIGN KEY REFERENCES MunicipioPaciente(CodigoMunicipioPaciente),
@@ -48,23 +74,23 @@ CREATE TABLE Paciente (
 
 CREATE TABLE MunicipioEstabelecimento (
     CodigoMunicipioEstabelecimento INT PRIMARY KEY,
-    NomeMunicipioEstabelecimento VARCHAR(150),
+    NomeMunicipioEstabelecimento VARCHAR(100),
     SgUfEstabelecimento CHAR(2),
     NomeUfEstabelecimento VARCHAR(100)
 );
 
 CREATE TABLE TipoEstabelecimento (
     CodigoTipoEstabelecimento INT PRIMARY KEY,
-    DescricaoTipoEstabelecimento VARCHAR(150)
+    DescricaoTipoEstabelecimento VARCHAR(100)
 );
 
 CREATE TABLE NaturezaEstabelecimento (
     CodigoNaturezaEstabelecimento INT PRIMARY KEY,
-    DescricaoNaturezaEstabelecimento VARCHAR(150)
+    DescricaoNaturezaEstabelecimento VARCHAR(100)
 );
 
 CREATE TABLE Estabelecimento (
-    CodigoCnesEstabelecimento BIGINT PRIMARY KEY,
+    CodigoCnesEstabelecimento INT PRIMARY KEY,
     NomeRazaoSocialEstabelecimento VARCHAR(255),
     NomeFantasiaEstalecimento VARCHAR(255),
     CodigoMunicipioEstabelecimento INT FOREIGN KEY REFERENCES MunicipioEstabelecimento(CodigoMunicipioEstabelecimento),
@@ -79,7 +105,7 @@ CREATE TABLE SistemaOrigem (
 
 CREATE TABLE OrigemRegistro (
     CodigoOrigemRegistro INT PRIMARY KEY,
-    DescricaoOrigemRegistro VARCHAR(150)
+    DescricaoOrigemRegistro VARCHAR(100)
 );
 
 CREATE TABLE EstrategiaVacinacao (
@@ -88,17 +114,16 @@ CREATE TABLE EstrategiaVacinacao (
 );
 
 CREATE TABLE Documento (
-    CodigoDocumento BIGINT PRIMARY KEY,
-    CodigoPaciente BIGINT FOREIGN KEY REFERENCES Paciente(CodigoPaciente),
-    CodigoTrocaDocumento BIGINT NULL,
-    StDocumento BIT,
+    CodigoDocumento UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+    CodigoPaciente UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Paciente(CodigoPaciente),
+    CodigoTrocaDocumento UNIQUEIDENTIFIER NULL,
+    StDocumento VARCHAR(20),
     DataEntradaRnDescricao DATETIME,
     DataDeletadoRnDescricao DATETIME NULL,
     CodigoSistemaOrigem INT FOREIGN KEY REFERENCES SistemaOrigem(CodigoSistemaOrigem),
     CodigoOrigemRegistro INT FOREIGN KEY REFERENCES OrigemRegistro(CodigoOrigemRegistro),
     CodigoEstrategiaVacinacao INT FOREIGN KEY REFERENCES EstrategiaVacinacao(CodigoEstrategiaVacinacao)
 );
-
 
 CREATE TABLE DoseVacina (
     CodigoDoseVacina INT PRIMARY KEY,
@@ -109,7 +134,6 @@ CREATE TABLE LocalAplicacao (
     CodigoLocalAplicacao INT PRIMARY KEY,
     DescricaoLocalAplicacao VARCHAR(150)
 );
-
 
 CREATE TABLE ViaAdministracao (
     CodigoViaAdministracao INT PRIMARY KEY,
@@ -132,7 +156,7 @@ CREATE TABLE CategoriaAtendimento (
 );
 
 CREATE TABLE Vacina (
-    CodigoVacina BIGINT PRIMARY KEY,
+    CodigoVacina INT PRIMARY KEY,
     SgVacina VARCHAR(50),
     CodigoDoseVacina INT FOREIGN KEY REFERENCES DoseVacina(CodigoDoseVacina),
     CodigoLocalAplicacao INT FOREIGN KEY REFERENCES LocalAplicacao(CodigoLocalAplicacao),
@@ -144,11 +168,12 @@ CREATE TABLE Vacina (
 );
 
 CREATE TABLE AplicacaoVacina (
-    IdAplicacao BIGINT IDENTITY PRIMARY KEY,
-    CodigoDocumento BIGINT FOREIGN KEY REFERENCES Documento(CodigoDocumento),
-    CodigoPaciente BIGINT FOREIGN KEY REFERENCES Paciente(CodigoPaciente),
-    CodigoCnesEstabelecimento BIGINT FOREIGN KEY REFERENCES Estabelecimento(CodigoCnesEstabelecimento),
-    CodigoVacina BIGINT FOREIGN KEY REFERENCES Vacina(CodigoVacina),
+    IdAplicacao INT IDENTITY PRIMARY KEY,
+    CodigoDocumento UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Documento(CodigoDocumento),
+    CodigoPaciente UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Paciente(CodigoPaciente),
+    CodigoCnesEstabelecimento INT FOREIGN KEY REFERENCES Estabelecimento(CodigoCnesEstabelecimento),
+    CodigoVacina INT FOREIGN KEY REFERENCES Vacina(CodigoVacina),
     DataVacina DATE
 );
+
 
