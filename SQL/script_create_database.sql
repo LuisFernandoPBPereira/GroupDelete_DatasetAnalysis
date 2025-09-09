@@ -48,7 +48,7 @@ CREATE TABLE PaisPaciente (
 );
 
 CREATE TABLE EtniaIndigenaPaciente (
-    CodigoEtniaIndigenaPaciente INT PRIMARY KEY,
+    CodigoEtniaIndigenaPaciente CHAR(4) PRIMARY KEY,
     NomeEtniaIndigenaPaciente VARCHAR(100)
 );
 
@@ -71,7 +71,7 @@ CREATE TABLE Paciente (
     CodigoRacaCorPaciente INT FOREIGN KEY REFERENCES RacaCorPaciente(CodigoRacaCorPaciente),
     CodigoMunicipioPaciente INT FOREIGN KEY REFERENCES MunicipioPaciente(CodigoMunicipioPaciente),
     CodigoPaisPaciente INT FOREIGN KEY REFERENCES PaisPaciente(CodigoPaisPaciente),
-    CodigoEtniaIndigenaPaciente INT NULL FOREIGN KEY REFERENCES EtniaIndigenaPaciente(CodigoEtniaIndigenaPaciente),
+    CodigoEtniaIndigenaPaciente CHAR(4) NULL FOREIGN KEY REFERENCES EtniaIndigenaPaciente(CodigoEtniaIndigenaPaciente),
     NumeroIdadePaciente INT,
     CodigoCondicaoMaternal INT NULL FOREIGN KEY REFERENCES CondicaoMaternal(CodigoCondicaoMaternal),
     DescricaoNacionalidadePaciente VARCHAR(100)
