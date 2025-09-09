@@ -177,3 +177,27 @@ CREATE TABLE AplicacaoVacina (
 );
 
 
+CREATE TABLE VacinaFabricanteVacina (
+    CodigoVacinaFabricante INT NOT NULL,
+    CodigoVacina INT NOT NULL,
+    CONSTRAINT PK_VacinaFabricanteVacina PRIMARY KEY (CodigoVacinaFabricante, CodigoVacina),
+    CONSTRAINT FK_VacinaFabricanteVacina_Fabricante FOREIGN KEY (CodigoVacinaFabricante) REFERENCES VacinaFabricante (CodigoVacinaFabricante),
+    CONSTRAINT FK_VacinaFabricanteVacina_Vacina FOREIGN KEY (CodigoVacina) REFERENCES Vacina (CodigoVacina)
+);
+
+CREATE TABLE AplicacaoVacinaEstabelecimento (
+    CodigoCnesEstabelecimento INT NOT NULL,
+    IdAplicacao INT NOT NULL,
+    CONSTRAINT PK_AplicacaoVacinaEstabelecimento PRIMARY KEY (CodigoCnesEstabelecimento, IdAplicacao),  
+    CONSTRAINT FK_AplicacaoVacinaEstabelecimento_Estabelecimento FOREIGN KEY (CodigoCnesEstabelecimento) REFERENCES Estabelecimento(CodigoCnesEstabelecimento),
+    CONSTRAINT FK_AplicacaoVacinaEstabelecimento_AplicacaoVacina FOREIGN KEY (IdAplicacao) REFERENCES AplicacaoVacina(IdAplicacao) 
+
+);
+
+CREATE TABLE VacinaLocalAplicacao (
+    CodigoLocalAplicacao INT NOT NULL,
+    CodigoVacina INT NOT NULL,
+    CONSTRAINT PK_VacinaLocalAplicacao PRIMARY KEY (CodigoLocalAplicacao, CodigoVacina),
+    CONSTRAINT FK_VacinaLocalAplicacao_LocalAplicacao FOREIGN KEY (CodigoLocalAplicacao) REFERENCES LocalAplicacao(CodigoLocalAplicacao), 
+    CONSTRAINT FK_VacinaLocalAplicacao_Vacina FOREIGN KEY (CodigoVacina) REFERENCES Vacina(CodigoVacina)
+);
