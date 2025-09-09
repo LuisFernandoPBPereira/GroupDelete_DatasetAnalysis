@@ -132,16 +132,8 @@ Este guia mostra como carregar dados de um arquivo **CSV** para uma tabela no **
 
 ### 🔹 Estrutura básica do comando
 
-```sql
-BULK INSERT vacinacao_jan_2025 -- Caso seja necessário alterar o nome da tabela, primeiro atualize o arquivo CreateGeral e, em seguida, ajuste também neste local.
-FROM 'C:\caminho\arquivo.csv'  -- Caminho do arquivo CSV
-WITH (
-    FIELDTERMINATOR = ';',   -- Separador de campos (padrão: `;`)
-    ROWTERMINATOR = '\n',    -- Separador de linhas
-    FIRSTROW = 2,            -- Ignora a primeira linha (cabeçalho)
-    TABLOCK                  -- Otimiza a inserção em lote
-);
-```
+- [BULK INSERT](https://github.com/LuisFernandoPBPereira/GroupDelete_DatasetAnalysis/blob/main/bulk-insert.sql)
+
 📌 **Observação:** Antes de realizar a importação dos dados, certifique-se de executar o arquivo **CreateGeral.sql**, responsável pela criação da estrutura das tabelas no banco.
 
 
