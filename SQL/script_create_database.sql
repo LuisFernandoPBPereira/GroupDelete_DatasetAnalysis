@@ -9,6 +9,10 @@ END
 
 USE DB_VACINACAO;
 
+
+DROP TABLE IF EXISTS AplicacaoVacinaEstabelecimento;
+DROP TABLE IF EXISTS VacinaLocalAplicacao;
+DROP TABLE IF EXISTS VacinaFabricanteVacina;
 DROP TABLE IF EXISTS AplicacaoVacina;
 DROP TABLE IF EXISTS Vacina;
 DROP TABLE IF EXISTS CategoriaAtendimento;
@@ -31,6 +35,7 @@ DROP TABLE IF EXISTS CondicaoMaternal;
 DROP TABLE IF EXISTS EtniaIndigenaPaciente;
 DROP TABLE IF EXISTS PaisPaciente;
 DROP TABLE IF EXISTS RacaCorPaciente;
+
 
 CREATE TABLE RacaCorPaciente (
     CodigoRacaCorPaciente INT PRIMARY KEY,
@@ -180,6 +185,7 @@ CREATE TABLE AplicacaoVacina (
 CREATE TABLE VacinaFabricanteVacina (
     CodigoVacinaFabricante INT NOT NULL,
     CodigoVacina INT NOT NULL,
+    
     CONSTRAINT PK_VacinaFabricanteVacina PRIMARY KEY (CodigoVacinaFabricante, CodigoVacina),
     CONSTRAINT FK_VacinaFabricanteVacina_Fabricante FOREIGN KEY (CodigoVacinaFabricante) REFERENCES VacinaFabricante (CodigoVacinaFabricante),
     CONSTRAINT FK_VacinaFabricanteVacina_Vacina FOREIGN KEY (CodigoVacina) REFERENCES Vacina (CodigoVacina)
@@ -198,6 +204,6 @@ CREATE TABLE VacinaLocalAplicacao (
     CodigoLocalAplicacao INT NOT NULL,
     CodigoVacina INT NOT NULL,
     CONSTRAINT PK_VacinaLocalAplicacao PRIMARY KEY (CodigoLocalAplicacao, CodigoVacina),
-    CONSTRAINT FK_VacinaLocalAplicacao_LocalAplicacao FOREIGN KEY (CodigoLocalAplicacao) REFERENCES LocalAplicacao(CodigoLocalAplicacao), 
+    CONSTRAINT FK_VacinaLocalAplicacao_LocalAplicacao FOREIGN KEY (CodigoLocalAplicacao) REFERENCES LocalAplicacao(CodigoLocalAplicacao), -- << Altere se o nome da tabela/coluna for outro   
     CONSTRAINT FK_VacinaLocalAplicacao_Vacina FOREIGN KEY (CodigoVacina) REFERENCES Vacina(CodigoVacina)
 );
