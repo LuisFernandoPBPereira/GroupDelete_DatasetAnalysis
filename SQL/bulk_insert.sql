@@ -1,4 +1,4 @@
-BULK INSERT vacinacao_jan_2025 -- Caso seja necessário alterar o nome da tabela, primeiro atualize o arquivo CreateGeral e, em seguida, ajuste também neste local.
+BULK INSERT vacinacao_jan_2025 -- Caso seja necessário alterar o nome da tabela, primeiro atualize o arquivo create_geral e, em seguida, ajuste também neste local.
 FROM 'C:\caminho\arquivo.csv'  -- Caminho do arquivo CSV
 WITH (
     FIELDTERMINATOR = ';',   -- Separador de campos (padrão: `;`)

@@ -125,16 +125,89 @@ Para acessar todas as perguntas detalhadas, junto com as tabelas e fontes de dad
 
 <img width="800" alt="Diagrama Modelo Físico" src="https://github.com/user-attachments/assets/cb5ab105-6a20-4aec-882e-1d491fe1ff72" />  
 
-## Guia de Importação de Dados
+## 📋 Guia de Importação de Dados
 
 Este guia mostra como carregar dados de um arquivo **CSV** para uma tabela no **SQL Server** utilizando o comando `BULK INSERT`.
 
----
 
-### 🔹 Estrutura básica do comando
+### 🔹 Passo a Passo da Importação
+
+#### 1. Criar a Tabela no SQL Server
+
+Precisamos ter a tabela destino dos dados do dataset, para criá-la, utilize o seguinte comando SQL no arquivo `create_geral.sql`:
 
 ```sql
-BULK INSERT vacinacao_jan_2025 -- Caso seja necessário alterar o nome da tabela, primeiro atualize o arquivo CreateGeral e, em seguida, ajuste também neste local.
+CREATE TABLE [dbo].[vacinacao_jan_2025] (
+[co_documento] nvarchar(500),
+[co_paciente] nvarchar(500),
+[tp_sexo_paciente] nvarchar(500),
+[co_raca_cor_paciente] nvarchar(500),
+[no_raca_cor_paciente] nvarchar(500),
+[co_municipio_paciente] nvarchar(500),
+[co_pais_paciente] nvarchar(500),
+[no_municipio_paciente] nvarchar(500),
+[no_pais_paciente] nvarchar(500),
+[sg_uf_paciente] nvarchar(500),
+[nu_cep_paciente] nvarchar(500),
+[ds_nacionalidade_paciente] nvarchar(500),
+[no_etnia_indigena_paciente] nvarchar(500),
+[co_etnia_indigena_paciente] nvarchar(500),
+[co_cnes_estabelecimento] nvarchar(500),
+[no_razao_social_estabelecimento] nvarchar(500),
+[no_fantasia_estalecimento] nvarchar(500),
+[co_municipio_estabelecimento] nvarchar(500),
+[no_municipio_estabelecimento] nvarchar(500),
+[sg_uf_estabelecimento] nvarchar(500),
+[co_troca_documento] nvarchar(500),
+[co_vacina] nvarchar(500),
+[sg_vacina] nvarchar(500),
+[dt_vacina] nvarchar(500),
+[co_dose_vacina] nvarchar(500),
+[ds_dose_vacina] nvarchar(500),
+[co_local_aplicacao] nvarchar(500),
+[ds_local_aplicacao] nvarchar(500),
+[co_via_administracao] nvarchar(500),
+[ds_via_administracao] nvarchar(500),
+[co_lote_vacina] nvarchar(500),
+[ds_vacina_fabricante] nvarchar(500),
+[dt_entrada_rnds] nvarchar(500),
+[co_sistema_origem] nvarchar(500),
+[ds_sistema_origem] nvarchar(500),
+[st_documento] nvarchar(500),
+[co_estrategia_vacinacao] nvarchar(500),
+[ds_estrategia_vacinacao] nvarchar(500),
+[co_origem_registro] nvarchar(500),
+[ds_origem_registro] nvarchar(500),
+[co_vacina_grupo_atendimento] nvarchar(500),
+[ds_vacina_grupo_atendimento] nvarchar(500),
+[co_vacina_categoria_atendimento] nvarchar(500),
+[ds_vacina_categoria_atendimento] nvarchar(500),
+[co_vacina_fabricante] nvarchar(500),
+[ds_vacina] nvarchar(500),
+[ds_condicao_maternal] nvarchar(500),
+[co_tipo_estabelecimento] nvarchar(500),
+[ds_tipo_estabelecimento] nvarchar(500),
+[co_natureza_estabelecimento] nvarchar(500),
+[ds_natureza_estabelecimento] nvarchar(500),
+[nu_idade_paciente] nvarchar(500),
+[co_condicao_maternal] nvarchar(500),
+[no_uf_paciente] nvarchar(500),
+[no_uf_estabelecimento] nvarchar(500),
+[dt_deletado_rnds] nvarchar(500)
+)
+```
+
+<br>
+
+#### 2. Importar os Dados do Arquivo CSV
+
+Com a tabela criada, podemos importar os dados do arquivo CSV utilizando o comando `BULK INSERT`. Como o exemplo no arquivo `bulk_insert.sql`, temos o seguinte comando:
+
+
+📌 **Observação**: Se atente para o caminho de importação e o caminho do arquivo CSV serem iguais.
+
+```sql
+BULK INSERT vacinacao_jan_2025 -- Caso seja necessário alterar o nome da tabela, primeiro atualize o arquivo create_geral e, em seguida, ajuste também neste local.
 FROM 'C:\caminho\arquivo.csv'  -- Caminho do arquivo CSV
 WITH (
     FIELDTERMINATOR = ';',   -- Separador de campos (padrão: `;`)
@@ -142,10 +215,4 @@ WITH (
     FIRSTROW = 2,            -- Ignora a primeira linha (cabeçalho)
     TABLOCK                  -- Otimiza a inserção em lote
 );
-
 ```
-
-📌 **Observação:** Antes de realizar a importação dos dados, certifique-se de executar o arquivo **CreateGeral.sql**, responsável pela criação da estrutura das tabelas no banco.
-
-
-
