@@ -59,9 +59,9 @@ CREATE TABLE CondicaoMaternal (
 
 CREATE TABLE MunicipioPaciente (
     CodigoMunicipioPaciente INT PRIMARY KEY,
-    NomeMunicipioPaciente VARCHAR(100),
+    NomeMunicipioPaciente VARCHAR(50),
     SgUfPaciente CHAR(2),
-    NomeUfPaciente VARCHAR(100),
+    NomeUfPaciente VARCHAR(50),
     NumeroCepPaciente VARCHAR(8)
 );
 
