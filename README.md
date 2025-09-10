@@ -123,7 +123,8 @@ Para acessar todas as perguntas detalhadas, junto com as tabelas e fontes de dad
 ### 💾 Modelo Físico  
 🔗 [Abrir no Lucidchart](https://lucid.app/lucidchart/35e4a992-cc23-4e8a-864d-f4b806ccbcfe/edit?viewport_loc=1626%2C-2755%2C5593%2C3316%2C0_0&invitationId=inv_6fc621f9-b140-4649-afcc-890d184f6fe1)  
 
-<img width="800" alt="Diagrama Modelo Físico" src="https://github.com/user-attachments/assets/cb5ab105-6a20-4aec-882e-1d491fe1ff72" />  
+<img width="6920" height="2716" alt="Diagrama  modelo Físico" src="https://github.com/user-attachments/assets/876d582d-8697-4bcc-a735-08b4a3f08948" />
+ 
 
 ## 📋 Guia de Importação de Dados
 
