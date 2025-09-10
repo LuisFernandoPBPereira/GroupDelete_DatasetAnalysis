@@ -79,9 +79,9 @@ CREATE TABLE Paciente (
 
 CREATE TABLE MunicipioEstabelecimento (
     CodigoMunicipioEstabelecimento INT PRIMARY KEY,
-    NomeMunicipioEstabelecimento VARCHAR(100),
+    NomeMunicipioEstabelecimento VARCHAR(50),
     SgUfEstabelecimento CHAR(2),
-    NomeUfEstabelecimento VARCHAR(100)
+    NomeUfEstabelecimento VARCHAR(50)
 );
 
 CREATE TABLE TipoEstabelecimento (
