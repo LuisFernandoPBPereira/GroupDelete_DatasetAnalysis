@@ -14,7 +14,7 @@ O projeto visa **extrair insights valiosos e responder a perguntas de negócio c
 5. [Objetivo](#-objetivo)
 6. [Plano de Análise de Dados](#-plano-de-análise-de-dados)
 7. [Modelagem de Dados](#modelagem-de-dados)
-8. [Guia de Importação de Dados](#guia-de-importação-de-dados)
+8. [Guia de Importação de Dados](#-guia-de-importação-de-dados)
 
    
 ---
@@ -128,30 +128,39 @@ Para acessar todas as perguntas detalhadas, junto com as tabelas e fontes de dad
 
 ## 📋 Guia de Importação de Dados
 
-Este guia mostra como carregar dados de um arquivo **CSV** para uma tabela no **SQL Server** utilizando o comando `BULK INSERT`.
+Este guia demonstra como carregar dados de um arquivo **CSV** para uma tabela no **SQL Server** utilizando o comando `BULK INSERT`.
 
+---
 
-### 🔹 Passo a Passo da Importação
+## 🔹 Passo a Passo da Importação
 
-#### 1. Criar a Tabela no SQL Server
+### 1️⃣ Criar a Tabela no SQL Server
 
-Precisamos ter a tabela destino dos dados do dataset, para criá-la, utilize o comando SQL no arquivo `create_geral.sql`
+Antes de importar os dados, certifique-se de que a tabela **destino** já exista no banco de dados.  
 
+➡️ Utilize o script SQL disponível em:  
+📄 [create_geral.sql](https://github.com/LuisFernandoPBPereira/GroupDelete_DatasetAnalysis/blob/main/SQL/create_geral.sql)
 
-#### 2. Importar os Dados do Arquivo CSV
+---
 
-Com a tabela criada, podemos importar os dados do arquivo CSV utilizando o comando `BULK INSERT`. Como o exemplo no arquivo `bulk_insert.sql`, temos o seguinte comando:
+### 2️⃣ Importar os Dados do Arquivo CSV
 
+Com a tabela criada, você pode importar os dados do arquivo **CSV** utilizando o comando `BULK INSERT`.  
 
-📌 **Observação**: Se atente para o caminho de importação e o caminho do arquivo CSV serem iguais.
+📄 Exemplo disponível no arquivo [`bulk_insert.sql`](https://github.com/LuisFernandoPBPereira/GroupDelete_DatasetAnalysis/blob/main/SQL/bulk_insert.sql).  
+
+⚠️ **Atenção**: verifique se o caminho de importação definido no comando é o mesmo do arquivo CSV no seu sistema.  
 
 ```sql
-BULK INSERT vacinacao_jan_2025 -- Caso seja necessário alterar o nome da tabela, primeiro atualize o arquivo create_geral e, em seguida, ajuste também neste local.
-FROM 'C:\caminho\arquivo.csv'  -- Caminho do arquivo CSV
+BULK INSERT vacinacao_jan_2025 
+-- Caso seja necessário alterar o nome da tabela,
+-- primeiro ajuste no arquivo create_geral.sql 
+-- e depois atualize também aqui.
+FROM 'C:\caminho\arquivo.csv'  -- Caminho completo do arquivo CSV
 WITH (
-    FIELDTERMINATOR = ';',   -- Separador de campos (padrão: `;`)
+    FIELDTERMINATOR = ';',   -- Separador de campos (padrão: ;)
     ROWTERMINATOR = '\n',    -- Separador de linhas
     FIRSTROW = 2,            -- Ignora a primeira linha (cabeçalho)
     TABLOCK                  -- Otimiza a inserção em lote
 );
-```
+
