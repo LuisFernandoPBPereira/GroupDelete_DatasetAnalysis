@@ -162,6 +162,7 @@ CREATE TABLE CategoriaAtendimento (
 
 CREATE TABLE Vacina (
     CodigoVacina INT PRIMARY KEY,
+    DescricaoVacina VARCHAR(150),
     SgVacina VARCHAR(50),
     CodigoDoseVacina INT FOREIGN KEY REFERENCES DoseVacina(CodigoDoseVacina),
     CodigoLocalAplicacao INT FOREIGN KEY REFERENCES LocalAplicacao(CodigoLocalAplicacao),
