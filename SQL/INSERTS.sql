@@ -41,3 +41,13 @@ SELECT DISTINCT
 	   CAST(nu_cep_paciente AS VARCHAR(8))  -- Conversão de NVARCHAR para VARCHAR(8) 
 FROM vacinacao_jan_2025;     
 
+-- Inserindo dados distintos na tabela MunicipioEstabelecimento
+INSERT INTO MunicipioEstabelecimento (CodigoMunicipioEstabelecimento, SgUfEstabelecimento, NomeUfEstabelecimento )
+SELECT DISTINCT 
+       CAST(co_municipio_estabelecimento AS INT),         -- Conversão de NCHAR para INT 
+       CAST(no_municipio_estabelecimento AS VARCHAR(50)), -- Conversão de NVARCHAR para VARCHAR(50) 
+	   CAST(sg_uf_estabelecimento AS CHAR(2)),  -- Conversão de NVARCHAR para CHAR(2)
+	   CAST(no_uf_estabelecimento AS VARCHAR(50))  -- Conversão de NVARCHAR para VARCHAR(50)
+FROM vacinacao_jan_2025;    
+
+
