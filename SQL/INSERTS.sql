@@ -31,3 +31,13 @@ SELECT DISTINCT
        CAST(ds_condicao_maternal AS VARCHAR(50))  -- Conversão de NVARCHAR para VARCHAR(50) 
 FROM vacinacao_jan_2025;     
 
+-- Inserindo dados distintos na tabela MunicipioPaciente
+INSERT INTO MunicipioPaciente (CodigoMunicipioPaciente, NomeMunicipioPaciente, SgUfPaciente, NomeUfPaciente, NumeroCepPaciente)
+SELECT DISTINCT 
+       CAST(co_municipio_paciente AS INT),         -- Conversão de NCHAR para INT 
+       CAST(no_municipio_paciente AS VARCHAR(50)),  -- Conversão de NVARCHAR para VARCHAR(50)
+	   CAST(sg_uf_paciente AS CHAR(2)),  -- Conversão de NVARCHAR para CHAR(2)
+	   CAST(no_uf_paciente AS VARCHAR(50)), -- Conversão de NVARCHAR para VARCHAR(50)
+	   CAST(nu_cep_paciente AS VARCHAR(8))  -- Conversão de NVARCHAR para VARCHAR(8) 
+FROM vacinacao_jan_2025;     
+
