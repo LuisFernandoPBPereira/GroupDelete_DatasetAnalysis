@@ -24,6 +24,10 @@ SELECT DISTINCT
 FROM vacinacao_jan_2025 -- Tabela de origem importada via BULK INSERT
 WHERE vacinacao_jan_2025.co_etnia_indigena_paciente IS NOT NULL; -- Existe um campo nulo na tabela, então é necessário ter este where
 
-
-
+-- Inserindo dados distintos na tabela CondicaoMaternal
+INSERT INTO CondicaoMaternal (CodigoCondicaoMaternal, DescricaoCondicaoMaternal)
+SELECT DISTINCT 
+       CAST(co_condicao_maternal AS INT),         -- Conversão de NCHAR para INT 
+       CAST(ds_condicao_maternal AS VARCHAR(50))  -- Conversão de NVARCHAR para VARCHAR(50) 
+FROM vacinacao_jan_2025;     
 
