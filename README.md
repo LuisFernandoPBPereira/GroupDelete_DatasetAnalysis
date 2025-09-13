@@ -152,15 +152,14 @@ Com a tabela criada, você pode importar os dados do arquivo **CSV** utilizando 
 ⚠️ **Atenção**: verifique se o caminho de importação definido no comando é o mesmo do arquivo CSV no seu sistema.  
 
 ```sql
-BULK INSERT vacinacao_jan_2025 
--- Caso seja necessário alterar o nome da tabela,
--- primeiro ajuste no arquivo create_geral.sql 
--- e depois atualize também aqui.
-FROM 'C:\caminho\arquivo.csv'  -- Caminho completo do arquivo CSV
+BULK INSERT vacinacao_jan_2025    
+FROM 'D:\vacinacao_jan_2025.csv' -- Caminho do arquivo CSV (Exemplo)
 WITH (
-    FIELDTERMINATOR = ';',   -- Separador de campos (padrão: ;)
-    ROWTERMINATOR = '\n',    -- Separador de linhas
-    FIRSTROW = 2,            -- Ignora a primeira linha (cabeçalho)
-    TABLOCK                  -- Otimiza a inserção em lote
+    FIELDTERMINATOR = ';',    -- Separador de campos 
+    ROWTERMINATOR = '0x0d0a', -- quebra de linha em formato hexadecimal
+    FIRSTROW = 2,             -- Ignora a primeira linha (cabeçalho)
+    TABLOCK,                  -- Otimiza a inserção em lote
+    CODEPAGE = '1252'         -- Necesssário para tratar os dados (Acentos e etc)
+
 );
 
