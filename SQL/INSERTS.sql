@@ -24,6 +24,30 @@ SELECT DISTINCT
 FROM vacinacao_jan_2025 -- Tabela de origem importada via BULK INSERT
 WHERE vacinacao_jan_2025.co_etnia_indigena_paciente IS NOT NULL; -- Existe um campo nulo na tabela, então é necessário ter este where
 
+-- Inserindo dados distintos na tabela CondicaoMaternal
+INSERT INTO CondicaoMaternal (CodigoCondicaoMaternal, DescricaoCondicaoMaternal)
+SELECT DISTINCT 
+       CAST(co_condicao_maternal AS INT),         -- Conversão de NCHAR para INT 
+       CAST(ds_condicao_maternal AS VARCHAR(50))  -- Conversão de NVARCHAR para VARCHAR(50) 
+FROM vacinacao_jan_2025;     
 
+-- Inserindo dados distintos na tabela MunicipioPaciente
+INSERT INTO MunicipioPaciente (CodigoMunicipioPaciente, NomeMunicipioPaciente, SgUfPaciente, NomeUfPaciente, NumeroCepPaciente)
+SELECT DISTINCT 
+       CAST(co_municipio_paciente AS INT),         -- Conversão de NCHAR para INT 
+       CAST(no_municipio_paciente AS VARCHAR(50)),  -- Conversão de NVARCHAR para VARCHAR(50)
+	   CAST(sg_uf_paciente AS CHAR(2)),  -- Conversão de NVARCHAR para CHAR(2)
+	   CAST(no_uf_paciente AS VARCHAR(50)), -- Conversão de NVARCHAR para VARCHAR(50)
+	   CAST(nu_cep_paciente AS VARCHAR(8))  -- Conversão de NVARCHAR para VARCHAR(8) 
+FROM vacinacao_jan_2025;     
+
+-- Inserindo dados distintos na tabela MunicipioEstabelecimento
+INSERT INTO MunicipioEstabelecimento (CodigoMunicipioEstabelecimento, SgUfEstabelecimento, NomeUfEstabelecimento )
+SELECT DISTINCT 
+       CAST(co_municipio_estabelecimento AS INT),         -- Conversão de NCHAR para INT 
+       CAST(no_municipio_estabelecimento AS VARCHAR(50)), -- Conversão de NVARCHAR para VARCHAR(50) 
+	   CAST(sg_uf_estabelecimento AS CHAR(2)),  -- Conversão de NVARCHAR para CHAR(2)
+	   CAST(no_uf_estabelecimento AS VARCHAR(50))  -- Conversão de NVARCHAR para VARCHAR(50)
+FROM vacinacao_jan_2025;    
 
 
