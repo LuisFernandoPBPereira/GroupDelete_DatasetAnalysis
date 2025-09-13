@@ -8,11 +8,11 @@ SELECT DISTINCT
        CAST(no_raca_cor_paciente AS VARCHAR(50)) -- Conversão de NVARCHAR para VARCHAR(50) 
 FROM vacinacao_jan_2025;                         -- Tabela de origem importada via BULK INSERT
 
--- Tabela PaisPaciente
+-- Inserindo dados distintos na tabela PaisPaciente
 INSERT INTO PaisPaciente  (CodigoPaisPaciente , NomePaisPaciente )
 SELECT DISTINCT  
-       co_pais_paciente, 
-       no_pais_paciente
+       CAST(co_pais_paciente AS INT), -- Conversão de NVARCHAR para INT
+       CAST(no_pais_paciente AS VARCHAR(100)) -- Conversão de NVARCHAR para VARCHAR(50) 
 FROM vacinacao_jan_2025 -- Tabela de origem importada via BULK INSERT
 WHERE vacinacao_jan_2025.co_pais_paciente IS NOT NULL; -- Existe um campo nulo na tabela, então é necessário ter este where
 
@@ -23,4 +23,5 @@ SELECT DISTINCT
        no_etnia_indigena_paciente
 FROM vacinacao_jan_2025 -- Tabela de origem importada via BULK INSERT
 WHERE vacinacao_jan_2025.co_etnia_indigena_paciente IS NOT NULL; -- Existe um campo nulo na tabela, então é necessário ter este where
+
 
