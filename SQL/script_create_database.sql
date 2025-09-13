@@ -61,8 +61,7 @@ CREATE TABLE MunicipioPaciente (
     CodigoMunicipioPaciente INT PRIMARY KEY,
     NomeMunicipioPaciente VARCHAR(50),
     SgUfPaciente CHAR(2),
-    NomeUfPaciente VARCHAR(50),
-    NumeroCepPaciente VARCHAR(8)
+    NomeUfPaciente VARCHAR(50)
 );
 
 CREATE TABLE Paciente (
@@ -74,7 +73,8 @@ CREATE TABLE Paciente (
     CodigoEtniaIndigenaPaciente CHAR(4) NULL FOREIGN KEY REFERENCES EtniaIndigenaPaciente(CodigoEtniaIndigenaPaciente),
     NumeroIdadePaciente INT,
     CodigoCondicaoMaternal INT NULL FOREIGN KEY REFERENCES CondicaoMaternal(CodigoCondicaoMaternal),
-    DescricaoNacionalidadePaciente VARCHAR(100)
+    DescricaoNacionalidadePaciente VARCHAR(100),
+    NumeroCepPaciente VARCHAR(8)
 );
 
 CREATE TABLE MunicipioEstabelecimento (
