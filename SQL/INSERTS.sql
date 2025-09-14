@@ -63,5 +63,37 @@ FROM vacinacao_jan_2025   -- Tabela de origem importada via BULK INSERT
 WHERE 
 	v.co_via_administracao IS NOT NULL AND v.ds_via_administracao IS NOT NULL   -- Filtro para evitar campos nulos
 
+-- Inserindo dados distintos na tabela AplicacaoVacina
+INSERT INTO AplicacaoVacina  (IdAplicacao , CodigoDocumento , CodigoPaciente , CodigoCnesEstabelecimento , CodigoVacina , DataVacina )
+SELECT DISTINCT  
+       CAST(st_documento AS VARCHAR(100)), -- Conversão de NVARCHAR para VARCHAR(100)
+       CAST(co_paciente AS VARCHAR(100)), -- Conversão de NVARCHAR para VARCHAR(100)
+       CAST(co_cnes_estabelecimento AS VARCHAR(100)), -- Conversão de NVARCHAR para VARCHAR(100)
+       CAST(co_vacina AS VARCHAR(100)), -- Conversão de NVARCHAR para VARCHAR(100)
+       CAST(dt_vacina AS VARCHAR(100)), -- Conversão de NVARCHAR para VARCHAR(100)
+FROM vacinacao_jan_2025 -- Tabela de origem importada via BULK INSERT
+WHERE vacinacao_jan_2025.StDocumento IS NOT NULL; -- Existe um campo nulo na tabela, então é necessário ter este where
 
+-- Inserindo dados distintos na tabela VacinaFabricanteVacina
+INSERT INTO VacinaFabricanteVacina  (CodigoVacinaFabricante , CodigoVacina )
+SELECT DISTINCT  
+       CAST(co_vacina_fabricante AS VARCHAR(100)) -- Conversão de NVARCHAR para VARCHAR(100) 
+       CAST(co_vacina AS VARCHAR(100)), -- Conversão de NVARCHAR para VARCHAR(100)
+FROM vacinacao_jan_2025 -- Tabela de origem importada via BULK INSERT
+WHERE vacinacao_jan_2025.co_vacina_fabricante IS NOT NULL; -- Existe um campo nulo na tabela, então é necessário ter este where
 
+-- Inserindo dados distintos na tabela VacinaLocalAplicacao
+INSERT INTO VacinaLocalAplicacao  (CodigoLocalAplicacao , CodigoVacina )
+SELECT DISTINCT  
+       CAST(co_local_aplicacao AS VARCHAR(100)) -- Conversão de NVARCHAR para VARCHAR(100) 
+       CAST(co_vacina AS VARCHAR(100)), -- Conversão de NVARCHAR para VARCHAR(100)
+FROM vacinacao_jan_2025 -- Tabela de origem importada via BULK INSERT
+WHERE vacinacao_jan_2025.co_local_aplicacao IS NOT NULL; -- Existe um campo nulo na tabela, então é necessário ter este where
+
+-- Inserindo dados distintos na tabela AplicacaoVacinaEstabelecimento
+INSERT INTO AplicacaoVacinaEstabelecimento  (CodigoCnesEstabelecimento , IdAplicacao )
+SELECT DISTINCT  
+       CAST(co_cnes_estabelecimento AS VARCHAR(100)) -- Conversão de NVARCHAR para VARCHAR(100) 
+       CAST(IdAplicacao AS VARCHAR(100)), -- Conversão de NVARCHAR para VARCHAR(100)
+FROM vacinacao_jan_2025 -- Tabela de origem importada via BULK INSERT
+WHERE vacinacao_jan_2025.co_local_aplicacao IS NOT NULL; -- Existe um campo nulo na tabela, então é necessário ter este where
