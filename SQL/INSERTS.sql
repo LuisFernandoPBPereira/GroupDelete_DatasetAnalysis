@@ -54,4 +54,14 @@ FROM vacinacao_jan_2025 v
 WHERE
     v.co_municipio_estabelecimento IS NOT NULL AND v.no_municipio_estabelecimento IS NOT NULL
 
+-- Inserindo dados distintos na tabela ViaAdministracao
+INSERT INTO ViaAdministracao (CodigoViaAdministracao, DescricaoViaAdministracao)    
+SELECT DISTINCT 
+	CAST(co_via_administracao AS INT),   -- Conversão de NCHAR para INT
+	CAST(ds_via_administracao AS VARCHAR(150))   -- Conversão de NCHAR para VARCHAR(150)
+FROM vacinacao_jan_2025   -- Tabela de origem importada via BULK INSERT
+WHERE 
+	v.co_via_administracao IS NOT NULL AND v.ds_via_administracao IS NOT NULL   -- Filtro para evitar campos nulos
+
+
 
