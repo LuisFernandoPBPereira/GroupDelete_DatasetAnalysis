@@ -7,13 +7,19 @@ BEGIN
     CREATE DATABASE DB_VACINACAO;
 END
 
+GO
+
 USE DB_VACINACAO;
 
+GO
 
 DROP TABLE IF EXISTS AplicacaoVacinaEstabelecimento;
 DROP TABLE IF EXISTS VacinaLocalAplicacao;
 DROP TABLE IF EXISTS VacinaFabricanteVacina;
 DROP TABLE IF EXISTS AplicacaoVacina;
+DROP TABLE IF EXISTS VacinaDoseVacina;
+DROP TABLE IF EXISTS VacinaViaAdmnistracao;
+
 DROP TABLE IF EXISTS Vacina;
 DROP TABLE IF EXISTS CategoriaAtendimento;
 DROP TABLE IF EXISTS GrupoAtendimento;
@@ -21,6 +27,7 @@ DROP TABLE IF EXISTS VacinaFabricante;
 DROP TABLE IF EXISTS ViaAdministracao;
 DROP TABLE IF EXISTS LocalAplicacao;
 DROP TABLE IF EXISTS DoseVacina;
+
 DROP TABLE IF EXISTS Documento;
 DROP TABLE IF EXISTS EstrategiaVacinacao;
 DROP TABLE IF EXISTS OrigemRegistro;
