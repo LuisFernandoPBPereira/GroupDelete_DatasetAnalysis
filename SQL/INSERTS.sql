@@ -82,6 +82,7 @@ SELECT DISTINCT
 FROM vacinacao_jan_2025   -- Tabela de origem importada via BULK INSERT
 WHERE co_vacina_fabricante IS NOT NULL;  -- Filtro para evitar campos nulos
 
+<<<<<<< HEAD
 -- Inserindo dados distintos na tabela VacinaLocalAplicacao
 INSERT INTO VacinaLocalAplicacao (CodigoLocalAplicacao, CodigoVacina)
 SELECT DISTINCT
