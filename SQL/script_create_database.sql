@@ -12,7 +12,8 @@ GO
 USE DB_VACINACAO;
 
 GO
-
+DROP TABLE IF EXISTS VacinaCategoriaAtendimento;
+DROP TABLE IF EXISTS VacinaGrupoAtendimento;
 DROP TABLE IF EXISTS AplicacaoVacinaEstabelecimento;
 DROP TABLE IF EXISTS VacinaLocalAplicacao;
 DROP TABLE IF EXISTS VacinaFabricanteVacina;
