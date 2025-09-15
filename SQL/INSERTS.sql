@@ -73,6 +73,39 @@ FROM vacinacao_jan_2025   -- Tabela de origem importada via BULK INSERT
 WHERE 
 	v.co_via_administracao IS NOT NULL AND v.ds_via_administracao IS NOT NULL   -- Filtro para evitar campos nulos
 
+-- Inserindo dados distintos na tabela AplicacaoVacina
+INSERT INTO AplicacaoVacina (CodigoDocumento, CodigoPaciente, CodigoCnesEstabelecimento, CodigoVacina, DataVacina)
+SELECT DISTINCT
+       CAST(st_documento AS UNIQUEIDENTIFIER),        -- Conversão de NCHAR/NVARCHAR para UNIQUEIDENTIFIER (chave do Documento)
+       CAST(co_paciente AS UNIQUEIDENTIFIER),         -- Conversão de NCHAR/NVARCHAR para UNIQUEIDENTIFIER (chave do Paciente)
+       CAST(co_cnes_estabelecimento AS INT),          -- Conversão de NCHAR/NVARCHAR para INT (código CNES do Estabelecimento)
+       CAST(co_vacina AS INT),                        -- Conversão de NCHAR/NVARCHAR para INT (código da Vacina)
+       CAST(dt_vacina AS DATE)                        -- Conversão de NCHAR/NVARCHAR para DATE (data da aplicação da vacina)
+FROM vacinacao_jan_2025   -- Tabela de origem importada via BULK INSERT
+WHERE st_documento IS NOT NULL;  -- Filtro para evitar valores nulos no campo obrigatório
 
+-- Inserindo dados distintos na tabela VacinaFabricanteVacina
+INSERT INTO VacinaFabricanteVacina (CodigoVacinaFabricante, CodigoVacina)
+SELECT DISTINCT
+       CAST(co_vacina_fabricante AS INT),   -- Conversão de NCHAR/NVARCHAR para INT (código do fabricante da vacina)
+       CAST(co_vacina AS INT)               -- Conversão de NCHAR/NVARCHAR para INT (código da vacina)
+FROM vacinacao_jan_2025   -- Tabela de origem importada via BULK INSERT
+WHERE co_vacina_fabricante IS NOT NULL;  -- Filtro para evitar campos nulos
 
+-- Inserindo dados distintos na tabela VacinaLocalAplicacao
+INSERT INTO VacinaLocalAplicacao (CodigoLocalAplicacao, CodigoVacina)
+SELECT DISTINCT
+       CAST(co_local_aplicacao AS INT),   -- Conversão de NCHAR/NVARCHAR para INT (código do local de aplicação)
+       CAST(co_vacina AS INT)             -- Conversão de NCHAR/NVARCHAR para INT (código da vacina)
+FROM vacinacao_jan_2025   -- Tabela de origem importada via BULK INSERT
+WHERE co_local_aplicacao IS NOT NULL;  -- Filtro para evitar campos nulos
+
+-- Inserindo dados distintos na tabela AplicacaoVacinaEstabelecimento
+INSERT INTO AplicacaoVacinaEstabelecimento (CodigoCnesEstabelecimento, IdAplicacao)
+SELECT DISTINCT
+       CAST(v.co_cnes_estabelecimento AS INT),   -- Conversão de NCHAR/NVARCHAR para INT (código CNES do Estabelecimento)
+       CAST(v.st_documento AS UNIQUEIDENTIFIER)  -- Usando o documento como referência direta para IdAplicacao
+FROM vacinacao_jan_2025 v
+WHERE v.co_cnes_estabelecimento IS NOT NULL
+AND v.st_documento IS NOT NULL;  -- Filtro para evitar campos nulos
 
