@@ -108,4 +108,3 @@ SELECT DISTINCT
 FROM vacinacao_jan_2025 v
 WHERE v.co_cnes_estabelecimento IS NOT NULL
 AND v.st_documento IS NOT NULL;  -- Filtro para evitar campos nulos
-
