@@ -7,13 +7,19 @@ BEGIN
     CREATE DATABASE DB_VACINACAO;
 END
 
+GO
+
 USE DB_VACINACAO;
 
+GO
 
 DROP TABLE IF EXISTS AplicacaoVacinaEstabelecimento;
 DROP TABLE IF EXISTS VacinaLocalAplicacao;
 DROP TABLE IF EXISTS VacinaFabricanteVacina;
 DROP TABLE IF EXISTS AplicacaoVacina;
+DROP TABLE IF EXISTS VacinaDoseVacina;
+DROP TABLE IF EXISTS VacinaViaAdmnistracao;
+
 DROP TABLE IF EXISTS Vacina;
 DROP TABLE IF EXISTS CategoriaAtendimento;
 DROP TABLE IF EXISTS GrupoAtendimento;
@@ -21,6 +27,7 @@ DROP TABLE IF EXISTS VacinaFabricante;
 DROP TABLE IF EXISTS ViaAdministracao;
 DROP TABLE IF EXISTS LocalAplicacao;
 DROP TABLE IF EXISTS DoseVacina;
+
 DROP TABLE IF EXISTS Documento;
 DROP TABLE IF EXISTS EstrategiaVacinacao;
 DROP TABLE IF EXISTS OrigemRegistro;
@@ -217,3 +224,11 @@ CREATE TABLE VacinaDoseVacina(
     CONSTRAINT FK_VacinaDoseVacina_CodigoDoseVacina FOREIGN KEY (CodigoDoseVacina) REFERENCES DoseVacina(CodigoDoseVacina)
 );
 
+CREATE TABLE VacinaViaAdmnistracao(
+    CodigoVacina INT NOT NULL,
+    CodigoViaAdministracao INT NOT NULL,
+    CONSTRAINT PK_VacinaViaAdmnistracao PRIMARY KEY (CodigoVacina,CodigoViaAdministracao),
+    CONSTRAINT FK_VacinaViaAdmnistracao_Vacina FOREIGN KEY (CodigoVacina) REFERENCES Vacina(CodigoVacina),
+    CONSTRAINT FK_VacinaViaAdmnistracao_CodigoViaAdministracao FOREIGN KEY (CodigoViaAdministracao) REFERENCES ViaAdministracao(CodigoViaAdministracao)
+
+);
