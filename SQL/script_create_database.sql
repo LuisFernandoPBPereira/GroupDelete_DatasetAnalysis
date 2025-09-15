@@ -217,3 +217,11 @@ CREATE TABLE VacinaDoseVacina(
     CONSTRAINT FK_VacinaDoseVacina_CodigoDoseVacina FOREIGN KEY (CodigoDoseVacina) REFERENCES DoseVacina(CodigoDoseVacina)
 );
 
+CREATE TABLE VacinaViaAdmnistracao(
+    CodigoVacina INT NOT NULL,
+    CodigoViaAdministracao INT NOT NULL,
+    CONSTRAINT PK_VacinaViaAdmnistracao PRIMARY KEY (CodigoVacina,CodigoViaAdministracao),
+    CONSTRAINT FK_VacinaViaAdmnistracao_Vacina FOREIGN KEY (CodigoVacina) REFERENCES Vacina(CodigoVacina),
+    CONSTRAINT FK_VacinaViaAdmnistracao_CodigoViaAdministracao FOREIGN KEY (CodigoViaAdministracao) REFERENCES ViaAdministracao(CodigoViaAdministracao)
+
+);
