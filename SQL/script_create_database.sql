@@ -127,12 +127,12 @@ CREATE TABLE EstrategiaVacinacao (
 );
 
 CREATE TABLE Documento (
-    CodigoDocumento UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
-    CodigoPaciente UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Paciente(CodigoPaciente),
-    CodigoTrocaDocumento UNIQUEIDENTIFIER NULL,
+    CodigoDocumento CHAR(41) PRIMARY KEY DEFAULT NEWID(),
+    CodigoPaciente CHAR(64) FOREIGN KEY REFERENCES Paciente(CodigoPaciente),
+    CodigoTrocaDocumento CHAR(41) NULL,
     StDocumento VARCHAR(20),
-    DataEntradaRnDescricao DATETIME,
-    DataDeletadoRnDescricao DATETIME NULL,
+    DataEntradaRnDescricao DATETIME2,
+    DataDeletadoRnDescricao DATETIME2 NULL,
     CodigoSistemaOrigem INT FOREIGN KEY REFERENCES SistemaOrigem(CodigoSistemaOrigem),
     CodigoOrigemRegistro INT FOREIGN KEY REFERENCES OrigemRegistro(CodigoOrigemRegistro),
     CodigoEstrategiaVacinacao INT FOREIGN KEY REFERENCES EstrategiaVacinacao(CodigoEstrategiaVacinacao)
@@ -183,8 +183,8 @@ CREATE TABLE Vacina (
 
 CREATE TABLE AplicacaoVacina (
     IdAplicacao INT IDENTITY PRIMARY KEY,
-    CodigoDocumento UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Documento(CodigoDocumento),
-    CodigoPaciente UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Paciente(CodigoPaciente),
+    CodigoDocumento CHAR(41) FOREIGN KEY REFERENCES Documento(CodigoDocumento),
+    CodigoPaciente CHAR(64) FOREIGN KEY REFERENCES Paciente(CodigoPaciente),
     CodigoCnesEstabelecimento INT FOREIGN KEY REFERENCES Estabelecimento(CodigoCnesEstabelecimento),
     CodigoVacina INT FOREIGN KEY REFERENCES Vacina(CodigoVacina),
     DataVacina DATE
