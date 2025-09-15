@@ -87,24 +87,30 @@ WHERE st_documento IS NOT NULL;  -- Filtro para evitar valores nulos no campo ob
 -- Inserindo dados distintos na tabela VacinaFabricanteVacina
 INSERT INTO VacinaFabricanteVacina (CodigoVacinaFabricante, CodigoVacina)
 SELECT DISTINCT
-       CAST(co_vacina_fabricante AS INT),   -- Conversão de NCHAR/NVARCHAR para INT (código do fabricante da vacina)
-       CAST(co_vacina AS INT)               -- Conversão de NCHAR/NVARCHAR para INT (código da vacina)
-FROM vacinacao_jan_2025   -- Tabela de origem importada via BULK INSERT
-WHERE co_vacina_fabricante IS NOT NULL;  -- Filtro para evitar campos nulos
+       CAST(v.co_vacina_fabricante AS INT),   -- Código do fabricante
+       CAST(v.co_vacina AS INT)               -- Código da vacina
+FROM vacinacao_jan_2025 v
+WHERE v.co_vacina_fabricante IS NOT NULL 
+  AND v.co_vacina IS NOT NULL;                -- Filtro para evitar campos nulos
 
 -- Inserindo dados distintos na tabela VacinaLocalAplicacao
 INSERT INTO VacinaLocalAplicacao (CodigoLocalAplicacao, CodigoVacina)
 SELECT DISTINCT
-       CAST(co_local_aplicacao AS INT),   -- Conversão de NCHAR/NVARCHAR para INT (código do local de aplicação)
-       CAST(co_vacina AS INT)             -- Conversão de NCHAR/NVARCHAR para INT (código da vacina)
-FROM vacinacao_jan_2025   -- Tabela de origem importada via BULK INSERT
-WHERE co_local_aplicacao IS NOT NULL;  -- Filtro para evitar campos nulos
+       CAST(v.co_local_aplicacao AS INT),   -- Código do local de aplicação
+       CAST(v.co_vacina AS INT)             -- Código da vacina
+FROM vacinacao_jan_2025 v
+WHERE v.co_local_aplicacao IS NOT NULL 
+  AND v.co_vacina IS NOT NULL;              -- Filtro para evitar campos nulos
 
 -- Inserindo dados distintos na tabela AplicacaoVacinaEstabelecimento
 INSERT INTO AplicacaoVacinaEstabelecimento (CodigoCnesEstabelecimento, IdAplicacao)
 SELECT DISTINCT
-       CAST(v.co_cnes_estabelecimento AS INT),   -- Conversão de NCHAR/NVARCHAR para INT (código CNES do Estabelecimento)
-       CAST(v.st_documento AS UNIQUEIDENTIFIER)  -- Usando o documento como referência direta para IdAplicacao
+       CAST(v.co_cnes_estabelecimento AS INT),   -- Código CNES do estabelecimento
+       av.IdAplicacao                            -- IdAplicacao já gerado em AplicacaoVacina
 FROM vacinacao_jan_2025 v
-WHERE v.co_cnes_estabelecimento IS NOT NULL
-AND v.st_documento IS NOT NULL;  -- Filtro para evitar campos nulos
+INNER JOIN AplicacaoVacina av
+       ON av.CodigoDocumento = CAST(v.st_documento AS UNIQUEIDENTIFIER)
+       AND av.CodigoPaciente = CAST(v.co_paciente AS UNIQUEIDENTIFIER)
+WHERE v.co_cnes_estabelecimento IS NOT NULL 
+  AND v.st_documento IS NOT NULL 
+  AND v.co_paciente IS NOT NULL;  -- Garantia de integridade nas FKs
