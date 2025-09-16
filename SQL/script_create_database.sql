@@ -172,12 +172,6 @@ CREATE TABLE Vacina (
     CodigoVacina INT PRIMARY KEY,
     DescricaoVacina VARCHAR(150),
     SgVacina VARCHAR(50),
-    CodigoDoseVacina INT FOREIGN KEY REFERENCES DoseVacina(CodigoDoseVacina),
-    CodigoLocalAplicacao INT FOREIGN KEY REFERENCES LocalAplicacao(CodigoLocalAplicacao),
-    CodigoViaAdministracao INT FOREIGN KEY REFERENCES ViaAdministracao(CodigoViaAdministracao),
-    CodigoVacinaFabricante INT FOREIGN KEY REFERENCES VacinaFabricante(CodigoVacinaFabricante),
-    CodigoVacinaGrupoAtendimento INT FOREIGN KEY REFERENCES GrupoAtendimento(CodigoVacinaGrupoAtendimento),
-    CodigoVacinaCategoriaAtendimento INT FOREIGN KEY REFERENCES CategoriaAtendimento(CodigoVacinaCategoriaAtendimento),
     CodigoLoteVacina VARCHAR(100)
 );
 
