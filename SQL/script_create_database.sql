@@ -251,6 +251,6 @@ CREATE TABLE PacienteMunicipioPaciente(
     CodigoMunicipioPaciente INT NOT NULL,
     CONSTRAINT PK_PacienteMunicipioPaciente PRIMARY KEY (CodigoPaciente,CodigoMunicipioPaciente),
     CONSTRAINT FK_PacienteMunicipioPaciente_PACIENTE FOREIGN KEY (CodigoPaciente) REFERENCES Paciente(CodigoPaciente),
-    CONSTRAINT FK_PacienteMunicipioPaciente_MunicipioPaciente FOREIGN KEY (CodigoMunicipioPaciente) REFERENCES CategoriaAtendimento(CodigoVacinaCategoriaAtendimento)
+    CONSTRAINT FK_PacienteMunicipioPaciente_MunicipioPaciente FOREIGN KEY (CodigoMunicipioPaciente) REFERENCES MunicipioPaciente(CodigoMunicipioPaciente)
 
 );
