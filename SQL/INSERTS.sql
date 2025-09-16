@@ -139,3 +139,11 @@ SELECT DISTINCT
     CAST(ds_natureza_estabelecimento AS VARCHAR(100))
 FROM vacinacao_jan_2025
 WHERE co_natureza_estabelecimento;
+
+-- Inserindo dados distintos na tabela TipoEstabelecimento
+INSERT INTO TipoEstabelecimento (CodigoTipoEstabelecimento, DescricaoTipoEstabelecimento)
+SELECT DISTINCT
+    CAST(co_tipo_estabelecimento AS INT),
+    CAST(ds_tipo_estabelecimento AS VARCHAR(100))
+FROM vacinacao_jan_2025
+WHERE co_tipo_estabelecimento;
