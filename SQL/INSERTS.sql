@@ -88,3 +88,12 @@ SELECT DISTINCT
 	CAST(ds_origem_registro AS VARCHAR(100))
 FROM dbo.vacinacao_jan_2025 AS vj25
 WHERE vj25.co_origem_registro IS NOT NULL AND vj25.ds_origem_registro IS NOT NULL
+
+-- Inserindo dados distintos na tabela GrupoAtendimento
+INSERT INTO GrupoAtendimento (CodigoVacinaGrupoAtendimento, DescricaoVacinaGrupoAtendimento)
+SELECT DISTINCT 
+	CAST(co_vacina_grupo_atendimento AS INT),   -- Conversão de NCHAR para INT
+	CAST(ds_vacina_grupo_atendimento AS VARCHAR(150))   -- Conversão de NCHAR para VARCHAR(150)
+FROM vacinacao_jan_2025   -- Tabela de origem importada via BULK INSERT
+WHERE co_vacina_grupo_atendimento IS NOT NULL;   -- Filtro para evitar campos nulos
+
