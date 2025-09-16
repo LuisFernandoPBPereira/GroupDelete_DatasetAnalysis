@@ -250,7 +250,15 @@ CREATE TABLE PacienteMunicipioPaciente(
     CodigoPaciente CHAR(64) NOT NULL,
     CodigoMunicipioPaciente INT NOT NULL,
     CONSTRAINT PK_PacienteMunicipioPaciente PRIMARY KEY (CodigoPaciente,CodigoMunicipioPaciente),
-    CONSTRAINT FK_PacienteMunicipioPaciente_PACIENTE FOREIGN KEY (CodigoPaciente) REFERENCES Paciente(CodigoPaciente),
+    CONSTRAINT FK_PacienteMunicipioPaciente_Paciente FOREIGN KEY (CodigoPaciente) REFERENCES Paciente(CodigoPaciente),
     CONSTRAINT FK_PacienteMunicipioPaciente_MunicipioPaciente FOREIGN KEY (CodigoMunicipioPaciente) REFERENCES MunicipioPaciente(CodigoMunicipioPaciente)
 
 );
+
+CREATE TABLE PacienteRacaCorPaciente(
+    CodigoPaciente CHAR(64) NOT NULL,
+    CodigoRacaCorPaciente INT NOT NULL,
+    CONSTRAINT PK_PacienteRacaCorPaciente PRIMARY KEY (CodigoPaciente,CodigoRacaCorPaciente),
+    CONSTRAINT FK_PacienteRacaCorPaciente_Paciente FOREIGN KEY (CodigoPaciente) REFERENCES Paciente(CodigoPaciente),
+    CONSTRAINT FK_PacienteRacaCorPaciente_RacaCorPaciente FOREIGN KEY (CodigoRacaCorPaciente) REFERENCES RacaCorPaciente(CodigoRacaCorPaciente)
+    );
