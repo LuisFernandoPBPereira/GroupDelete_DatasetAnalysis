@@ -1,3 +1,4 @@
+
 -- Observação: O uso do DISTINCT é necessário para garantir que não sejam inseridos registros duplicados, mas nem todas devem ter.
 -- As colunas estão mapeadas conforme o dicionário de dados (De/Para).
 
@@ -131,3 +132,10 @@ SELECT DISTINCT
 FROM vacinacao_jan_2025;   -- Tabela de origem importada via BULK INSERT
 WHERE co_vacina IS NOT NULL;   -- Filtro para evitar campos nulos
 
+-- Inserindo dados distintos na tabela NaturezaEstabelecimento
+INSERT INTO NaturezaEstabelecimento (CodigoNaturezaEstabelecimento, DescricaoNaturezaEstabelecimento)
+SELECT DISTINCT
+    CAST(co_natureza_estabelecimento AS INT),
+    CAST(ds_natureza_estabelecimento AS VARCHAR(100))
+FROM vacinacao_jan_2025
+WHERE co_natureza_estabelecimento;
