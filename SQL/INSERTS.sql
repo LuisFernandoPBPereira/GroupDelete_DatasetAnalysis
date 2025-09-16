@@ -120,3 +120,14 @@ SELECT DISTINCT
     CAST(co_natureza_estabelecimento AS INT)
 FROM vacinacao_jan_2025
 WHERE co_cnes_estabelecimento;
+
+-- Inserindo dados distintos na tabela Vacina
+INSERT INTO Vacina (CodigoVacina, DescricaoVacina, SgVacina, CodigoLoteVacina)
+SELECT DISTINCT 
+	CAST(co_vacina AS INT),   -- Conversão de NCHAR para INT
+	CAST(ds_vacina AS VARCHAR(150),   -- Conversão de NCHAR para VARCHAR(150)
+	CAST(sg_vacina AS VARCHAR(50)),   -- Conversão de NCHAR para VARCHAR(50)
+	CAST(co_lote_vacina AS VARCHAR(100))   ---- Conversão de NCHAR para VARCHAR(100)
+FROM vacinacao_jan_2025;   -- Tabela de origem importada via BULK INSERT
+WHERE co_vacina IS NOT NULL;   -- Filtro para evitar campos nulos
+
