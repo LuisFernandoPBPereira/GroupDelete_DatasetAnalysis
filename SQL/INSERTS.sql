@@ -73,6 +73,18 @@ FROM vacinacao_jan_2025   -- Tabela de origem importada via BULK INSERT
 WHERE 
 	v.co_via_administracao IS NOT NULL AND v.ds_via_administracao IS NOT NULL   -- Filtro para evitar campos nulos
 
+-- Inserindo dados distintos na tabela SistemaOrigem
+INSERT INTO dbo.SistemaOrigem (CodigoSistemaOrigem, DescricaoSistemaOrigem)
+SELECT DISTINCT
+	CAST(co_sistema_origem AS INT),
+	CAST(ds_sistema_origem AS VARCHAR(150))
+FROM dbo.vacinacao_jan_2025 AS vj25
+WHERE vj25.co_sistema_origem IS NOT NULL AND vj25.ds_sistema_origem IS NOT NULL
 
-
-
+-- Inserindo dados distintos na tabela OrigemRegistro
+INSERT INTO dbo.OrigemRegistro (CodigoOrigemRegistro, DescricaoOrigemRegistro)
+SELECT DISTINCT
+	CAST(co_origem_registro AS INT),
+	CAST(ds_origem_registro AS VARCHAR(100))
+FROM dbo.vacinacao_jan_2025 AS vj25
+WHERE vj25.co_origem_registro IS NOT NULL AND vj25.ds_origem_registro IS NOT NULL
