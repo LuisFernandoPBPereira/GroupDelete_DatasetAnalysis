@@ -100,17 +100,21 @@ SELECT DISTINCT
        CAST(v.co_vacina AS INT)             -- Código da vacina
 FROM vacinacao_jan_2025 v
 WHERE v.co_local_aplicacao IS NOT NULL 
-  AND v.co_vacina IS NOT NULL;              -- Filtro para evitar campos nulos
+       AND v.co_vacina IS NOT NULL;              -- Filtro para evitar campos nulos
 
 -- Inserindo dados distintos na tabela AplicacaoVacinaEstabelecimento
+-- Nesta inserção é utilizado um INNER JOIN com a tabela AplicacaoVacina,
+-- pois o campo IdAplicacao é uma chave surrogate (IDENTITY) gerada nessa tabela.
+-- O JOIN garante que apenas aplicações previamente registradas em AplicacaoVacina
+-- sejam vinculadas a um estabelecimento, mantendo a integridade da Foreign Key
+-- e evitando registros órfãos na tabela de ligação.
 INSERT INTO AplicacaoVacinaEstabelecimento (CodigoCnesEstabelecimento, IdAplicacao)
 SELECT DISTINCT
-       CAST(v.co_cnes_estabelecimento AS INT),   -- Código CNES do estabelecimento
-       av.IdAplicacao                            -- IdAplicacao já gerado em AplicacaoVacina
+       CAST(v.co_cnes_estabelecimento AS INT),   -- Conversão para INT (código CNES do Estabelecimento)
+       av.IdAplicacao                            -- Recuperado da AplicacaoVacina para manter a integridade referencial
 FROM vacinacao_jan_2025 v
 INNER JOIN AplicacaoVacina av
        ON av.CodigoDocumento = CAST(v.st_documento AS UNIQUEIDENTIFIER)
        AND av.CodigoPaciente = CAST(v.co_paciente AS UNIQUEIDENTIFIER)
-WHERE v.co_cnes_estabelecimento IS NOT NULL 
-  AND v.st_documento IS NOT NULL 
-  AND v.co_paciente IS NOT NULL;  -- Garantia de integridade nas FKs
+WHERE v.co_cnes_estabelecimento IS NOT NULL;  -- Estabelecimento é campo obrigatório
+
