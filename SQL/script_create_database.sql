@@ -12,6 +12,7 @@ GO
 USE DB_VACINACAO;
 
 GO
+DROP TABLE IF EXISTS PacienteMunicipioPaciente;
 DROP TABLE IF EXISTS VacinaCategoriaAtendimento;
 DROP TABLE IF EXISTS VacinaGrupoAtendimento;
 DROP TABLE IF EXISTS AplicacaoVacinaEstabelecimento;
@@ -43,7 +44,6 @@ DROP TABLE IF EXISTS CondicaoMaternal;
 DROP TABLE IF EXISTS EtniaIndigenaPaciente;
 DROP TABLE IF EXISTS PaisPaciente;
 DROP TABLE IF EXISTS RacaCorPaciente;
-
 
 CREATE TABLE RacaCorPaciente (
     CodigoRacaCorPaciente INT PRIMARY KEY,
@@ -222,7 +222,7 @@ CREATE TABLE VacinaDoseVacina(
     CodigoDoseVacina INT NOT NULL,
     CONSTRAINT PK_VacinaDoseVacina PRIMARY KEY (CodigoVacina,CodigoDoseVacina),
     CONSTRAINT FK_VacinaDoseVacina_Vacina FOREIGN KEY (CodigoVacina) REFERENCES Vacina(CodigoVacina),
-    CONSTRAINT FK_VacinaDoseVacina_CodigoDoseVacina FOREIGN KEY (CodigoDoseVacina) REFERENCES DoseVacina(CodigoDoseVacina)
+    CONSTRAINT FK_VacinaDoseVacina_DoseVacina FOREIGN KEY (CodigoDoseVacina) REFERENCES DoseVacina(CodigoDoseVacina)
 );
 
 CREATE TABLE VacinaViaAdmnistracao(
@@ -230,7 +230,7 @@ CREATE TABLE VacinaViaAdmnistracao(
     CodigoViaAdministracao INT NOT NULL,
     CONSTRAINT PK_VacinaViaAdmnistracao PRIMARY KEY (CodigoVacina,CodigoViaAdministracao),
     CONSTRAINT FK_VacinaViaAdmnistracao_Vacina FOREIGN KEY (CodigoVacina) REFERENCES Vacina(CodigoVacina),
-    CONSTRAINT FK_VacinaViaAdmnistracao_CodigoViaAdministracao FOREIGN KEY (CodigoViaAdministracao) REFERENCES ViaAdministracao(CodigoViaAdministracao)
+    CONSTRAINT FK_VacinaViaAdmnistracao_ViaAdministracao FOREIGN KEY (CodigoViaAdministracao) REFERENCES ViaAdministracao(CodigoViaAdministracao)
 
 );
 
@@ -239,7 +239,7 @@ CREATE TABLE VacinaGrupoAtendimento(
     CodigoVacinaGrupoAtendimento INT NOT NULL,
     CONSTRAINT PK_VacinaGrupoAtendimento PRIMARY KEY (CodigoVacina,CodigoVacinaGrupoAtendimento),
     CONSTRAINT FK_VacinaGrupoAtendimento_Vacina FOREIGN KEY (CodigoVacina) REFERENCES Vacina(CodigoVacina),
-    CONSTRAINT FK_VacinaGrupoAtendimento_CodigoVacinaGrupoAtendimento FOREIGN KEY (CodigoVacinaGrupoAtendimento) REFERENCES GrupoAtendimento(CodigoVacinaGrupoAtendimento)
+    CONSTRAINT FK_VacinaGrupoAtendimento_GrupoAtendimento FOREIGN KEY (CodigoVacinaGrupoAtendimento) REFERENCES GrupoAtendimento(CodigoVacinaGrupoAtendimento)
 
 );
 
@@ -248,6 +248,16 @@ CREATE TABLE VacinaCategoriaAtendimento(
     CodigoVacinaCategoriaAtendimento INT NOT NULL,
     CONSTRAINT PK_VacinaCategoriaAtendimento PRIMARY KEY (CodigoVacina,CodigoVacinaCategoriaAtendimento),
     CONSTRAINT FK_VacinaCategoriaAtendimento_Vacina FOREIGN KEY (CodigoVacina) REFERENCES Vacina(CodigoVacina),
-    CONSTRAINT FK_VacinaCategoriaAtendimento_CodigoVacinaCategoriaAtendimento FOREIGN KEY (CodigoVacinaCategoriaAtendimento) REFERENCES CategoriaAtendimento(CodigoVacinaCategoriaAtendimento)
+    CONSTRAINT FK_VacinaCategoriaAtendimento_CategoriaAtendimento FOREIGN KEY (CodigoVacinaCategoriaAtendimento) REFERENCES CategoriaAtendimento(CodigoVacinaCategoriaAtendimento)
 
-)
+);
+
+CREATE TABLE PacienteMunicipioPaciente(
+    CodigoPaciente CHAR(64) NOT NULL,
+    CodigoMunicipioPaciente INT NOT NULL,
+    CONSTRAINT PK_PacienteMunicipioPaciente PRIMARY KEY (CodigoPaciente,CodigoMunicipioPaciente),
+    CONSTRAINT FK_PacienteMunicipioPaciente_PACIENTE FOREIGN KEY (CodigoPaciente) REFERENCES Paciente(CodigoPaciente),
+    CONSTRAINT FK_PacienteMunicipioPaciente_MunicipioPaciente FOREIGN KEY (CodigoMunicipioPaciente) REFERENCES CategoriaAtendimento(CodigoVacinaCategoriaAtendimento)
+
+);
+
