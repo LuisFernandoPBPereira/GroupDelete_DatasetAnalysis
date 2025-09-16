@@ -108,3 +108,11 @@ SELECT DISTINCT
     CAST(nu_cep_paciente AS VARCHAR(8))
 FROM vacinacao_jan_2025
 WHERE co_paciente IS NOT NULL;
+
+-- Inserindo dados distintos na tabela NaturezaEstabelecimento
+INSERT INTO NaturezaEstabelecimento (CodigoNaturezaEstabelecimento, DescricaoNaturezaEstabelecimento)
+SELECT DISTINCT
+    CAST(co_natureza_estabelecimento AS INT),
+    CAST(ds_natureza_estabelecimento AS VARCHAR(100))
+FROM vacinacao_jan_2025
+WHERE co_natureza_estabelecimento;
