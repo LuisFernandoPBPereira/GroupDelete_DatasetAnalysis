@@ -271,3 +271,11 @@ CREATE TABLE PacienteCondicaoMaternal(
      CONSTRAINT FK_PacienteCondicaoMaternal_CondicaoMaternal FOREIGN KEY (CodigoCondicaoMaternal) REFERENCES CondicaoMaternal(CodigoCondicaoMaternal)
 );
 
+CREATE TABLE PacienteEtniaIndigenaPaciente(
+     CodigoPaciente CHAR(64) NOT NULL,
+     CodigoEtniaIndigenaPaciente CHAR(4) NOT NULL,
+     CONSTRAINT PK_PacienteEtniaIndigenaPaciente PRIMARY KEY (CodigoPaciente,CodigoEtniaIndigenaPaciente),
+     CONSTRAINT FK_PacienteEtniaIndigenaPaciente_Paciente FOREIGN KEY (CodigoPaciente) REFERENCES Paciente(CodigoPaciente),
+     CONSTRAINT FK_PacienteEtniaIndigenaPaciente_EtniaIndigenaPaciente FOREIGN KEY (CodigoEtniaIndigenaPaciente) REFERENCES EtniaIndigenaPaciente(CodigoEtniaIndigenaPaciente)
+      
+);
