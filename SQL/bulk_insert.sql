@@ -1,8 +1,10 @@
-BULK INSERT vacinacao_jan_2025 -- Caso seja necessário alterar o nome da tabela, primeiro atualize o arquivo create_geral e, em seguida, ajuste também neste local.
-FROM 'C:\caminho\arquivo.csv'  -- Caminho do arquivo CSV
+BULK INSERT vacinacao_jan_2025    
+FROM 'D:\vacinacao_jan_2025.csv' -- Caminho do arquivo CSV (Exemplo)
 WITH (
-    FIELDTERMINATOR = ';',   -- Separador de campos (padrão: `;`)
-    ROWTERMINATOR = '\n',    -- Separador de linhas
-    FIRSTROW = 2,            -- Ignora a primeira linha (cabeçalho)
-    TABLOCK                  -- Otimiza a inserção em lote
+    FIELDTERMINATOR = ';',    -- Separador de campos 
+    ROWTERMINATOR = '0x0d0a', -- quebra de linha em formato hexadecimal
+    FIRSTROW = 2,             -- Ignora a primeira linha (cabeçalho)
+    TABLOCK,                  -- Otimiza a inserção em lote
+    CODEPAGE = '1252'         -- Necesssário para tratar os dados (Acentos e etc)
+
 );
