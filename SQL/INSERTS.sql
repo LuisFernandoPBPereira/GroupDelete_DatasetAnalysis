@@ -97,3 +97,14 @@ SELECT DISTINCT
 FROM vacinacao_jan_2025   -- Tabela de origem importada via BULK INSERT
 WHERE co_vacina_grupo_atendimento IS NOT NULL;   -- Filtro para evitar campos nulos
 
+-- Inserindo dados distintos na tabela Paciente
+INSERT INTO Paciente (CodigoPaciente, TipoSexoPaciente, CodigoPaisPaciente, NumeroIdadePaciente, DescricaoNacionalidadePaciente, NumeroCepPaciente)
+SELECT DISTINCT
+    CAST(co_paciente AS CHAR(64)),
+    CAST(tp_sexo_paciente AS CHAR(1)),
+    CAST(co_pais_paciente AS INT),
+    CAST(nu_idade_paciente AS INT),
+    CAST(ds_nacionalidade_paciente AS VARCHAR(100)),
+    CAST(nu_cep_paciente AS VARCHAR(8))
+FROM vacinacao_jan_2025
+WHERE co_paciente IS NOT NULL;
