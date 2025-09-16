@@ -75,12 +75,8 @@ CREATE TABLE MunicipioPaciente (
 CREATE TABLE Paciente (
     CodigoPaciente CHAR(64) PRIMARY KEY DEFAULT NEWID(),
     TipoSexoPaciente CHAR(1),
-    CodigoRacaCorPaciente INT FOREIGN KEY REFERENCES RacaCorPaciente(CodigoRacaCorPaciente),
-    CodigoMunicipioPaciente INT FOREIGN KEY REFERENCES MunicipioPaciente(CodigoMunicipioPaciente),
     CodigoPaisPaciente INT FOREIGN KEY REFERENCES PaisPaciente(CodigoPaisPaciente),
-    CodigoEtniaIndigenaPaciente CHAR(4) NULL FOREIGN KEY REFERENCES EtniaIndigenaPaciente(CodigoEtniaIndigenaPaciente),
     NumeroIdadePaciente INT,
-    CodigoCondicaoMaternal INT NULL FOREIGN KEY REFERENCES CondicaoMaternal(CodigoCondicaoMaternal),
     DescricaoNacionalidadePaciente VARCHAR(100),
     NumeroCepPaciente VARCHAR(8)
 );
