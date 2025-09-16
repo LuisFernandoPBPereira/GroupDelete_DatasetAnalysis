@@ -73,7 +73,7 @@ CREATE TABLE MunicipioPaciente (
 );
 
 CREATE TABLE Paciente (
-    CodigoPaciente UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+    CodigoPaciente CHAR(64) PRIMARY KEY DEFAULT NEWID(),
     TipoSexoPaciente CHAR(1),
     CodigoRacaCorPaciente INT FOREIGN KEY REFERENCES RacaCorPaciente(CodigoRacaCorPaciente),
     CodigoMunicipioPaciente INT FOREIGN KEY REFERENCES MunicipioPaciente(CodigoMunicipioPaciente),
@@ -260,4 +260,3 @@ CREATE TABLE PacienteMunicipioPaciente(
     CONSTRAINT FK_PacienteMunicipioPaciente_MunicipioPaciente FOREIGN KEY (CodigoMunicipioPaciente) REFERENCES CategoriaAtendimento(CodigoVacinaCategoriaAtendimento)
 
 );
-
