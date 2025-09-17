@@ -99,16 +99,19 @@ FROM vacinacao_jan_2025   -- Tabela de origem importada via BULK INSERT
 WHERE co_vacina_grupo_atendimento IS NOT NULL;   -- Filtro para evitar campos nulos
 
 -- Inserindo dados distintos na tabela Paciente
-INSERT INTO Paciente (CodigoPaciente, TipoSexoPaciente, CodigoPaisPaciente, NumeroIdadePaciente, DescricaoNacionalidadePaciente, NumeroCepPaciente)
+INSERT INTO Paciente (CodigoPaciente, TipoSexoPaciente, NumeroIdadePaciente)
 SELECT DISTINCT
-    CAST(co_paciente AS CHAR(64)),
-    CAST(tp_sexo_paciente AS CHAR(1)),
-    CAST(co_pais_paciente AS INT),
-    CAST(nu_idade_paciente AS INT),
-    CAST(ds_nacionalidade_paciente AS VARCHAR(100)),
-    CAST(nu_cep_paciente AS VARCHAR(8))
-FROM vacinacao_jan_2025
-WHERE co_paciente IS NOT NULL;
+    CAST(co_paciente AS CHAR(64)), -- Conversão de NCHAR para CHAR(64)
+    CAST(MAX(tp_sexo_paciente) AS CHAR(1)),  -- Conversão de NCHAR para CHAR(1)
+    CAST(MAX(nu_idade_paciente) AS INT)  -- Conversão de NCHAR para INT
+FROM 
+    vacinacao_jan_2025 v
+WHERE 
+    co_paciente IS NOT NULL AND co_pais_paciente IS NOT NULL -- Impedir nulos
+GROUP BY
+    co_paciente,
+    co_pais_paciente,
+    ds_nacionalidade_paciente; 
 
 -- Inserindo dados distintos na tabela Estabelecimento
 INSERT INTO Estabelecimento (CodigoCnesEstabelecimento, NomeRazaoSocialEstabelecimento, NomeFantasiaEstalecimento, CodigoMunicipioEstabelecimento, CodigoTipoEstabelecimento, CodigoNaturezaEstabelecimento)
@@ -222,3 +225,4 @@ SELECT DISTINCT
        CAST(co_dose_vacina AS INT)       -- Conversão de NVARCHAR para INT
 FROM vacinacao_jan_2025
 WHERE co_vacina IS NOT NULL AND co_dose_vacina IS NOT NULL;  -- Filtro para evitar campos nulos
+
