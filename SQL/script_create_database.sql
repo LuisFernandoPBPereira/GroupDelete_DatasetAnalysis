@@ -277,3 +277,11 @@ CREATE TABLE PacienteEtniaIndigenaPaciente(
      CONSTRAINT FK_PacienteEtniaIndigenaPaciente_Paciente FOREIGN KEY (CodigoPaciente) REFERENCES Paciente(CodigoPaciente),
      CONSTRAINT FK_PacienteEtniaIndigenaPaciente_EtniaIndigenaPaciente FOREIGN KEY (CodigoEtniaIndigenaPaciente) REFERENCES EtniaIndigenaPaciente(CodigoEtniaIndigenaPaciente)  
 );
+
+CREATE TABLE PacientePaisPaciente(
+     CodigoPaciente CHAR(64) NOT NULL,
+     CodigoPaisPaciente INT NOT NULL,
+     CONSTRAINT PK_PacientePaisPaciente PRIMARY KEY (CodigoPaciente,CodigoPaisPaciente),
+     CONSTRAINT FK_PacientePaisPaciente_Paciente FOREIGN KEY (CodigoPaciente) REFERENCES Paciente(CodigoPaciente),
+     CONSTRAINT FK_PacientePaisPaciente_CodigoPaisPaciente FOREIGN KEY (CodigoPaisPaciente) REFERENCES PaisPaciente (CodigoPaisPaciente)  
+);
