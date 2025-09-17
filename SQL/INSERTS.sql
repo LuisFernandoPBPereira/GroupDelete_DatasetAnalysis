@@ -147,3 +147,38 @@ SELECT DISTINCT
     CAST(ds_tipo_estabelecimento AS VARCHAR(100))
 FROM vacinacao_jan_2025
 WHERE co_tipo_estabelecimento;
+
+-- Inserindo dados distintos na tabela AplicacaoVacina
+INSERT INTO AplicacaoVacina (CodigoDocumento, CodigoPaciente, CodigoCnesEstabelecimento, CodigoVacina, DataVacina)
+SELECT DISTINCT
+       CAST(st_documento AS CHAR(41),        -- Conversão de NVARCHAR para CHAR(41)
+       CAST(co_paciente AS CHAR(64),         -- Conversão de NVARCHAR para VARCHAR(64)
+       CAST(co_cnes_estabelecimento AS INT),          -- Conversão DE NCHAR para INT 
+       CAST(co_vacina AS INT),                        -- Conversão DE NCHAR para INT 
+       CAST(dt_vacina AS DATE)                        -- Conversão DE VARCHAR para DATE 
+FROM vacinacao_jan_2025   -- Tabela de origem importada via BULK INSERT
+WHERE st_documento IS NOT NULL;  -- Filtro para evitar valores nulos no campo obrigatóriO
+
+-- Inserindo dados distintos na tabela VacinaFabricanteVacina
+INSERT INTO VacinaFabricanteVacina (CodigoVacinaFabricante, CodigoVacina)
+SELECT DISTINCT
+       CAST(co_vacina_fabricante AS INT),   -- Conversão de NVARCHAR para INT
+       CAST(co_vacina AS INT)               -- Conversão de NVARCHAR para INT 
+FROM vacinacao_jan_2025   -- Tabela de origem importada via BULK INSERT
+WHERE co_vacina_fabricante IS NOT NULL;  -- Filtro para evitar campos nulos
+
+-- Inserindo dados distintos na tabela VacinaLocalAplicacao
+INSERT INTO VacinaLocalAplicacao (CodigoLocalAplicacao, CodigoVacina)
+SELECT DISTINCT
+       CAST(co_local_aplicacao AS INT),   -- Conversão de NVARCHAR para INT 
+       CAST(co_vacina AS INT)             -- Conversão de NVARCHAR para INT
+FROM vacinacao_jan_2025   -- Tabela de origem importada via BULK INSERT
+WHERE co_local_aplicacao IS NOT NULL;  -- Filtro para evitar campos nulos
+
+-- Inserindo dados distintos na tabela AplicacaoVacinaEstabelecimento
+INSERT INTO AplicacaoVacinaEstabelecimento (CodigoCnesEstabelecimento, IdAplicacao)
+SELECT DISTINCT
+       CAST(v.co_cnes_estabelecimento AS INT),   -- Conversão de NVARCHAR para INT 
+       CAST(av.IdAplicacao AS INT)       -- Conversão de NVARCHAR para INT
+FROM vacinacao_jan_2025
+WHERE v.co_cnes_estabelecimento IS NOT NULL;  -- Filtro para evitar campos nulos
