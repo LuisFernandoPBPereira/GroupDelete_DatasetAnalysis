@@ -152,7 +152,7 @@ WHERE co_tipo_estabelecimento;
 INSERT INTO AplicacaoVacina (CodigoDocumento, CodigoPaciente, CodigoCnesEstabelecimento, CodigoVacina, DataVacina)
 SELECT DISTINCT
        CAST(st_documento AS CHAR(41),        -- Conversão de NVARCHAR para CHAR(41)
-       CAST(co_paciente AS CHAR(64),         -- Conversão de NVARCHAR para VARCHAR(64)
+       CAST(co_paciente AS CHAR(64),         -- Conversão de NVARCHAR para CHAR(64)
        CAST(co_cnes_estabelecimento AS INT),          -- Conversão DE NCHAR para INT 
        CAST(co_vacina AS INT),                        -- Conversão DE NCHAR para INT 
        CAST(dt_vacina AS DATE)                        -- Conversão DE VARCHAR para DATE 
@@ -182,3 +182,43 @@ SELECT DISTINCT
        CAST(av.IdAplicacao AS INT)       -- Conversão de NVARCHAR para INT
 FROM vacinacao_jan_2025
 WHERE v.co_cnes_estabelecimento IS NOT NULL;  -- Filtro para evitar campos nulos
+
+-- Inserindo dados distintos na tabela EstrategiaVacinacao
+INSERT INTO EstrategiaVacinacao (CodigoEstrategiaVacinacao, DescricaoEstrategiaVacinacao)
+SELECT DISTINCT
+       CAST(co_estrategia_vacinacao AS INT),   -- Conversão de NVARCHAR para INT 
+       CAST(s_estrategia_vacinacao AS VARCHAR(150))       -- Conversão de NVARCHAR para VARCHAR(150)
+FROM vacinacao_jan_2025
+WHERE co_estrategia_vacinacao IS NOT NULL;  -- Filtro para evitar campos nulos
+
+-- Inserindo dados distintos na tabela LocalAplicacao
+INSERT INTO LocalAplicacao (CodigoLocalAplicacao, DescricaoLocalAplicacao)
+SELECT DISTINCT
+       CAST(co_local_aplicacao AS INT),   -- Conversão de NVARCHAR para INT 
+       CAST(ds_local_aplicacao AS VARCHAR(150))       -- Conversão de NVARCHAR para VARCHAR(150)
+FROM vacinacao_jan_2025
+WHERE co_local_aplicacao IS NOT NULL;  -- Filtro para evitar campos nulos
+
+-- Inserindo dados distintos na tabela VacinaFabricante
+INSERT INTO VacinaFabricante (CodigoVacinaFabricante, DescricaoVacinaFabricante)
+SELECT DISTINCT
+       CAST(co_vacina_fabricante AS INT),   -- Conversão de NVARCHAR para INT 
+       CAST(ds_vacina_fabricante AS VARCHAR(150))       -- Conversão de NVARCHAR para VARCHAR(150)
+FROM vacinacao_jan_2025
+WHERE co_vacina_fabricante IS NOT NULL;  -- Filtro para evitar campos nulos
+	
+-- Inserindo dados distintos na tabela CategoriaAtendimento
+INSERT INTO CategoriaAtendimento (CodigoVacinaCategoriaAtendimento, DescricaoVacinaCategoriaAtendimento)
+SELECT DISTINCT
+       CAST(co_vacina_categoria_atendimento AS INT),   -- Conversão de NVARCHAR para INT 
+       CAST(ds_vacina_categoria_atendimento AS VARCHAR(150))       -- Conversão de NVARCHAR para VARCHAR(150)
+FROM vacinacao_jan_2025
+WHERE co_vacina_categoria_atendimento IS NOT NULL;  -- Filtro para evitar campos nulos
+
+-- Inserindo dados distintos na tabela VacinaDoseVacina
+INSERT INTO VacinaDoseVacina (CodigoVacina, CodigoDoseVacina)
+SELECT DISTINCT
+       CAST(co_vacina AS INT),   -- Conversão de NVARCHAR para INT 
+       CAST(co_dose_vacina AS INT)       -- Conversão de NVARCHAR para INT
+FROM vacinacao_jan_2025
+WHERE co_vacina IS NOT NULL AND co_dose_vacina IS NOT NULL;  -- Filtro para evitar campos nulos
