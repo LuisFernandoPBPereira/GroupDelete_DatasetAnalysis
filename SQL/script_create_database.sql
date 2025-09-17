@@ -12,6 +12,7 @@ GO
 USE DB_VACINACAO;
 
 GO
+DROP TABLE IF EXISTS PacientePaisPaciente;
 DROP TABLE IF EXISTS PacienteRacaCorPaciente;
 DROP TABLE IF EXISTS PacienteCondicaoMaternal;
 DROP TABLE IF EXISTS PacienteEtniaIndigenaPaciente
