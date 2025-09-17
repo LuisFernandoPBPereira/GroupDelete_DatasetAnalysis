@@ -12,6 +12,9 @@ GO
 USE DB_VACINACAO;
 
 GO
+DROP TABLE IF EXISTS PacienteRacaCorPaciente;
+DROP TABLE IF EXISTS PacienteCondicaoMaternal;
+DROP TABLE IF EXISTS PacienteEtniaIndigenaPaciente
 DROP TABLE IF EXISTS PacienteMunicipioPaciente;
 DROP TABLE IF EXISTS VacinaCategoriaAtendimento;
 DROP TABLE IF EXISTS VacinaGrupoAtendimento;
@@ -69,7 +72,8 @@ CREATE TABLE MunicipioPaciente (
     CodigoMunicipioPaciente INT PRIMARY KEY,
     NomeMunicipioPaciente VARCHAR(50),
     SgUfPaciente CHAR(2),
-    NomeUfPaciente VARCHAR(50)
+    NomeUfPaciente VARCHAR(50),
+    NumeroCepPaciente VARCHAR(8)
 );
 
 CREATE TABLE Paciente (
@@ -77,8 +81,7 @@ CREATE TABLE Paciente (
     TipoSexoPaciente CHAR(1),
     CodigoPaisPaciente INT FOREIGN KEY REFERENCES PaisPaciente(CodigoPaisPaciente),
     NumeroIdadePaciente INT,
-    DescricaoNacionalidadePaciente VARCHAR(100),
-    NumeroCepPaciente VARCHAR(8)
+    DescricaoNacionalidadePaciente VARCHAR(100)
 );
 
 CREATE TABLE MunicipioEstabelecimento (
@@ -99,7 +102,7 @@ CREATE TABLE NaturezaEstabelecimento (
 );
 
 CREATE TABLE Estabelecimento (
-    CodigoCnesEstabelecimento INT PRIMARY KEY,
+    CodigoCnesEstabelecimento CHAR(7) PRIMARY KEY,
     NomeRazaoSocialEstabelecimento VARCHAR(255),
     NomeFantasiaEstalecimento VARCHAR(255),
     CodigoMunicipioEstabelecimento INT FOREIGN KEY REFERENCES MunicipioEstabelecimento(CodigoMunicipioEstabelecimento),
@@ -175,7 +178,7 @@ CREATE TABLE AplicacaoVacina (
     IdAplicacao INT IDENTITY PRIMARY KEY,
     CodigoDocumento CHAR(41) FOREIGN KEY REFERENCES Documento(CodigoDocumento),
     CodigoPaciente CHAR(64) FOREIGN KEY REFERENCES Paciente(CodigoPaciente),
-    CodigoCnesEstabelecimento INT FOREIGN KEY REFERENCES Estabelecimento(CodigoCnesEstabelecimento),
+    CodigoCnesEstabelecimento CHAR(7) FOREIGN KEY REFERENCES Estabelecimento(CodigoCnesEstabelecimento),
     CodigoVacina INT FOREIGN KEY REFERENCES Vacina(CodigoVacina),
     DataVacina DATE
 );
@@ -191,7 +194,7 @@ CREATE TABLE VacinaFabricanteVacina (
 );
 
 CREATE TABLE AplicacaoVacinaEstabelecimento (
-    CodigoCnesEstabelecimento INT NOT NULL,
+    CodigoCnesEstabelecimento CHAR(7) NOT NULL,
     IdAplicacao INT NOT NULL,
     CONSTRAINT PK_AplicacaoVacinaEstabelecimento PRIMARY KEY (CodigoCnesEstabelecimento, IdAplicacao),  
     CONSTRAINT FK_AplicacaoVacinaEstabelecimento_Estabelecimento FOREIGN KEY (CodigoCnesEstabelecimento) REFERENCES Estabelecimento(CodigoCnesEstabelecimento),
@@ -272,6 +275,5 @@ CREATE TABLE PacienteEtniaIndigenaPaciente(
      CodigoEtniaIndigenaPaciente CHAR(4) NOT NULL,
      CONSTRAINT PK_PacienteEtniaIndigenaPaciente PRIMARY KEY (CodigoPaciente,CodigoEtniaIndigenaPaciente),
      CONSTRAINT FK_PacienteEtniaIndigenaPaciente_Paciente FOREIGN KEY (CodigoPaciente) REFERENCES Paciente(CodigoPaciente),
-     CONSTRAINT FK_PacienteEtniaIndigenaPaciente_EtniaIndigenaPaciente FOREIGN KEY (CodigoEtniaIndigenaPaciente) REFERENCES EtniaIndigenaPaciente(CodigoEtniaIndigenaPaciente)
-      
+     CONSTRAINT FK_PacienteEtniaIndigenaPaciente_EtniaIndigenaPaciente FOREIGN KEY (CodigoEtniaIndigenaPaciente) REFERENCES EtniaIndigenaPaciente(CodigoEtniaIndigenaPaciente)  
 );
