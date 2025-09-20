@@ -185,6 +185,32 @@ SELECT DISTINCT
 FROM vacinacao_jan_2025   -- Tabela de origem importada via BULK INSERT
 WHERE co_vacina IS NOT NULL;   -- Filtro para evitar campos nulos
 
+--Inserindo dados distintos na tabela Documento
+INSERT INTO Documento 
+	(
+		CodigoDocumento, 
+		CodigoPaciente, 
+		CodigoTrocaDocumento, 
+		StDocumento, 
+		DataEntradaRnDescricao, 
+		DataDeletadoRnDescricao, 
+		CodigoSistemaOrigem, 
+		CodigoOrigemRegistro, 
+		CodigoEstrategiaVacinacao
+	)
+SELECT DISTINCT
+	CAST(TRIM(co_documento) AS CHAR(41)),
+	CAST(TRIM(co_paciente) AS CHAR(64)),
+	CAST(TRIM(co_troca_documento) AS CHAR(41)),
+	CAST(TRIM(st_documento) AS VARCHAR(20)),
+	CAST(TRIM(dt_entrada_rnds) AS DATETIME2),
+	CAST(TRIM(dt_deletado_rnds) AS DATETIME2),
+	CAST(TRIM(co_sistema_origem) AS INT),
+	CAST(TRIM(co_origem_registro) AS INT),
+	CAST(TRIM(co_estrategia_vacinacao) AS INT)
+FROM vacinacao_jan_2025
+WHERE co_documento IS NOT NULL
+
 -- Inserindo dados distintos na tabela AplicacaoVacina
 INSERT INTO AplicacaoVacina (CodigoDocumento, CodigoPaciente, CodigoCnesEstabelecimento, CodigoVacina, DataVacina)
 SELECT DISTINCT
