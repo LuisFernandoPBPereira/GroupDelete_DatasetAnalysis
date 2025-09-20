@@ -179,7 +179,7 @@ WHERE co_vacina_categoria_atendimento IS NOT NULL;  -- Filtro para evitar campos
 INSERT INTO Vacina (CodigoVacina, DescricaoVacina, SgVacina, CodigoLoteVacina)
 SELECT DISTINCT 
 	CAST(co_vacina AS INT),   -- Conversão de NCHAR para INT
-	CAST(ds_vacina AS VARCHAR(150),   -- Conversão de NCHAR para VARCHAR(150)
+	CAST(ds_vacina AS VARCHAR(150)),   -- Conversão de NCHAR para VARCHAR(150)
 	CAST(sg_vacina AS VARCHAR(50)),   -- Conversão de NCHAR para VARCHAR(50)
 	CAST(co_lote_vacina AS VARCHAR(100))   ---- Conversão de NCHAR para VARCHAR(100)
 FROM vacinacao_jan_2025   -- Tabela de origem importada via BULK INSERT
@@ -188,8 +188,8 @@ WHERE co_vacina IS NOT NULL;   -- Filtro para evitar campos nulos
 -- Inserindo dados distintos na tabela AplicacaoVacina
 INSERT INTO AplicacaoVacina (CodigoDocumento, CodigoPaciente, CodigoCnesEstabelecimento, CodigoVacina, DataVacina)
 SELECT DISTINCT
-       CAST(st_documento AS CHAR(41),        -- Conversão de NVARCHAR para CHAR(41)
-       CAST(co_paciente AS CHAR(64),         -- Conversão de NVARCHAR para CHAR(64)
+       CAST(st_documento AS CHAR(41)),        -- Conversão de NVARCHAR para CHAR(41)
+       CAST(co_paciente AS CHAR(64)),         -- Conversão de NVARCHAR para CHAR(64)
        CAST(co_cnes_estabelecimento AS INT),          -- Conversão DE NCHAR para INT 
        CAST(co_vacina AS INT),                        -- Conversão DE NCHAR para INT 
        CAST(dt_vacina AS DATE)                        -- Conversão DE VARCHAR para DATE 
@@ -208,8 +208,9 @@ WHERE co_vacina_fabricante IS NOT NULL;  -- Filtro para evitar campos nulos
 INSERT INTO AplicacaoVacinaEstabelecimento (CodigoCnesEstabelecimento, IdAplicacao)
 SELECT DISTINCT
        CAST(v.co_cnes_estabelecimento AS INT),   -- Conversão de NVARCHAR para INT 
-       CAST(v.IdAplicacao AS INT)       -- Conversão de NVARCHAR para INT
+       CAST(av.IdAplicacao AS INT)       -- Conversão de NVARCHAR para INT
 FROM vacinacao_jan_2025 v
+INNER JOIN AplicacaoVacina av on av.CodigoCnesEstabelecimento = v.co_cnes_estabelecimento
 WHERE v.co_cnes_estabelecimento IS NOT NULL;  -- Filtro para evitar campos nulos
 
 -- Inserindo dados distintos na tabela VacinaLocalAplicacao
@@ -227,3 +228,83 @@ SELECT DISTINCT
        CAST(co_dose_vacina AS INT)       -- Conversão de NVARCHAR para INT
 FROM vacinacao_jan_2025
 WHERE co_vacina IS NOT NULL AND co_dose_vacina IS NOT NULL;  -- Filtro para evitar campos nulos
+
+-- Inserindo dados distintos na tabela VacinaViaAdministracao
+INSERT INTO VacinaViaAdministracao(CodigoVacina, CodigoViaAdministracao)
+SELECT DISTINCT
+	CAST(TRIM(co_vacina) AS INT),
+	CAST(TRIM(co_via_administracao) AS INT)
+FROM vacinacao_jan_2025
+WHERE co_vacina IS NOT NULL AND co_via_administracao IS NOT NULL; 
+
+-- Inserindo dados distintos na tabela VacinaGrupoAtendimento
+INSERT INTO VacinaGrupoAtendimento (CodigoVacina, CodigoVacinaGrupoAtendimento)
+SELECT DISTINCT 
+	CAST(TRIM(co_vacina) AS INT),
+	CAST(TRIM(co_vacina_grupo_atendimento) AS INT)
+FROM vacinacao_jan_2025
+WHERE co_vacina IS NOT NULL AND co_vacina_grupo_atendimento IS NOT NULL;
+
+-- Inserindo dados distintos na tabela CategoriaAtendimento
+INSERT INTO VacinaCategoriaAtendimento (CodigoVacina, CodigoVacinaCategoriaAtendimento)
+SELECT DISTINCT
+	CAST(TRIM(co_vacina) AS INT),
+	CAST(TRIM(co_vacina_categoria_atendimento) AS INT)
+FROM vacinacao_jan_2025
+WHERE co_vacina IS NOT NULL AND co_vacina_categoria_atendimento IS NOT NULL;
+
+-- Inserindo dados distintos na tabela PacienteMunicipioPaciente
+INSERT INTO PacienteMunicipioPaciente(CodigoPaciente, CodigoMunicipioPaciente)
+SELECT DISTINCT
+	CAST(TRIM(co_paciente) AS char(64)),
+	CAST(TRIM(co_municipio_paciente) AS INT)
+FROM vacinacao_jan_2025
+WHERE co_paciente IS NOT NULL AND co_municipio_paciente IS NOT NULL;
+
+-- Inserindo dados distintos na tabela CategoriaAtendimento
+INSERT INTO VacinaCategoriaAtendimento (CodigoVacina, CodigoVacinaCategoriaAtendimento)
+SELECT DISTINCT
+	CAST(TRIM(co_vacina) AS INT),
+	CAST(TRIM(co_vacina_categoria_atendimento) AS INT)
+FROM vacinacao_jan_2025
+WHERE co_vacina IS NOT NULL AND co_vacina_categoria_atendimento IS NOT NULL;
+
+-- Inserindo dados distintos na tabela PacienteRacaCorPaciente
+INSERT INTO PacienteRacaCorPaciente(CodigoPaciente, CodigoRacaCorPaciente)
+SELECT DISTINCT
+	CAST(TRIM(co_paciente) AS CHAR(64)),
+	CAST(TRIM(co_raca_cor_paciente) AS INT)
+FROM vacinacao_jan_2025
+WHERE co_paciente IS NOT NULL AND co_raca_cor_paciente IS NOT NULL;
+
+-- Inserindo dados distintos na tabela PacienteCondicaoMaternal
+INSERT INTO PacienteCondicaoMaternal(CodigoPaciente, CodigoCondicaoMaternal)
+SELECT DISTINCT
+	CAST(TRIM(co_paciente) AS CHAR(64)),
+	CAST(TRIM(co_condicao_maternal) AS INT)
+FROM vacinacao_jan_2025
+WHERE co_paciente IS NOT NULL AND co_condicao_maternal IS NOT NULL;
+
+-- Inserindo dados distintos na tabela PacienteEtniaIndigenaPaciente
+INSERT INTO PacienteEtniaIndigenaPaciente(CodigoPaciente, CodigoEtniaIndigenaPaciente)
+SELECT DISTINCT
+	CAST(TRIM(co_paciente) AS CHAR(64)),
+	CAST(TRIM(co_etnia_indigena_paciente) AS CHAR(4))
+FROM vacinacao_jan_2025
+WHERE co_paciente IS NOT NULL AND co_etnia_indigena_paciente IS NOT NULL;
+
+-- Inserindo dados distintos na tabela PacienteEtniaIndigenaPaciente
+INSERT INTO PacienteEtniaIndigenaPaciente(CodigoPaciente, CodigoEtniaIndigenaPaciente)
+SELECT DISTINCT
+	CAST(TRIM(co_paciente) AS CHAR(64)),
+	CAST(TRIM(co_etnia_indigena_paciente) AS CHAR(4))
+FROM vacinacao_jan_2025
+WHERE co_paciente IS NOT NULL AND co_etnia_indigena_paciente IS NOT NULL;
+
+-- Inserindo dados distintos na tabela PacientePaisPaciente
+INSERT INTO PacientePaisPaciente(CodigoPaciente, CodigoPaisPaciente)
+SELECT DISTINCT
+	CAST(TRIM(co_paciente) AS CHAR(64)),
+	CAST(TRIM(co_pais_paciente) AS INT)
+FROM vacinacao_jan_2025
+WHERE co_paciente IS NOT NULL AND co_pais_paciente IS NOT NULL;
