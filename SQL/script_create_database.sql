@@ -271,3 +271,10 @@ CREATE TABLE PacientePaisPaciente(
      CONSTRAINT FK_PacientePaisPaciente_Paciente FOREIGN KEY (CodigoPaciente) REFERENCES Paciente(CodigoPaciente),
      CONSTRAINT FK_PacientePaisPaciente_CodigoPaisPaciente FOREIGN KEY (CodigoPaisPaciente) REFERENCES PaisPaciente (CodigoPaisPaciente)  
 );
+
+CREATE TABLE EstabelecimentoTipoEstabelecimento(
+    CodigoCnesEstabelecimento CHAR(7) NOT NULL,
+    CodigoTipoEstabelecimento INT NOT NULL,
+    CONSTRAINT FK_EstabelecimentoTipoEstabelecimento_Estabelecimento FOREIGN KEY (CodigoCnesEstabelecimento) REFERENCES Estabelecimento(CodigoCnesEstabelecimento),
+    CONSTRAINT FK_EstabelecimentoTipoEstabelecimento_TipoEstabelecimento FOREIGN KEY (CodigoTipoEstabelecimento) REFERENCES TipoEstabelecimento(CodigoTipoEstabelecimento)
+);
