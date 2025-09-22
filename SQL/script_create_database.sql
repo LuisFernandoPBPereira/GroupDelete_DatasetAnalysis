@@ -12,6 +12,8 @@ GO
 USE DB_VACINACAO;
 
 GO
+DROP TABLE IF EXISTS EstabelecimentoNaturezaEstabelecimento;
+DROP TABLE IF EXISTS EstabelecimentoTipoEstabelecimento; 
 DROP TABLE IF EXISTS PacientePaisPaciente;
 DROP TABLE IF EXISTS PacienteRacaCorPaciente;
 DROP TABLE IF EXISTS PacienteCondicaoMaternal;
@@ -277,4 +279,11 @@ CREATE TABLE EstabelecimentoTipoEstabelecimento(
     CodigoTipoEstabelecimento INT NOT NULL,
     CONSTRAINT FK_EstabelecimentoTipoEstabelecimento_Estabelecimento FOREIGN KEY (CodigoCnesEstabelecimento) REFERENCES Estabelecimento(CodigoCnesEstabelecimento),
     CONSTRAINT FK_EstabelecimentoTipoEstabelecimento_TipoEstabelecimento FOREIGN KEY (CodigoTipoEstabelecimento) REFERENCES TipoEstabelecimento(CodigoTipoEstabelecimento)
+);
+
+CREATE TABLE EstabelecimentoNaturezaEstabelecimento(
+    CodigoCnesEstabelecimento CHAR(7) NOT NULL,
+    CodigoNaturezaEstabelecimento INT NOT NULL,
+    CONSTRAINT FK_EstabelecimentoNaturezaEstabelecimento_Estabelecimento FOREIGN KEY (CodigoCnesEstabelecimento) REFERENCES Estabelecimento (CodigoCnesEstabelecimento),
+    CONSTRAINT FK_EstabelecimentoNaturezaEstabelecimento_NaturezaEstabelecimento FOREIGN KEY (CodigoNaturezaEstabelecimento) REFERENCES NaturezaEstabelecimento (CodigoNaturezaEstabelecimento)
 );
