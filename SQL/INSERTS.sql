@@ -88,16 +88,37 @@ FROM vacinacao_jan_2025 v
 WHERE v.co_natureza_estabelecimento IS NOT NULL
 
 -- Inserindo dados distintos na tabela Estabelecimento
-INSERT INTO Estabelecimento (CodigoCnesEstabelecimento, NomeRazaoSocialEstabelecimento, NomeFantasiaEstalecimento, CodigoMunicipioEstabelecimento, CodigoTipoEstabelecimento, CodigoNaturezaEstabelecimento)
-SELECT DISTINCT
-    CAST(co_cnes_estabelecimento AS INT),
+ -- O ; evita erros de executação da WITH 
+;WITH EstabelecimentoNumerado AS ( -- Inicia a definição de uma tabela temporária (CTE)
+    SELECT
+        v.co_cnes_estabelecimento,
+        v.no_razao_social_estabelecimento,
+        v.no_fantasia_estalecimento,
+        v.co_municipio_estabelecimento,
+        ROW_NUMBER() OVER (   -- Cria uma nova coluna com um número sequencial para cada linha.
+            PARTITION BY v.co_cnes_estabelecimento -- Define os grupos de dados. A numeração vai reiniciar para cada novo co_cnes_estabelecimento.
+            ORDER BY v.co_cnes_estabelecimento DESC -- Ordem decrescente para que o ultimo registro seja o primeiro
+        ) AS rn
+    FROM 
+        vacinacao_jan_2025 v -- Tabela de origem dos dados (dataset)
+    WHERE 
+        v.co_cnes_estabelecimento IS NOT NULL AND v.no_razao_social_estabelecimento IS NOT NULL -- Filtro para impedir nulos
+)
+INSERT INTO Estabelecimento (
+    CodigoCnesEstabelecimento, 
+    NomeRazaoSocialEstabelecimento, 
+    NomeFantasiaEstalecimento, 
+    CodigoMunicipioEstabelecimento
+)
+SELECT
+    CAST(co_cnes_estabelecimento AS CHAR(7)),
     CAST(no_razao_social_estabelecimento AS VARCHAR(255)),
-    CAST(no_fantasia_estabelecimento AS VARCHAR(255)),
-    CAST(co_municipio_estabelecimento AS INT),
-    CAST(co_tipo_estabelecimento AS INT),
-    CAST(co_natureza_estabelecimento AS INT)
-FROM vacinacao_jan_2025 v
-WHERE v.co_cnes_estabelecimento IS NOT NULL
+    CAST(no_fantasia_estalecimento AS VARCHAR(255)),
+    CAST(co_municipio_estabelecimento AS INT)
+FROM 
+    EstabelecimentoNumerado
+WHERE 
+    rn = 1;
 
 -- Inserindo dados distintos na tabela SistemaOrigem
 INSERT INTO dbo.SistemaOrigem (CodigoSistemaOrigem, DescricaoSistemaOrigem)
@@ -334,3 +355,4 @@ SELECT DISTINCT
 	CAST(TRIM(co_pais_paciente) AS INT)
 FROM vacinacao_jan_2025
 WHERE co_paciente IS NOT NULL AND co_pais_paciente IS NOT NULL;
+
