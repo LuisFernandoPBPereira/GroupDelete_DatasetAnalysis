@@ -106,8 +106,6 @@ CREATE TABLE Estabelecimento (
     NomeRazaoSocialEstabelecimento VARCHAR(255),
     NomeFantasiaEstalecimento VARCHAR(255),
     CodigoMunicipioEstabelecimento INT FOREIGN KEY REFERENCES MunicipioEstabelecimento(CodigoMunicipioEstabelecimento),
-    CodigoTipoEstabelecimento INT FOREIGN KEY REFERENCES TipoEstabelecimento(CodigoTipoEstabelecimento),
-    CodigoNaturezaEstabelecimento INT FOREIGN KEY REFERENCES NaturezaEstabelecimento(CodigoNaturezaEstabelecimento)
 );
 
 CREATE TABLE SistemaOrigem (
