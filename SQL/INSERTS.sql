@@ -147,30 +147,33 @@ WHERE v.co_estrategia_vacinacao IS NOT NULL
 GROUP BY v.co_estrategia_vacinacao;
 
 --Inserindo dados distintos na tabela Documento
-INSERT INTO Documento 
-	(
-		CodigoDocumento, 
-		CodigoPaciente, 
-		CodigoTrocaDocumento, 
-		StDocumento, 
-		DataEntradaRnDescricao, 
-		DataDeletadoRnDescricao, 
-		CodigoSistemaOrigem, 
-		CodigoOrigemRegistro, 
-		CodigoEstrategiaVacinacao
-	)
+INSERT INTO Documento (
+    CodigoDocumento, 
+    CodigoPaciente, 
+    CodigoTrocaDocumento, 
+    StDocumento, 
+    DataEntradaRnDescricao, 
+    CodigoSistemaOrigem, 
+    CodigoOrigemRegistro, 
+    CodigoEstrategiaVacinacao
+)
 SELECT DISTINCT
-	CAST(TRIM(co_documento) AS CHAR(41)),
-	CAST(TRIM(co_paciente) AS CHAR(64)),
-	CAST(TRIM(co_troca_documento) AS CHAR(41)),
-	CAST(TRIM(st_documento) AS VARCHAR(20)),
-	CAST(TRIM(dt_entrada_rnds) AS DATETIME2),
-	CAST(TRIM(dt_deletado_rnds) AS DATETIME2),
-	CAST(TRIM(co_sistema_origem) AS INT),
-	CAST(TRIM(co_origem_registro) AS INT),
-	CAST(TRIM(co_estrategia_vacinacao) AS INT)
-FROM vacinacao_jan_2025
-WHERE co_documento IS NOT NULL
+    CAST(TRIM(v.co_documento) AS CHAR(41)),
+    CAST(TRIM(v.co_paciente) AS CHAR(64)),
+    CAST(TRIM(v.co_troca_documento) AS CHAR(41)),
+    CAST(TRIM(v.st_documento) AS VARCHAR(20)),
+    CAST(TRIM(v.dt_entrada_rnds) AS DATETIME2),
+    CAST(TRIM(v.co_sistema_origem) AS INT),
+    CAST(TRIM(v.co_origem_registro) AS INT),
+    CAST(TRIM(v.co_estrategia_vacinacao) AS INT)
+FROM 
+    vacinacao_jan_2025 v
+INNER JOIN 
+    Paciente p ON TRIM(v.co_paciente) = p.CodigoPaciente -- Garantir apenas registro dos pacientes da tabela Paciente
+INNER JOIN
+    OrigemRegistro o ON o.CodigoOrigemRegistro = v.co_origem_registro -- Garantir apenas os registro da tabela OrigemRegistro
+WHERE 
+    v.co_documento IS NOT NULL;
 
 -- Inserindo dados distintos na tabela DoseVacina
 INSERT INTO DoseVacina(CodigoDoseVacina,DescricaoDoseVacina)
@@ -355,6 +358,7 @@ SELECT DISTINCT
 	CAST(TRIM(co_pais_paciente) AS INT)
 FROM vacinacao_jan_2025
 WHERE co_paciente IS NOT NULL AND co_pais_paciente IS NOT NULL;
+
 
 
 
