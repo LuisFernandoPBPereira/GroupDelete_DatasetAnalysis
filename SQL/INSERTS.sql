@@ -137,11 +137,11 @@ FROM dbo.vacinacao_jan_2025 AS vj25
 WHERE vj25.co_origem_registro IS NOT NULL AND vj25.ds_origem_registro IS NOT NULL
 
 -- Inserindo dados distintos na tabela EstrategiaVacinacao
- Inserindo dados distintos na tabela EstrategiaVacinacao
 INSERT INTO EstrategiaVacinacao (CodigoEstrategiaVacinacao, DescricaoEstrategiaVacinacao)
 SELECT 
     CAST(TRIM(v.co_estrategia_vacinacao) AS INT), -- Converte para int
     CAST(MIN(TRIM(v.ds_estrategia_vacinacao)) AS VARCHAR(100)) -- Converte para varchar, além disso o primeiro valor daquele código
+FROM vacinacao_jan_2025 v
 WHERE v.co_estrategia_vacinacao IS NOT NULL
   AND v.ds_estrategia_vacinacao IS NOT NULL
 GROUP BY v.co_estrategia_vacinacao;
@@ -355,6 +355,7 @@ SELECT DISTINCT
 	CAST(TRIM(co_pais_paciente) AS INT)
 FROM vacinacao_jan_2025
 WHERE co_paciente IS NOT NULL AND co_pais_paciente IS NOT NULL;
+
 
 
 
