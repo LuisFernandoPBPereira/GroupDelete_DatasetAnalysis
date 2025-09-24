@@ -74,16 +74,16 @@ WHERE
 -- Inserindo dados distintos na tabela TipoEstabelecimento
 INSERT INTO TipoEstabelecimento (CodigoTipoEstabelecimento, DescricaoTipoEstabelecimento)
 SELECT DISTINCT
-    CAST(co_tipo_estabelecimento AS INT),
-    CAST(ds_tipo_estabelecimento AS VARCHAR(100))
+    CAST(TRIM(co_tipo_estabelecimento) AS INT),
+    CAST(TRIM(ds_tipo_estabelecimento) AS VARCHAR(100))
 FROM vacinacao_jan_2025 v
 WHERE v.co_tipo_estabelecimento IS NOT NULL AND V.ds_tipo_estabelecimento IS NOT NULL
 
 -- Inserindo dados distintos na tabela NaturezaEstabelecimento
 INSERT INTO NaturezaEstabelecimento (CodigoNaturezaEstabelecimento, DescricaoNaturezaEstabelecimento)
 SELECT DISTINCT
-    CAST(co_natureza_estabelecimento AS INT),
-    CAST(ds_natureza_estabelecimento AS VARCHAR(100))
+    CAST(TRIM(co_natureza_estabelecimento) AS INT),
+    CAST(TRIM(ds_natureza_estabelecimento) AS VARCHAR(100))
 FROM vacinacao_jan_2025 v
 WHERE v.co_natureza_estabelecimento IS NOT NULL
 
@@ -355,6 +355,7 @@ SELECT DISTINCT
 	CAST(TRIM(co_pais_paciente) AS INT)
 FROM vacinacao_jan_2025
 WHERE co_paciente IS NOT NULL AND co_pais_paciente IS NOT NULL;
+
 
 
 
