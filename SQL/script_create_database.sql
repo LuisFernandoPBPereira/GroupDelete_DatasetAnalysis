@@ -124,7 +124,7 @@ CREATE TABLE EstrategiaVacinacao (
 );
 
 CREATE TABLE Documento (
-    CodigoDocumento CHAR(41) PRIMARY KEY DEFAULT NEWID(),
+    CodigoDocumento CHAR(41) PRIMARY KEY,
     CodigoPaciente CHAR(64) FOREIGN KEY REFERENCES Paciente(CodigoPaciente),
     CodigoTrocaDocumento CHAR(41) NULL,
     StDocumento VARCHAR(20),
