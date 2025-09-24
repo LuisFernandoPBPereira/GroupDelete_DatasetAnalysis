@@ -5,24 +5,24 @@
 -- Inserindo dados distintos na tabela RacaCorPaciente
 INSERT INTO RacaCorPaciente (CodigoRacaCorPaciente, NomeRacaCorPaciente)
 SELECT DISTINCT 
-       CAST(co_raca_cor_paciente AS INT),         -- Conversão de NCHAR para INT 
-       CAST(no_raca_cor_paciente AS VARCHAR(50)) -- Conversão de NVARCHAR para VARCHAR(50) 
+       CAST(TRIM(co_raca_cor_paciente) AS INT),         -- Conversão de NCHAR para INT 
+       CAST(TRIM(no_raca_cor_paciente) AS VARCHAR(50)) -- Conversão de NVARCHAR para VARCHAR(50) 
 FROM vacinacao_jan_2025;                         -- Tabela de origem importada via BULK INSERT
 -- Não precisa de WHERE pois não tem valores nulos
 
 -- Inserindo dados distintos na tabela PaisPaciente
 INSERT INTO PaisPaciente  (CodigoPaisPaciente , NomePaisPaciente )
 SELECT DISTINCT  
-       CAST(co_pais_paciente AS INT), -- Conversão de NVARCHAR para INT
-       CAST(no_pais_paciente AS VARCHAR(100)) -- Conversão de NVARCHAR para VARCHAR(100) 
+       CAST(TRIM(co_pais_paciente) AS INT), -- Conversão de NVARCHAR para INT
+       CAST(TRIM(no_pais_paciente) AS VARCHAR(100)) -- Conversão de NVARCHAR para VARCHAR(100) 
 FROM vacinacao_jan_2025 -- Tabela de origem importada via BULK INSERT
 WHERE vacinacao_jan_2025.co_pais_paciente IS NOT NULL; -- Existe um campo nulo na tabela, então é necessário ter este where
 
 -- Inserindo dados distintos na tabela EtniaIndigenaPaciente
 INSERT INTO EtniaIndigenaPaciente  (CodigoEtniaIndigenaPaciente , NomeEtniaIndigenaPaciente )
 SELECT DISTINCT  
-       CAST(co_etnia_indigena_paciente AS CHAR(4)), -- Conversão de NVARCHAR para CHAR(4) 
-       CAST(no_etnia_indigena_paciente AS VARCHAR(100)) -- Conversão de NVARCHAR para VARCHAR(100) 
+       CAST(TRIM(co_etnia_indigena_paciente) AS CHAR(4)), -- Conversão de NVARCHAR para CHAR(4) 
+       CAST(TRIM(no_etnia_indigena_paciente) AS VARCHAR(100)) -- Conversão de NVARCHAR para VARCHAR(100) 
 FROM vacinacao_jan_2025 -- Tabela de origem importada via BULK INSERT
 WHERE vacinacao_jan_2025.co_etnia_indigena_paciente IS NOT NULL; -- Existe um campo nulo na tabela, então é necessário ter este where
 
@@ -355,5 +355,6 @@ SELECT DISTINCT
 	CAST(TRIM(co_pais_paciente) AS INT)
 FROM vacinacao_jan_2025
 WHERE co_paciente IS NOT NULL AND co_pais_paciente IS NOT NULL;
+
 
 
