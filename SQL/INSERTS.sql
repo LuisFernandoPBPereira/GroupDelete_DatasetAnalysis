@@ -88,7 +88,7 @@ FROM vacinacao_jan_2025 v
 WHERE v.co_natureza_estabelecimento IS NOT NULL
 
 -- Inserindo dados distintos na tabela Estabelecimento
- -- O ; evita erros de executação da WITH 
+-- O ; evita erros de executação da WITH 
 ;WITH EstabelecimentoNumerado AS ( -- Inicia a definição de uma tabela temporária (CTE)
     SELECT
         v.co_cnes_estabelecimento,
@@ -111,10 +111,10 @@ INSERT INTO Estabelecimento (
     CodigoMunicipioEstabelecimento
 )
 SELECT
-    CAST(co_cnes_estabelecimento AS CHAR(7)),
-    CAST(no_razao_social_estabelecimento AS VARCHAR(255)),
-    CAST(no_fantasia_estalecimento AS VARCHAR(255)),
-    CAST(co_municipio_estabelecimento AS INT)
+    CAST(TRIM(co_cnes_estabelecimento) AS CHAR(7)),
+    CAST(TRIM(no_razao_social_estabelecimento) AS VARCHAR(255)),
+    CAST(TRIM(no_fantasia_estalecimento) AS VARCHAR(255)),
+    CAST(TRIM(co_municipio_estabelecimento) AS INT)
 FROM 
     EstabelecimentoNumerado
 WHERE 
@@ -355,6 +355,7 @@ SELECT DISTINCT
 	CAST(TRIM(co_pais_paciente) AS INT)
 FROM vacinacao_jan_2025
 WHERE co_paciente IS NOT NULL AND co_pais_paciente IS NOT NULL;
+
 
 
 
