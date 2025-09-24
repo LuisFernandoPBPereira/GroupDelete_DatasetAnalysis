@@ -63,10 +63,10 @@ GROUP BY
 -- Inserindo dados distintos na tabela MunicipioEstabelecimento
 INSERT INTO MunicipioEstabelecimento (CodigoMunicipioEstabelecimento, NomeMunicipioEstabelecimento, SgUfEstabelecimento, NomeUfEstabelecimento )
 SELECT DISTINCT 
-     CAST(co_municipio_estabelecimento AS INT),         -- Conversão de NCHAR para INT 
-     CAST(no_municipio_estabelecimento AS VARCHAR(50)), -- Conversão de NVARCHAR para VARCHAR(50) 
-	   CAST(sg_uf_estabelecimento AS CHAR(2)),  -- Conversão de NVARCHAR para CHAR(2)
-	   CAST(no_uf_estabelecimento AS VARCHAR(50))  -- Conversão de NVARCHAR para VARCHAR(50)
+     CAST(TRIM(co_municipio_estabelecimento) AS INT),         -- Conversão de NCHAR para INT 
+     CAST(TRIM(no_municipio_estabelecimento) AS VARCHAR(50)), -- Conversão de NVARCHAR para VARCHAR(50) 
+	   CAST(TRIM(sg_uf_estabelecimento) AS CHAR(2)),  -- Conversão de NVARCHAR para CHAR(2)
+	   CAST((no_uf_estabelecimento) AS VARCHAR(50))  -- Conversão de NVARCHAR para VARCHAR(50)
 FROM vacinacao_jan_2025 v
 WHERE
     v.co_municipio_estabelecimento IS NOT NULL AND v.no_municipio_estabelecimento IS NOT NULL
@@ -355,6 +355,5 @@ SELECT DISTINCT
 	CAST(TRIM(co_pais_paciente) AS INT)
 FROM vacinacao_jan_2025
 WHERE co_paciente IS NOT NULL AND co_pais_paciente IS NOT NULL;
-
 
 
