@@ -228,10 +228,12 @@ WHERE co_vacina_categoria_atendimento IS NOT NULL;  -- Filtro para evitar campos
 -- Inserindo dados distintos na tabela Vacina
 INSERT INTO Vacina (CodigoVacina, DescricaoVacina)
 SELECT DISTINCT 
-	CAST(co_vacina AS INT),   -- Conversão de NCHAR para INT
-	CAST(ds_vacina AS VARCHAR(150))   -- Conversão de NCHAR para VARCHAR(150)
+	CAST(TRIM(co_vacina) AS INT),   -- Conversão de NCHAR para INT
+	CAST(TRIM(MAX(ds_vacina)) AS VARCHAR(150))   -- Conversão de NCHAR para VARCHAR(150)
 FROM vacinacao_jan_2025   -- Tabela de origem importada via BULK INSERT
-WHERE co_vacina IS NOT NULL   -- Filtro para evitar campos nulos
+WHERE co_vacina IS NOT NULL  -- Filtro para evitar campos nulos
+GROUP BY 
+	CAST(TRIM(co_vacina) AS INT)
 
 -- Inserindo dados distintos na tabela AplicacaoVacina
 INSERT INTO AplicacaoVacina (CodigoDocumento, CodigoPaciente, CodigoCnesEstabelecimento, CodigoVacina, DataVacina)
@@ -356,6 +358,7 @@ SELECT DISTINCT
 	CAST(TRIM(co_pais_paciente) AS INT)
 FROM vacinacao_jan_2025
 WHERE co_paciente IS NOT NULL AND co_pais_paciente IS NOT NULL;
+
 
 
 
