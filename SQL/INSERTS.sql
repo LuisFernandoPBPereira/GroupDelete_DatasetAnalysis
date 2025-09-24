@@ -29,18 +29,18 @@ WHERE vacinacao_jan_2025.co_etnia_indigena_paciente IS NOT NULL; -- Existe um ca
 -- Inserindo dados distintos na tabela CondicaoMaternal
 INSERT INTO CondicaoMaternal (CodigoCondicaoMaternal, DescricaoCondicaoMaternal)
 SELECT DISTINCT 
-       CAST(co_condicao_maternal AS INT),         -- Conversão de NCHAR para INT 
-       CAST(ds_condicao_maternal AS VARCHAR(50))  -- Conversão de NVARCHAR para VARCHAR(50) 
+       CAST(TRIM(co_condicao_maternal) AS INT),         -- Conversão de NCHAR para INT 
+       CAST(TRIM(ds_condicao_maternal) AS VARCHAR(50))  -- Conversão de NVARCHAR para VARCHAR(50) 
 FROM vacinacao_jan_2025
 WHERE vacinacao_jan_2025.co_condicao_maternal IS NOT NULL -- Filtro para evitar campos nulos 
 
 -- Inserindo dados distintos na tabela MunicipioPaciente
 INSERT INTO MunicipioPaciente (CodigoMunicipioPaciente, NomeMunicipioPaciente, SgUfPaciente, NomeUfPaciente)
 SELECT DISTINCT 
-       CAST(TRIM(co_municipio_paciente AS INT)),          -- Código do município: convertido de NCHAR para INT
-       CAST(TRIM(no_municipio_paciente AS VARCHAR(50))),  -- Nome do município: convertido de NVARCHAR para VARCHAR(50)
-       CAST(TRIM(sg_uf_paciente AS CHAR(2))),             -- Sigla da UF: convertido de NVARCHAR para CHAR(2)
-       CAST(TRIM(no_uf_paciente AS VARCHAR(50)))          -- Nome da UF: convertido de NVARCHAR para VARCHAR(50)
+       CAST(TRIM(co_municipio_paciente) AS INT),          -- Código do município: convertido de NCHAR para INT
+       CAST(TRIM(no_municipio_paciente) AS VARCHAR(50)),  -- Nome do município: convertido de NVARCHAR para VARCHAR(50)
+       CAST(TRIM(sg_uf_paciente) AS CHAR(2)),             -- Sigla da UF: convertido de NVARCHAR para CHAR(2)
+       CAST(TRIM(no_uf_paciente) AS VARCHAR(50))          -- Nome da UF: convertido de NVARCHAR para VARCHAR(50)
 FROM vacinacao_jan_2025 v
 WHERE v.co_municipio_paciente IS NOT NULL AND v.no_municipio_paciente IS NOT NULL  -- "IS NOT NULL" Remove registros com código ou nome de município nulos
   AND v.no_municipio_paciente <> 'CG' --  Exclui 'CG', usado incorretamente no lugar de 'CAMPO GRANDE', 
@@ -63,8 +63,8 @@ GROUP BY
 -- Inserindo dados distintos na tabela MunicipioEstabelecimento
 INSERT INTO MunicipioEstabelecimento (CodigoMunicipioEstabelecimento, NomeMunicipioEstabelecimento, SgUfEstabelecimento, NomeUfEstabelecimento )
 SELECT DISTINCT 
-       CAST(co_municipio_estabelecimento AS INT),         -- Conversão de NCHAR para INT 
-       CAST(no_municipio_estabelecimento AS VARCHAR(50)), -- Conversão de NVARCHAR para VARCHAR(50) 
+     CAST(co_municipio_estabelecimento AS INT),         -- Conversão de NCHAR para INT 
+     CAST(no_municipio_estabelecimento AS VARCHAR(50)), -- Conversão de NVARCHAR para VARCHAR(50) 
 	   CAST(sg_uf_estabelecimento AS CHAR(2)),  -- Conversão de NVARCHAR para CHAR(2)
 	   CAST(no_uf_estabelecimento AS VARCHAR(50))  -- Conversão de NVARCHAR para VARCHAR(50)
 FROM vacinacao_jan_2025 v
@@ -355,5 +355,6 @@ SELECT DISTINCT
 	CAST(TRIM(co_pais_paciente) AS INT)
 FROM vacinacao_jan_2025
 WHERE co_paciente IS NOT NULL AND co_pais_paciente IS NOT NULL;
+
 
 
