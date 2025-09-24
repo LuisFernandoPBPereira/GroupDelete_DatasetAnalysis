@@ -129,7 +129,6 @@ CREATE TABLE Documento (
     CodigoTrocaDocumento CHAR(41) NULL,
     StDocumento VARCHAR(20),
     DataEntradaRnDescricao DATETIME2,
-    DataDeletadoRnDescricao DATETIME2 NULL,
     CodigoSistemaOrigem INT FOREIGN KEY REFERENCES SistemaOrigem(CodigoSistemaOrigem),
     CodigoOrigemRegistro INT FOREIGN KEY REFERENCES OrigemRegistro(CodigoOrigemRegistro),
     CodigoEstrategiaVacinacao INT FOREIGN KEY REFERENCES EstrategiaVacinacao(CodigoEstrategiaVacinacao)
