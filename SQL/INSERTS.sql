@@ -29,8 +29,8 @@ WHERE vacinacao_jan_2025.co_etnia_indigena_paciente IS NOT NULL; -- Existe um ca
 -- Inserindo dados distintos na tabela CondicaoMaternal
 INSERT INTO CondicaoMaternal (CodigoCondicaoMaternal, DescricaoCondicaoMaternal)
 SELECT DISTINCT 
-       CAST(co_condicao_maternal AS INT),         -- Conversão de NCHAR para INT 
-       CAST(ds_condicao_maternal AS VARCHAR(50))  -- Conversão de NVARCHAR para VARCHAR(50) 
+       CAST(TRIM(co_condicao_maternal) AS INT),         -- Conversão de NCHAR para INT 
+       CAST(TRIM(ds_condicao_maternal) AS VARCHAR(50))  -- Conversão de NVARCHAR para VARCHAR(50) 
 FROM vacinacao_jan_2025
 WHERE vacinacao_jan_2025.co_condicao_maternal IS NOT NULL -- Filtro para evitar campos nulos 
 
@@ -355,4 +355,6 @@ SELECT DISTINCT
 	CAST(TRIM(co_pais_paciente) AS INT)
 FROM vacinacao_jan_2025
 WHERE co_paciente IS NOT NULL AND co_pais_paciente IS NOT NULL;
+
+
 
