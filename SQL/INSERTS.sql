@@ -48,9 +48,9 @@ WHERE v.co_municipio_paciente IS NOT NULL AND v.no_municipio_paciente IS NOT NUL
 -- Inserindo dados distintos na tabela Paciente
 INSERT INTO Paciente (CodigoPaciente, TipoSexoPaciente, NumeroIdadePaciente)
 SELECT DISTINCT
-    CAST(co_paciente AS CHAR(64)), -- Conversão de NCHAR para CHAR(64)
-    CAST(MAX(tp_sexo_paciente) AS CHAR(1)),  -- Conversão de NCHAR para CHAR(1)
-    CAST(MAX(nu_idade_paciente) AS INT)  -- Conversão de NCHAR para INT
+    CAST(TRIM(co_paciente) AS CHAR(64)), -- Conversão de NCHAR para CHAR(64)
+    CAST(MAX(TRIM(tp_sexo_paciente)) AS CHAR(1)),  -- Conversão de NCHAR para CHAR(1)
+    CAST(MAX(TRIM(nu_idade_paciente)) AS INT)  -- Conversão de NCHAR para INT
 FROM 
     vacinacao_jan_2025 v
 WHERE 
@@ -355,6 +355,7 @@ SELECT DISTINCT
 	CAST(TRIM(co_pais_paciente) AS INT)
 FROM vacinacao_jan_2025
 WHERE co_paciente IS NOT NULL AND co_pais_paciente IS NOT NULL;
+
 
 
 
