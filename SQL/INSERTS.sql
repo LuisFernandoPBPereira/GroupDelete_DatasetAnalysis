@@ -276,8 +276,8 @@ WHERE co_local_aplicacao IS NOT NULL;  -- Filtro para evitar campos nulos
 -- Inserindo dados distintos na tabela VacinaDoseVacina
 INSERT INTO VacinaDoseVacina (CodigoVacina, CodigoDoseVacina)
 SELECT DISTINCT
-       CAST(co_vacina AS INT),   -- Conversão de NVARCHAR para INT 
-       CAST(co_dose_vacina AS INT)       -- Conversão de NVARCHAR para INT
+       CAST(TRIM(co_vacina AS INT)),   -- Conversão de NVARCHAR para INT 
+       CAST(TRIM(co_dose_vacina AS INT))       -- Conversão de NVARCHAR para INT
 FROM vacinacao_jan_2025
 WHERE co_vacina IS NOT NULL AND co_dose_vacina IS NOT NULL;  -- Filtro para evitar campos nulos
 
@@ -360,6 +360,7 @@ SELECT DISTINCT
 	CAST(TRIM(co_pais_paciente) AS INT)
 FROM vacinacao_jan_2025
 WHERE co_paciente IS NOT NULL AND co_pais_paciente IS NOT NULL;
+
 
 
 
