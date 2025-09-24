@@ -149,8 +149,8 @@ WHERE co_estrategia_vacinacao IS NOT NULL;  -- Filtro para evitar campos nulos
 -- Inserindo dados distintos na tabela DoseVacina
 INSERT INTO DoseVacina(CodigoDoseVacina,DescricaoDoseVacina)
 SELECT DISTINCT
-    CAST(v.co_dose_vacina AS INT),
-    CAST(v.ds_dose_vacina AS VARCHAR(100))
+    CAST(TRIM(v.co_dose_vacina) AS INT),
+    CAST(TRIM(v.ds_dose_vacina) AS VARCHAR(100))
 FROM
     vacinacao_jan_2025 v
 -- Não precisa de WHERE pois não tem valores nulos
@@ -355,6 +355,7 @@ SELECT DISTINCT
 	CAST(TRIM(co_pais_paciente) AS INT)
 FROM vacinacao_jan_2025
 WHERE co_paciente IS NOT NULL AND co_pais_paciente IS NOT NULL;
+
 
 
 
