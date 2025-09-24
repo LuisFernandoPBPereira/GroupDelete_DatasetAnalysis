@@ -251,16 +251,16 @@ WHERE  co_documento IS NOT NULL;  -- Filtro para evitar valores nulos no campo o
 -- Inserindo dados distintos na tabela VacinaFabricanteVacina
 INSERT INTO VacinaFabricanteVacina (CodigoVacinaFabricante, CodigoVacina)
 SELECT DISTINCT
-       CAST(co_vacina_fabricante AS INT),   -- Conversão de NVARCHAR para INT
-       CAST(co_vacina AS INT)               -- Conversão de NVARCHAR para INT 
+       CAST(TRIM(co_vacina_fabricante) AS INT),   -- Conversão de NVARCHAR para INT
+       CAST(TRIM(co_vacina) AS INT)               -- Conversão de NVARCHAR para INT 
 FROM vacinacao_jan_2025   -- Tabela de origem importada via BULK INSERT
 WHERE co_vacina_fabricante IS NOT NULL;  -- Filtro para evitar campos nulos
 
 -- Inserindo dados distintos na tabela AplicacaoVacinaEstabelecimento
 INSERT INTO AplicacaoVacinaEstabelecimento (CodigoCnesEstabelecimento, IdAplicacao)
 SELECT DISTINCT
-       CAST(v.co_cnes_estabelecimento AS INT),   -- Conversão de NVARCHAR para INT 
-       CAST(av.IdAplicacao AS INT)       -- Conversão de NVARCHAR para INT
+       CAST(TRIM(v.co_cnes_estabelecimento) AS INT),   -- Conversão de NVARCHAR para INT 
+       CAST(TRIM(av.IdAplicacao) AS INT)       -- Conversão de NVARCHAR para INT
 FROM vacinacao_jan_2025 v
 INNER JOIN AplicacaoVacina av on av.CodigoCnesEstabelecimento = v.co_cnes_estabelecimento
 WHERE v.co_cnes_estabelecimento IS NOT NULL;  -- Filtro para evitar campos nulos
@@ -268,16 +268,16 @@ WHERE v.co_cnes_estabelecimento IS NOT NULL;  -- Filtro para evitar campos nulos
 -- Inserindo dados distintos na tabela VacinaLocalAplicacao
 INSERT INTO VacinaLocalAplicacao (CodigoLocalAplicacao, CodigoVacina)
 SELECT DISTINCT
-       CAST(co_local_aplicacao AS INT),   -- Conversão de NVARCHAR para INT 
-       CAST(co_vacina AS INT)             -- Conversão de NVARCHAR para INT
+       CAST(TRIM(co_local_aplicacao) AS INT),   -- Conversão de NVARCHAR para INT 
+       CAST(TRIM(co_vacina) AS INT)             -- Conversão de NVARCHAR para INT
 FROM vacinacao_jan_2025   -- Tabela de origem importada via BULK INSERT
 WHERE co_local_aplicacao IS NOT NULL;  -- Filtro para evitar campos nulos
 
 -- Inserindo dados distintos na tabela VacinaDoseVacina
 INSERT INTO VacinaDoseVacina (CodigoVacina, CodigoDoseVacina)
 SELECT DISTINCT
-       CAST(co_vacina AS INT),   -- Conversão de NVARCHAR para INT 
-       CAST(co_dose_vacina AS INT)       -- Conversão de NVARCHAR para INT
+       CAST(TRIM(co_vacina) AS INT),   -- Conversão de NVARCHAR para INT 
+       CAST(TRIM(co_dose_vacina) AS INT)       -- Conversão de NVARCHAR para INT
 FROM vacinacao_jan_2025
 WHERE co_vacina IS NOT NULL AND co_dose_vacina IS NOT NULL;  -- Filtro para evitar campos nulos
 
@@ -360,6 +360,7 @@ SELECT DISTINCT
 	CAST(TRIM(co_pais_paciente) AS INT)
 FROM vacinacao_jan_2025
 WHERE co_paciente IS NOT NULL AND co_pais_paciente IS NOT NULL;
+
 
 
 
