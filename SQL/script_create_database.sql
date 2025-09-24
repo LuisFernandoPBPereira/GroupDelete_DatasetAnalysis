@@ -166,9 +166,7 @@ CREATE TABLE CategoriaAtendimento (
 
 CREATE TABLE Vacina (
     CodigoVacina INT PRIMARY KEY,
-    DescricaoVacina VARCHAR(150),
-    SgVacina VARCHAR(50),
-    CodigoLoteVacina VARCHAR(100)
+    DescricaoVacina VARCHAR(150)
 );
 
 CREATE TABLE AplicacaoVacina (
