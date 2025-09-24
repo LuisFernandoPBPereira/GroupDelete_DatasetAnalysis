@@ -123,16 +123,16 @@ WHERE
 -- Inserindo dados distintos na tabela SistemaOrigem
 INSERT INTO dbo.SistemaOrigem (CodigoSistemaOrigem, DescricaoSistemaOrigem)
 SELECT DISTINCT
-	CAST(co_sistema_origem AS INT),
-	CAST(ds_sistema_origem AS VARCHAR(150))
+	CAST(TRIM(co_sistema_origem) AS INT),
+	CAST(TRIM(ds_sistema_origem) AS VARCHAR(150))
 FROM dbo.vacinacao_jan_2025 AS vj25
 WHERE vj25.co_sistema_origem IS NOT NULL AND vj25.ds_sistema_origem IS NOT NULL
 
 -- Inserindo dados distintos na tabela OrigemRegistro
 INSERT INTO dbo.OrigemRegistro (CodigoOrigemRegistro, DescricaoOrigemRegistro)
 SELECT DISTINCT
-	CAST(co_origem_registro AS INT),
-	CAST(ds_origem_registro AS VARCHAR(100))
+	CAST(TRIM(co_origem_registro) AS INT),
+	CAST(TRIM(ds_origem_registro) AS VARCHAR(100))
 FROM dbo.vacinacao_jan_2025 AS vj25
 WHERE vj25.co_origem_registro IS NOT NULL AND vj25.ds_origem_registro IS NOT NULL
 
@@ -355,6 +355,7 @@ SELECT DISTINCT
 	CAST(TRIM(co_pais_paciente) AS INT)
 FROM vacinacao_jan_2025
 WHERE co_paciente IS NOT NULL AND co_pais_paciente IS NOT NULL;
+
 
 
 
