@@ -324,44 +324,58 @@ WHERE co_vacina IS NOT NULL AND co_vacina_categoria_atendimento IS NOT NULL;
 -- Inserindo dados distintos na tabela PacienteRacaCorPaciente
 INSERT INTO PacienteRacaCorPaciente(CodigoPaciente, CodigoRacaCorPaciente)
 SELECT DISTINCT
-	CAST(TRIM(co_paciente) AS CHAR(64)),
-	CAST(TRIM(co_raca_cor_paciente) AS INT)
+	CAST(TRIM(co_paciente) AS CHAR(64)),   -- Conversão de NVARCHAR para CHAR(64)
+	CAST(TRIM(co_raca_cor_paciente) AS INT)   -- Conversão de NVARCHAR para INT
 FROM vacinacao_jan_2025
-WHERE co_paciente IS NOT NULL AND co_raca_cor_paciente IS NOT NULL;
+WHERE co_paciente IS NOT NULL AND co_raca_cor_paciente IS NOT NULL;   -- Filtro para evitar campos nulos
 
 -- Inserindo dados distintos na tabela PacienteCondicaoMaternal
 INSERT INTO PacienteCondicaoMaternal(CodigoPaciente, CodigoCondicaoMaternal)
 SELECT DISTINCT
-	CAST(TRIM(co_paciente) AS CHAR(64)),
-	CAST(TRIM(co_condicao_maternal) AS INT)
+	CAST(TRIM(co_paciente) AS CHAR(64)),   -- Conversão de NVARCHAR para CHAR(64)
+	CAST(TRIM(co_condicao_maternal) AS INT)   -- Conversão de NVARCHAR para INT
 FROM vacinacao_jan_2025
-WHERE co_paciente IS NOT NULL AND co_condicao_maternal IS NOT NULL;
+WHERE co_paciente IS NOT NULL AND co_condicao_maternal IS NOT NULL;   -- Filtro para evitar campos nulos
 
 -- Inserindo dados distintos na tabela PacienteEtniaIndigenaPaciente
 INSERT INTO PacienteEtniaIndigenaPaciente(CodigoPaciente, CodigoEtniaIndigenaPaciente)
 SELECT DISTINCT
-	CAST(TRIM(co_paciente) AS CHAR(64)),
-	CAST(TRIM(co_etnia_indigena_paciente) AS CHAR(4))
+	CAST(TRIM(co_paciente) AS CHAR(64)),   -- Conversão de NVARCHAR para CHAR(64)
+	CAST(TRIM(co_etnia_indigena_paciente) AS CHAR(4))   -- Conversão de NVARCHAR para CHAR(4)
 FROM vacinacao_jan_2025
-WHERE co_paciente IS NOT NULL AND co_etnia_indigena_paciente IS NOT NULL;
+WHERE co_paciente IS NOT NULL AND co_etnia_indigena_paciente IS NOT NULL;   -- Filtro para evitar campos nulos
 
 -- Inserindo dados distintos na tabela PacienteEtniaIndigenaPaciente
 INSERT INTO PacienteEtniaIndigenaPaciente(CodigoPaciente, CodigoEtniaIndigenaPaciente)
 SELECT DISTINCT
-	CAST(TRIM(co_paciente) AS CHAR(64)),
-	CAST(TRIM(co_etnia_indigena_paciente) AS CHAR(4))
+	CAST(TRIM(co_paciente) AS CHAR(64)),   -- Conversão de NVARCHAR para CHAR(64)
+	CAST(TRIM(co_etnia_indigena_paciente) AS CHAR(4))   -- Conversão de NVARCHAR para CHAR(4)
 FROM vacinacao_jan_2025
-WHERE co_paciente IS NOT NULL AND co_etnia_indigena_paciente IS NOT NULL;
+WHERE co_paciente IS NOT NULL AND co_etnia_indigena_paciente IS NOT NULL;   -- Filtro para evitar campos nulos
 
 -- Inserindo dados distintos na tabela PacientePaisPaciente
 INSERT INTO PacientePaisPaciente(CodigoPaciente, CodigoPaisPaciente)
 SELECT DISTINCT
-	CAST(TRIM(co_paciente) AS CHAR(64)),
-	CAST(TRIM(co_pais_paciente) AS INT)
+	CAST(TRIM(co_paciente) AS CHAR(64)),   -- Conversão de NVARCHAR para CHAR(64)
+	CAST(TRIM(co_pais_paciente) AS INT)   -- Conversão de NVARCHAR para INT
 FROM vacinacao_jan_2025
-WHERE co_paciente IS NOT NULL AND co_pais_paciente IS NOT NULL;
+WHERE co_paciente IS NOT NULL AND co_pais_paciente IS NOT NULL;   -- Filtro para evitar campos nulos
 
+--Inserindo dados distintos na tabela EstabelecimentoTipoEstabelecimento
+INSERT INTO EstabelecimentoTipoEstabelecimento(CodigoCnesEstabelecimento,CodigoTipoEstabelecimento)
+SELECT DISTINCT 
+    CAST(TRIM(co_cnes_estabelecimento) AS CHAR(7)),   -- Conversão de NVARCHAR para CHAR(7)
+    CAST(TRIM(co_tipo_estabelecimento) AS INT)   -- Conversão de NVARCHAR para INT
+FROM vacinacao_jan_2025
+WHERE co_cnes_estabelecimento IS NOT NULL AND co_tipo_estabelecimento IS NOT NULL;   -- Filtro para evitar campos nulos
 
+--Inserindo dados distintos na tabela EstabelecimentoNaturezaEstabelecimento
+INSERT INTO EstabelecimentoNaturezaEstabelecimento(CodigoCnesEstabelecimento, CodigoNaturezaEstabelecimento) 
+SELECT DISTINCT 
+    CAST(TRIM(co_cnes_estabelecimento) AS CHAR(7)),   -- Conversão de NVARCHAR para CHAR(7)
+    CAST(TRIM(co_natureza_estabelecimento) AS INT)   -- Conversão de NVARCHAR para INT
+FROM vacinacao_jan_2025
+WHERE co_cnes_estabelecimento IS NOT NULL AND co_natureza_estabelecimento IS NOT NULL;   -- Filtro para evitar campos nulos
 
 
 
