@@ -178,13 +178,14 @@ CREATE TABLE AplicacaoVacina (
     DataVacina DATE
 );
 
-
 CREATE TABLE VacinaFabricanteVacina (
     CodigoVacinaFabricante INT NOT NULL,
     CodigoVacina INT NOT NULL,
-    
-    CONSTRAINT FK_VacinaFabricanteVacina_Fabricante FOREIGN KEY (CodigoVacinaFabricante) REFERENCES VacinaFabricante (CodigoVacinaFabricante),
-    CONSTRAINT FK_VacinaFabricanteVacina_Vacina FOREIGN KEY (CodigoVacina) REFERENCES Vacina (CodigoVacina)
+    CONSTRAINT PK_VacinaFabricanteVacina PRIMARY KEY (CodigoVacinaFabricante, CodigoVacina),
+    CONSTRAINT FK_VacinaFabricanteVacina_Fabricante 
+        FOREIGN KEY (CodigoVacinaFabricante) REFERENCES VacinaFabricante (CodigoVacinaFabricante),
+    CONSTRAINT FK_VacinaFabricanteVacina_Vacina 
+        FOREIGN KEY (CodigoVacina) REFERENCES Vacina (CodigoVacina)
 );
 
 CREATE TABLE AplicacaoVacinaEstabelecimento (
