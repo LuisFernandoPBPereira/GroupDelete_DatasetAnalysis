@@ -302,7 +302,9 @@ INSERT INTO VacinaGrupoAtendimento (CodigoVacina, CodigoVacinaGrupoAtendimento)
 SELECT DISTINCT 
 	CAST(TRIM(co_vacina) AS INT),
 	CAST(TRIM(co_vacina_grupo_atendimento) AS INT)
-FROM vacinacao_jan_2025
+FROM vacinacao_jan_2025 VJ
+INNER JOIN Vacina V ON V.CodigoVacina = VJ.co_vacina -- Garante somente vacinas já inseridas na tabela VACINA
+INNER JOIN GrupoAtendimento GA ON GA.CodigoVacinaGrupoAtendimento = VJ.co_vacina_grupo_atendimento -- Garante somente registros já inseridos na tabela GrupoAtendimento
 WHERE co_vacina IS NOT NULL AND co_vacina_grupo_atendimento IS NOT NULL;
 
 -- Inserindo dados distintos na tabela CategoriaAtendimento
@@ -384,6 +386,7 @@ SELECT DISTINCT
     CAST(TRIM(co_natureza_estabelecimento) AS INT)   -- Conversão de NVARCHAR para INT
 FROM vacinacao_jan_2025
 WHERE co_cnes_estabelecimento IS NOT NULL AND co_natureza_estabelecimento IS NOT NULL;   -- Filtro para evitar campos nulos
+
 
 
 
