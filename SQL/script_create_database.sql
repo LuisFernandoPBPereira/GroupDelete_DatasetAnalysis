@@ -201,8 +201,11 @@ CREATE TABLE AplicacaoVacinaEstabelecimento (
 CREATE TABLE VacinaLocalAplicacao (
     CodigoLocalAplicacao INT NOT NULL,
     CodigoVacina INT NOT NULL,
-    CONSTRAINT FK_VacinaLocalAplicacao_LocalAplicacao FOREIGN KEY (CodigoLocalAplicacao) REFERENCES LocalAplicacao(CodigoLocalAplicacao), -- << Altere se o nome da tabela/coluna for outro   
-    CONSTRAINT FK_VacinaLocalAplicacao_Vacina FOREIGN KEY (CodigoVacina) REFERENCES Vacina(CodigoVacina)
+    CONSTRAINT PK_VacinaLocalAplicacao PRIMARY KEY (CodigoLocalAplicacao, CodigoVacina),
+    CONSTRAINT FK_VacinaLocalAplicacao_LocalAplicacao 
+        FOREIGN KEY (CodigoLocalAplicacao) REFERENCES LocalAplicacao(CodigoLocalAplicacao),
+    CONSTRAINT FK_VacinaLocalAplicacao_Vacina 
+        FOREIGN KEY (CodigoVacina) REFERENCES Vacina(CodigoVacina)
 );
 
 CREATE TABLE VacinaDoseVacina(
