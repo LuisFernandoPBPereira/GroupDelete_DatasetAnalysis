@@ -272,8 +272,10 @@ INSERT INTO VacinaLocalAplicacao (CodigoLocalAplicacao, CodigoVacina)
 SELECT DISTINCT
        CAST(TRIM(co_local_aplicacao) AS INT),   -- Conversão de NVARCHAR para INT 
        CAST(TRIM(co_vacina) AS INT)             -- Conversão de NVARCHAR para INT
-FROM vacinacao_jan_2025   -- Tabela de origem importada via BULK INSERT
-WHERE co_local_aplicacao IS NOT NULL;  -- Filtro para evitar campos nulos
+FROM vacinacao_jan_2025 VJ  -- Tabela de origem importada via BULK INSERT
+INNER JOIN Vacina V ON V.CodigoVacina = VJ.co_vacina -- Garante somente vacinas já inseridas na tabela VACINA
+INNER JOIN LocalAplicacao LA ON LA.CodigoLocalAplicacao = VJ.co_local_aplicacao -- Garante somente Locais já inseridos na tabela LocalAplicacao
+WHERE co_local_aplicacao IS NOT NULL AND co_vacina IS NOT NULL;  -- Filtro para evitar campos nulos
 
 -- Inserindo dados distintos na tabela VacinaDoseVacina
 INSERT INTO VacinaDoseVacina (CodigoVacina, CodigoDoseVacina)
@@ -378,6 +380,7 @@ SELECT DISTINCT
     CAST(TRIM(co_natureza_estabelecimento) AS INT)   -- Conversão de NVARCHAR para INT
 FROM vacinacao_jan_2025
 WHERE co_cnes_estabelecimento IS NOT NULL AND co_natureza_estabelecimento IS NOT NULL;   -- Filtro para evitar campos nulos
+
 
 
 
