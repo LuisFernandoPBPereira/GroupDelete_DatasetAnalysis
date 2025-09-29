@@ -353,6 +353,7 @@ SELECT DISTINCT
 	CAST(TRIM(co_paciente) AS CHAR(64)),   -- Conversão de NVARCHAR para CHAR(64)
 	CAST(TRIM(co_etnia_indigena_paciente) AS CHAR(4))   -- Conversão de NVARCHAR para CHAR(4)
 FROM vacinacao_jan_2025
+INNER JOIN PACIENTE P ON V.co_paciente = P.CodigoPaciente
 WHERE co_paciente IS NOT NULL AND co_etnia_indigena_paciente IS NOT NULL;   -- Filtro para evitar campos nulos
 
 -- Inserindo dados distintos na tabela PacienteEtniaIndigenaPaciente
@@ -386,6 +387,7 @@ SELECT DISTINCT
     CAST(TRIM(co_natureza_estabelecimento) AS INT)   -- Conversão de NVARCHAR para INT
 FROM vacinacao_jan_2025
 WHERE co_cnes_estabelecimento IS NOT NULL AND co_natureza_estabelecimento IS NOT NULL;   -- Filtro para evitar campos nulos
+
 
 
 
