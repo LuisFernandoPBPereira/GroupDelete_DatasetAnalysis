@@ -250,42 +250,47 @@ CREATE TABLE VacinaCategoriaAtendimento(
 CREATE TABLE PacienteMunicipioPaciente(
     CodigoPaciente CHAR(64) NOT NULL,
     CodigoMunicipioPaciente INT NOT NULL,
+    CONSTRAINT PK_PacienteMunicipioPaciente PRIMARY KEY (CodigoPaciente, CodigoMunicipioPaciente),
     CONSTRAINT FK_PacienteMunicipioPaciente_Paciente FOREIGN KEY (CodigoPaciente) REFERENCES Paciente(CodigoPaciente),
     CONSTRAINT FK_PacienteMunicipioPaciente_MunicipioPaciente FOREIGN KEY (CodigoMunicipioPaciente) REFERENCES MunicipioPaciente(CodigoMunicipioPaciente)
-
 );
 
 CREATE TABLE PacienteRacaCorPaciente(
     CodigoPaciente CHAR(64) NOT NULL,
     CodigoRacaCorPaciente INT NOT NULL,
+    CONSTRAINT PK_PacienteRacaCorPaciente PRIMARY KEY (CodigoPaciente, CodigoRacaCorPaciente),
     CONSTRAINT FK_PacienteRacaCorPaciente_Paciente FOREIGN KEY (CodigoPaciente) REFERENCES Paciente(CodigoPaciente),
     CONSTRAINT FK_PacienteRacaCorPaciente_RacaCorPaciente FOREIGN KEY (CodigoRacaCorPaciente) REFERENCES RacaCorPaciente(CodigoRacaCorPaciente)
 );
 
 CREATE TABLE PacienteCondicaoMaternal(
-     CodigoPaciente CHAR(64) NOT NULL,
-     CodigoCondicaoMaternal INT NOT NULL,
-     CONSTRAINT FK_PacienteCondicaoMaternal_Paciente FOREIGN KEY (CodigoPaciente) REFERENCES Paciente(CodigoPaciente),
-     CONSTRAINT FK_PacienteCondicaoMaternal_CondicaoMaternal FOREIGN KEY (CodigoCondicaoMaternal) REFERENCES CondicaoMaternal(CodigoCondicaoMaternal)
+    CodigoPaciente CHAR(64) NOT NULL,
+    CodigoCondicaoMaternal INT NOT NULL,
+    CONSTRAINT PK_PacienteCondicaoMaternal PRIMARY KEY (CodigoPaciente, CodigoCondicaoMaternal),
+    CONSTRAINT FK_PacienteCondicaoMaternal_Paciente FOREIGN KEY (CodigoPaciente) REFERENCES Paciente(CodigoPaciente),
+    CONSTRAINT FK_PacienteCondicaoMaternal_CondicaoMaternal FOREIGN KEY (CodigoCondicaoMaternal) REFERENCES CondicaoMaternal(CodigoCondicaoMaternal)
 );
 
 CREATE TABLE PacienteEtniaIndigenaPaciente(
-     CodigoPaciente CHAR(64) NOT NULL,
-     CodigoEtniaIndigenaPaciente CHAR(4) NOT NULL,
-     CONSTRAINT FK_PacienteEtniaIndigenaPaciente_Paciente FOREIGN KEY (CodigoPaciente) REFERENCES Paciente(CodigoPaciente),
-     CONSTRAINT FK_PacienteEtniaIndigenaPaciente_EtniaIndigenaPaciente FOREIGN KEY (CodigoEtniaIndigenaPaciente) REFERENCES EtniaIndigenaPaciente(CodigoEtniaIndigenaPaciente)  
+    CodigoPaciente CHAR(64) NOT NULL,
+    CodigoEtniaIndigenaPaciente CHAR(4) NOT NULL,
+    CONSTRAINT PK_PacienteEtniaIndigenaPaciente PRIMARY KEY (CodigoPaciente, CodigoEtniaIndigenaPaciente),
+    CONSTRAINT FK_PacienteEtniaIndigenaPaciente_Paciente FOREIGN KEY (CodigoPaciente) REFERENCES Paciente(CodigoPaciente),
+    CONSTRAINT FK_PacienteEtniaIndigenaPaciente_EtniaIndigenaPaciente FOREIGN KEY (CodigoEtniaIndigenaPaciente) REFERENCES EtniaIndigenaPaciente(CodigoEtniaIndigenaPaciente)
 );
 
 CREATE TABLE PacientePaisPaciente(
-     CodigoPaciente CHAR(64) NOT NULL,
-     CodigoPaisPaciente INT NOT NULL,
-     CONSTRAINT FK_PacientePaisPaciente_Paciente FOREIGN KEY (CodigoPaciente) REFERENCES Paciente(CodigoPaciente),
-     CONSTRAINT FK_PacientePaisPaciente_CodigoPaisPaciente FOREIGN KEY (CodigoPaisPaciente) REFERENCES PaisPaciente (CodigoPaisPaciente)  
+    CodigoPaciente CHAR(64) NOT NULL,
+    CodigoPaisPaciente INT NOT NULL,
+    CONSTRAINT PK_PacientePaisPaciente PRIMARY KEY (CodigoPaciente, CodigoPaisPaciente),
+    CONSTRAINT FK_PacientePaisPaciente_Paciente FOREIGN KEY (CodigoPaciente) REFERENCES Paciente(CodigoPaciente),
+    CONSTRAINT FK_PacientePaisPaciente_CodigoPaisPaciente FOREIGN KEY (CodigoPaisPaciente) REFERENCES PaisPaciente (CodigoPaisPaciente)
 );
 
 CREATE TABLE EstabelecimentoTipoEstabelecimento(
     CodigoCnesEstabelecimento CHAR(7) NOT NULL,
     CodigoTipoEstabelecimento INT NOT NULL,
+    CONSTRAINT PK_EstabelecimentoTipoEstabelecimento PRIMARY KEY (CodigoCnesEstabelecimento, CodigoTipoEstabelecimento),
     CONSTRAINT FK_EstabelecimentoTipoEstabelecimento_Estabelecimento FOREIGN KEY (CodigoCnesEstabelecimento) REFERENCES Estabelecimento(CodigoCnesEstabelecimento),
     CONSTRAINT FK_EstabelecimentoTipoEstabelecimento_TipoEstabelecimento FOREIGN KEY (CodigoTipoEstabelecimento) REFERENCES TipoEstabelecimento(CodigoTipoEstabelecimento)
 );
@@ -293,6 +298,7 @@ CREATE TABLE EstabelecimentoTipoEstabelecimento(
 CREATE TABLE EstabelecimentoNaturezaEstabelecimento(
     CodigoCnesEstabelecimento CHAR(7) NOT NULL,
     CodigoNaturezaEstabelecimento INT NOT NULL,
+    CONSTRAINT PK_EstabelecimentoNaturezaEstabelecimento PRIMARY KEY (CodigoCnesEstabelecimento, CodigoNaturezaEstabelecimento),
     CONSTRAINT FK_EstabelecimentoNaturezaEstabelecimento_Estabelecimento FOREIGN KEY (CodigoCnesEstabelecimento) REFERENCES Estabelecimento (CodigoCnesEstabelecimento),
     CONSTRAINT FK_EstabelecimentoNaturezaEstabelecimento_NaturezaEstabelecimento FOREIGN KEY (CodigoNaturezaEstabelecimento) REFERENCES NaturezaEstabelecimento (CodigoNaturezaEstabelecimento)
 );
