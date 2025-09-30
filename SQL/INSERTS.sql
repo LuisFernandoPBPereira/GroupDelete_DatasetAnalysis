@@ -334,7 +334,7 @@ SELECT DISTINCT
 	CAST(TRIM(co_raca_cor_paciente) AS INT)   -- Conversão de NVARCHAR para INT
 FROM vacinacao_jan_2025 VJ
 INNER JOIN Paciente P ON P.CodigoPaciente = VJ.co_paciente
-INNER JOIN RacaCorPaciente RCP.CodigoRacaCorPaciente = VJ.co_raca_cor_paciente
+INNER JOIN RacaCorPaciente RCP ON RCP.CodigoRacaCorPaciente = VJ.co_raca_cor_paciente
 WHERE co_paciente IS NOT NULL AND co_raca_cor_paciente IS NOT NULL; -- Filtro para evitar campos nulos
 
 -- Inserindo dados distintos na tabela PacienteCondicaoMaternal
@@ -386,3 +386,4 @@ FROM vacinacao_jan_2025 VJ
 INNER JOIN Estabelecimento E ON E.CodigoCnesEstabelecimento = VJ.co_cnes_estabelecimento
 INNER JOIN NaturezaEstabelecimento NE.CodigoNaturezaEstabelecimento = VJ.co_natureza_estabelecimento
 WHERE co_cnes_estabelecimento IS NOT NULL AND co_natureza_estabelecimento IS NOT NULL;   -- Filtro para evitar campos nulos
+
