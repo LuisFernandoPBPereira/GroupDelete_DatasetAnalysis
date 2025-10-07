@@ -349,7 +349,8 @@ SELECT DISTINCT
     CAST(TRIM(co_natureza_estabelecimento) AS INT)   -- Conversão de NVARCHAR para INT
 FROM vacinacao_jan_2025 VJ
 INNER JOIN Estabelecimento E ON E.CodigoCnesEstabelecimento = VJ.co_cnes_estabelecimento
-INNER JOIN NaturezaEstabelecimento NE.CodigoNaturezaEstabelecimento = VJ.co_natureza_estabelecimento
+INNER JOIN NaturezaEstabelecimento NE ON NE.CodigoNaturezaEstabelecimento = VJ.co_natureza_estabelecimento
 WHERE co_cnes_estabelecimento IS NOT NULL AND co_natureza_estabelecimento IS NOT NULL;   -- Filtro para evitar campos nulos
+
 
 
