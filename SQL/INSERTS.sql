@@ -46,20 +46,35 @@ WHERE v.co_municipio_paciente IS NOT NULL AND v.no_municipio_paciente IS NOT NUL
   AND v.no_municipio_paciente <> 'CG' --  Exclui 'CG', usado incorretamente no lugar de 'CAMPO GRANDE', 
   
 -- Inserindo dados distintos na tabela Paciente
-INSERT INTO Paciente (CodigoPaciente, TipoSexoPaciente, NumeroIdadePaciente)
+INSERT INTO Paciente (
+    CodigoPaciente,
+    TipoSexoPaciente,
+    NumeroIdadePaciente,
+    CodigoMunicipioPaciente,
+    CodigoRacaCorPaciente,
+    CodigoCondicaoMaternal,
+    CodigoEtniaIndigenaPaciente,
+    CodigoPaisPaciente
+)
 SELECT DISTINCT
-    CAST(TRIM(co_paciente) AS CHAR(64)), -- Conversão de NCHAR para CHAR(64)
-    CAST(MAX(TRIM(tp_sexo_paciente)) AS CHAR(1)),  -- Conversão de NCHAR para CHAR(1)
-    CAST(MAX(TRIM(nu_idade_paciente)) AS INT)  -- Conversão de NCHAR para INT
+    CAST(TRIM(co_paciente) AS CHAR(64)),
+    CAST(MAX(TRIM(tp_sexo_paciente)) AS CHAR(1)),
+    CAST(MAX(TRIM(nu_idade_paciente)) AS INT),
+    CAST(MAX(TRIM(co_municipio_paciente)) AS INT),
+    CAST(MAX(TRIM(co_raca_cor_paciente)) AS INT),
+    CAST(MAX(TRIM(co_condicao_maternal)) AS INT),
+    CAST(MAX(TRIM(co_etnia_indigena_paciente)) AS CHAR(4)),
+    CAST(MAX(TRIM(co_pais_paciente)) AS INT)
 FROM 
     vacinacao_jan_2025 v
 WHERE 
-    co_paciente IS NOT NULL AND co_pais_paciente IS NOT NULL -- Impedir nulos
+    co_paciente IS NOT NULL
+    AND co_municipio_paciente IS NOT NULL
+    AND co_raca_cor_paciente IS NOT NULL
+    AND co_pais_paciente IS NOT NULL
 GROUP BY
-    co_paciente,
-    co_pais_paciente,
-    ds_nacionalidade_paciente; 
-  
+    co_paciente;
+
 -- Inserindo dados distintos na tabela MunicipioEstabelecimento
 INSERT INTO MunicipioEstabelecimento (CodigoMunicipioEstabelecimento, NomeMunicipioEstabelecimento, SgUfEstabelecimento, NomeUfEstabelecimento )
 SELECT DISTINCT 
@@ -317,56 +332,6 @@ INNER JOIN Vacina V ON V.CodigoVacina = VJ.co_vacina -- Garante somente vacinas 
 INNER JOIN CategoriaAtendimento CA ON CA.CodigoVacinaCategoriaAtendimento = VJ.co_vacina_categoria_atendimento
 WHERE co_vacina IS NOT NULL AND co_vacina_categoria_atendimento IS NOT NULL;
 
--- Inserindo dados distintos na tabela PacienteMunicipioPaciente
-INSERT INTO PacienteMunicipioPaciente(CodigoPaciente, CodigoMunicipioPaciente)
-SELECT DISTINCT
-	CAST(TRIM(co_paciente) AS char(64)),
-	CAST(TRIM(co_municipio_paciente) AS INT)
-FROM vacinacao_jan_2025 VJ
-INNER JOIN Paciente P ON P.CodigoPaciente = VJ.co_paciente
-INNER JOIN MunicipioPaciente MP ON MP.CodigoMunicipioPaciente = VJ.co_municipio_paciente
-WHERE co_paciente IS NOT NULL AND co_municipio_paciente IS NOT NULL;
-
--- Inserindo dados distintos na tabela PacienteRacaCorPaciente
-INSERT INTO PacienteRacaCorPaciente(CodigoPaciente, CodigoRacaCorPaciente)
-SELECT DISTINCT
-	CAST(TRIM(co_paciente) AS CHAR(64)),   -- Conversão de NVARCHAR para CHAR(64)
-	CAST(TRIM(co_raca_cor_paciente) AS INT)   -- Conversão de NVARCHAR para INT
-FROM vacinacao_jan_2025 VJ
-INNER JOIN Paciente P ON P.CodigoPaciente = VJ.co_paciente
-INNER JOIN RacaCorPaciente RCP ON RCP.CodigoRacaCorPaciente = VJ.co_raca_cor_paciente
-WHERE co_paciente IS NOT NULL AND co_raca_cor_paciente IS NOT NULL; -- Filtro para evitar campos nulos
-
--- Inserindo dados distintos na tabela PacienteCondicaoMaternal
-INSERT INTO PacienteCondicaoMaternal(CodigoPaciente, CodigoCondicaoMaternal)
-SELECT DISTINCT
-	CAST(TRIM(co_paciente) AS CHAR(64)),   -- Conversão de NVARCHAR para CHAR(64)
-	CAST(TRIM(co_condicao_maternal) AS INT)   -- Conversão de NVARCHAR para INT
-FROM vacinacao_jan_2025 VJ
-INNER JOIN Paciente P ON P.CodigoPaciente = VJ.co_paciente
-INNER JOIN CondicaoMaternal CM.CodigoCondicaoMaternal = VJ.co_condicao_maternal
-WHERE co_paciente IS NOT NULL AND co_condicao_maternal IS NOT NULL;   -- Filtro para evitar campos nulos
-
--- Inserindo dados distintos na tabela PacienteEtniaIndigenaPaciente
-INSERT INTO PacienteEtniaIndigenaPaciente(CodigoPaciente, CodigoEtniaIndigenaPaciente)
-SELECT DISTINCT
-	CAST(TRIM(co_paciente) AS CHAR(64)),   -- Conversão de NVARCHAR para CHAR(64)
-	CAST(TRIM(co_etnia_indigena_paciente) AS CHAR(4))   -- Conversão de NVARCHAR para CHAR(4)
-FROM vacinacao_jan_2025 VJ
-INNER JOIN Paciente P ON P.CodigoPaciente = VJ.co_paciente
-INNER JOIN EtniaIndigenaPaciente EIP.CodigoEtniaIndigenaPaciente = VJ.co_etnia_indigena_paciente
-WHERE co_paciente IS NOT NULL AND co_etnia_indigena_paciente IS NOT NULL;   -- Filtro para evitar campos nulos
-
--- Inserindo dados distintos na tabela PacientePaisPaciente
-INSERT INTO PacientePaisPaciente(CodigoPaciente, CodigoPaisPaciente)
-SELECT DISTINCT
-	CAST(TRIM(co_paciente) AS CHAR(64)),   -- Conversão de NVARCHAR para CHAR(64)
-	CAST(TRIM(co_pais_paciente) AS INT)   -- Conversão de NVARCHAR para INT
-FROM vacinacao_jan_2025 VJ
-INNER JOIN Paciente P ON P.CodigoPaciente = VJ.co_paciente
-INNER JOIN PaisPaciente PP ON P.CodigoPaisPaciente = VJ.co_pais_paciente
-WHERE co_paciente IS NOT NULL AND co_pais_paciente IS NOT NULL;   -- Filtro para evitar campos nulos
-
 --Inserindo dados distintos na tabela EstabelecimentoTipoEstabelecimento
 INSERT INTO EstabelecimentoTipoEstabelecimento(CodigoCnesEstabelecimento,CodigoTipoEstabelecimento)
 SELECT DISTINCT 
@@ -386,4 +351,5 @@ FROM vacinacao_jan_2025 VJ
 INNER JOIN Estabelecimento E ON E.CodigoCnesEstabelecimento = VJ.co_cnes_estabelecimento
 INNER JOIN NaturezaEstabelecimento NE.CodigoNaturezaEstabelecimento = VJ.co_natureza_estabelecimento
 WHERE co_cnes_estabelecimento IS NOT NULL AND co_natureza_estabelecimento IS NOT NULL;   -- Filtro para evitar campos nulos
+
 
