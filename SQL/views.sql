@@ -4,10 +4,15 @@ CREATE OR ALTER VIEW vw_MediaIdadePacientes AS
 SELECT 
     FORMAT(AVG(p.NumeroIdadePaciente), 'N2', 'pt-BR') AS MediaIdade
 FROM Paciente p;
+
 -- Total de pacientes vacinados agrupados por gênero
 CREATE OR ALTER VIEW vw_PacientesPorGenero AS
 SELECT 
-    p.TipoSexoPaciente,
+    CASE
+        When p.TipoSexoPaciente = 'M' Then 'Masculino'
+        When p.TipoSexoPaciente = 'F' Then 'Feminino'
+        When p.TipoSexoPaciente = 'I' Then 'Indeterminado'
+    END AS TipoSexoPaciente,
     COUNT(*) AS Total,
     CASE 
         WHEN (COUNT(*) * 100.0 / (SELECT COUNT(*) FROM Paciente)) < 0.01 
