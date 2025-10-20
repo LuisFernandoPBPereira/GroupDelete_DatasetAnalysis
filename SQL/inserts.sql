@@ -354,3 +354,4 @@ WHERE co_cnes_estabelecimento IS NOT NULL AND co_natureza_estabelecimento IS NOT
 
 
 
+
