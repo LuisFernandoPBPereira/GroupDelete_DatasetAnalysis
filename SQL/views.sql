@@ -5,6 +5,8 @@ SELECT
     FORMAT(AVG(p.NumeroIdadePaciente), 'N2', 'pt-BR') AS MediaIdade
 FROM Paciente p;
 
+GO
+
 -- Total de pacientes vacinados agrupados por gênero
 CREATE OR ALTER VIEW vw_PacientesPorGenero AS
 SELECT 
@@ -22,6 +24,8 @@ SELECT
 FROM Paciente p
 GROUP BY p.TipoSexoPaciente;
 
+GO
+
 -- Qual a proporção de pacientes indígenas vacinados e como estão distribuídos por etnias?
 CREATE OR ALTER VIEW vw_PacientesIndigenasPorEtnia AS
 SELECT 
@@ -36,6 +40,8 @@ FROM Paciente p
 INNER JOIN EtniaIndigenaPaciente eip 
     ON p.CodigoEtniaIndigenaPaciente = eip.CodigoEtniaIndigenaPaciente
 GROUP BY eip.NomeEtniaIndigenaPaciente;
+
+GO
 
 -- Como está a distribuição das vacinas por estado e município?
 -- Por estado
@@ -54,6 +60,8 @@ INNER JOIN AplicacaoVacinaEstabelecimento ave ON e.CodigoCnesEstabelecimento = a
 INNER JOIN AplicacaoVacina av ON ave.IdAplicacao = av.IdAplicacao
 GROUP BY me.NomeUfEstabelecimento;
 
+GO
+
 -- Por município
 CREATE OR ALTER VIEW vw_DistribuicaoVacinasPorMunicipio AS
 SELECT 
@@ -71,6 +79,7 @@ INNER JOIN AplicacaoVacinaEstabelecimento ave ON e.CodigoCnesEstabelecimento = a
 INNER JOIN AplicacaoVacina av ON ave.IdAplicacao = av.IdAplicacao
 GROUP BY me.NomeMunicipioEstabelecimento, me.SgUfEstabelecimento;
 
+GO
 
 -- Qual a quantidade de doses aplicadas por fase (1ª, 2ª e reforço)?
 CREATE OR ALTER VIEW vw_DosesAplicadasPorFase AS
@@ -86,6 +95,8 @@ FROM DoseVacina dv
 INNER JOIN VacinaDoseVacina vdv ON dv.CodigoDoseVacina = vdv.CodigoDoseVacina
 INNER JOIN AplicacaoVacina av ON av.CodigoVacina = vdv.CodigoVacina
 GROUP BY dv.DescricaoDoseVacina;
+
+GO
 
 -- Quais vacinas são mais utilizadas e qual a participação de cada fabricante?
 CREATE OR ALTER VIEW vw_VacinasPorFabricante AS
@@ -113,6 +124,8 @@ INNER JOIN VacinaFabricante vf ON acf.CodigoVacinaFabricante = vf.CodigoVacinaFa
 INNER JOIN Vacina v ON acf.CodigoVacina = v.CodigoVacina
 GROUP BY vf.DescricaoVacinaFabricante, v.DescricaoVacina;
 
+GO
+
 -- Como se distribuem as aplicações entre UBS, hospitais e outros estabelecimentos?
 CREATE OR ALTER VIEW vw_AplicacoesPorTipoEstabelecimento AS
 SELECT 
@@ -128,6 +141,8 @@ INNER JOIN EstabelecimentoTipoEstabelecimento ete ON te.CodigoTipoEstabeleciment
 INNER JOIN AplicacaoVacinaEstabelecimento ave ON ete.CodigoCnesEstabelecimento = ave.CodigoCnesEstabelecimento
 GROUP BY te.DescricaoTipoEstabelecimento;
 
+GO
+
 -- Como o número de doses aplicadas evoluiu ao longo do tempo?
 CREATE OR ALTER VIEW vw_EvolucaoVacinasAoLongoDoTempo AS
 SELECT 
@@ -141,6 +156,7 @@ SELECT
 FROM AplicacaoVacina av
 GROUP BY av.DataVacina;
 
+GO
 
 -- Usando views
 SELECT * FROM vw_AplicacoesPorTipoEstabelecimento ORDER BY TotalAplicacoes DESC;
