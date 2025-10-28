@@ -35,7 +35,7 @@ O projeto utiliza um **dataset real de vacinação**, contendo informações det
 
 - **Dataset**: Vacinação - Janeiro 2025 [PNI - Programa Nacional de Imunizações (2025)](https://dados.gov.br/dados/conjuntos-dados/doses-aplicadas-pelo-programa-de-nacional-de-imunizacoes-pni-2025)
 - **Dicionário de Dados (do dataset)**: [Documento Oficial PDF](https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/dbbni/Dicionario_tb_ria_rotina.pdf)
-- **Dicionário de Dados (do projeto)**: [Dicionário de Dados](https://www.notion.so/Dicion-rio-de-Dados-25cd1f25e22f80bd83dadac84c6566b2)
+- **Dicionário de Dados (do projeto)**: [Dicionário de Dados](https://www.notion.so/Dicion-rio-de-Dados-29ad1f25e22f80709753e991a5beebd4?source=copy_link)
 - **De/Para**: [Mapeamento do dataset para a base de dados](https://www.notion.so/De-Para-2665f029a09a80d2bb44eb48df10a2a4?source=copy_link)
 
 ### 📂 Acesso ao Dataset
@@ -63,7 +63,7 @@ Para acessar o dataset, siga um dos caminhos abaixo:
 
 O dataset possui diversas colunas representando informações sobre pacientes, vacinas e unidades de saúde.  
 
-📄 Para a lista completa, consulte o [dicionário de dados](https://www.notion.so/Dicion-rio-de-Dados-25cd1f25e22f80bd83dadac84c6566b2).  
+📄 Para a lista completa, consulte o [dicionário de dados](https://www.notion.so/Dicion-rio-de-Dados-29ad1f25e22f80709753e991a5beebd4?source=copy_link).  
 
 ### Exemplos de colunas:
 - `CodigoRacaCorPaciente`  
