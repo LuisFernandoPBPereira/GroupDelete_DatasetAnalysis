@@ -172,14 +172,32 @@ Após importar todos os dados a partir do arquivo CSV, é hora de populá-los na
 Siga as etapas abaixo na ordem recomendada:
 
 🗃️ Criação das tabelas
+
 Execute o script [`script_create_database.sql`](https://github.com/LuisFernandoPBPereira/GroupDelete_DatasetAnalysis/blob/main/SQL/script_create_database.sql)
- para gerar a estrutura completa do banco de dados (tabelas, chaves primárias e estrangeiras).
+
+- Para gerar a estrutura completa do banco de dados (tabelas, chaves primárias e estrangeiras).
 
 ⚙️ Criação da trigger de logs
+
 Utilize o script [`trigger.sql`](https://github.com/LuisFernandoPBPereira/GroupDelete_DatasetAnalysis/blob/main/SQL/trigger.sql)
- para configurar o mecanismo de registro automático de alterações nas tabelas.
+
+- Para configurar o mecanismo de registro automático de alterações nas tabelas.
 
 📥 Inserção dos dados
-Por fim, execute o script [`inserts.sql`](https://github.com/LuisFernandoPBPereira/GroupDelete_DatasetAnalysis/blob/main/SQL/inserts.sql) ou [`insert_procedures.sql`](https://github.com/LuisFernandoPBPereira/GroupDelete_DatasetAnalysis/blob/main/SQL/insert_procedures.sql)
- para inserir os registros importados nas tabelas correspondentes.
+
+Execute o script [`inserts.sql`](https://github.com/LuisFernandoPBPereira/GroupDelete_DatasetAnalysis/blob/main/SQL/inserts.sql) ou [`insert_procedures.sql`](https://github.com/LuisFernandoPBPereira/GroupDelete_DatasetAnalysis/blob/main/SQL/insert_procedures.sql)
+
+- Para inserir os registros importados nas tabelas correspondentes.
+
+🧾 Criação das views e procedure
+
+Por último, crie todas as views executando o script [`views.sql`](https://github.com/LuisFernandoPBPereira/GroupDelete_DatasetAnalysis/blob/main/SQL/views.sql)
+
+- Essas views facilitam consultas, análises e agregações de dados a partir das tabelas já populadas.
+
+Se necessário, crie também as stored procedures utilizando o script [`insert_procedures.sql`](https://github.com/LuisFernandoPBPereira/GroupDelete_DatasetAnalysis/blob/main/SQL/insert_procedures.sql)
+
+- Essas procedures automatizam processos de inserção e manipulação de dados, tornando o gerenciamento do banco mais eficiente.
+ 
+
 
