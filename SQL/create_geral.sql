@@ -1,3 +1,18 @@
+IF NOT EXISTS (
+    SELECT name 
+    FROM sys.databases 
+    WHERE name = 'DB_VACINACAO'
+)
+BEGIN
+    CREATE DATABASE DB_VACINACAO;
+END
+
+GO
+
+USE DB_VACINACAO;
+
+DROP TABLE IF EXISTS vacinacao_jan_2025;
+
 CREATE TABLE [dbo].[vacinacao_jan_2025] (
 [co_documento] nvarchar(500),
 [co_paciente] nvarchar(500),
