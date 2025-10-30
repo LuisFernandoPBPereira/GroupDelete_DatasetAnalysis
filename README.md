@@ -189,15 +189,10 @@ Execute o script [`inserts.sql`](https://github.com/LuisFernandoPBPereira/GroupD
 
 - Para inserir os registros importados nas tabelas correspondentes.
 
-🧾 Criação das views e procedure
+🧾 Criação das views
 
 Por último, crie todas as views executando o script [`views.sql`](https://github.com/LuisFernandoPBPereira/GroupDelete_DatasetAnalysis/blob/main/SQL/views.sql)
 
 - Essas views facilitam consultas, análises e agregações de dados a partir das tabelas já populadas.
-
-Se necessário, crie também as stored procedures utilizando o script [`insert_procedures.sql`](https://github.com/LuisFernandoPBPereira/GroupDelete_DatasetAnalysis/blob/main/SQL/insert_procedures.sql)
-
-- Essas procedures automatizam processos de inserção e manipulação de dados, tornando o gerenciamento do banco mais eficiente.
- 
 
 
