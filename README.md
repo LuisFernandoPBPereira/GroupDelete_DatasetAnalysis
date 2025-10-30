@@ -195,4 +195,38 @@ Por último, crie todas as views executando o script [`views.sql`](https://githu
 
 - Essas views facilitam consultas, análises e agregações de dados a partir das tabelas já populadas.
 
+### 🧩 4️⃣ Backup do Banco de Dados
+
+Nesta etapa, disponibilizamos o **backup completo do banco de dados** para facilitar a restauração e o uso do projeto em seu ambiente local.  
+
+> 💡 **Dica:** Certifique-se de ter o **SQL Server Management Studio (SSMS)** instalado e permissões adequadas para restaurar bancos de dados.
+
+---
+
+#### ⚙️ Como restaurar o banco de dados
+
+1. **Baixe** o arquivo `.bak` disponível neste link [`Backup`](https://drive.google.com/file/d/1wO2oXfX2HJhIr3iw2tq7RPaPVDmX98S8/view?usp=sharing).  
+2. **Abra** o **SSMS** e conecte-se à sua instância do SQL Server.  
+3. **Execute** o comando abaixo no painel de consultas, ajustando o caminho conforme o local onde o `.bak` foi salvo.  
+
+```sql
+-- 🔁 Restaura o banco a partir do arquivo .bak
+RESTORE DATABASE [DB_VACINACAO]
+FROM DISK = 'D:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup\DB_VACINACAO_FULL_2025-10-30.bak' -- ⚠️ Verifique o caminho
+WITH REPLACE,       -- Sobrescreve o banco existente (se houver)
+     RECOVERY,      -- Deixa o banco pronto para uso
+     STATS = 10;    -- Exibe o progresso da restauração
+GO
+```
+
+
+> 💡 **OBS¹:** Se o SQL Server impedir a restauração por conexões ativas, coloque o banco em modo single user:
+```sql
+ALTER DATABASE [DB_VACINACAO] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+```
+
+> 💡 **OBS²:** Após concluir a restauração, retorne o banco para o modo multiusuário:
+```sql
+ALTER DATABASE [DB_VACINACAO] SET MULTI_USER;
+```
 
