@@ -233,3 +233,23 @@ ALTER DATABASE [DB_VACINACAO] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
 ALTER DATABASE [DB_VACINACAO] SET MULTI_USER;
 ```
 
+## Dashboard
+
+Disponibilizamos um dashboard para mostrar alguns dos dados obtidos.
+
+### Passo a passo para executar a Dashboard
+
+> [!IMPORTANT]
+> Para executar a Dashboard, é importante que tenha Python em sua máquina na versão 3.12.0
+
+#### 1️⃣ Baixe o arquivo `main.py` e instale suas dependências
+
+Instale as dependências a seguir:
+
+- `pip install pyodbc streamlit pandas plotly`
+
+#### 2️⃣ Executar arquivo
+
+Execute com o seguinte comando:
+
+- `streamlit run main.py`
