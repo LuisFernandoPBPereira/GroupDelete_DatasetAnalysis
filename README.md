@@ -212,10 +212,13 @@ Nesta etapa, disponibilizamos o **backup completo do banco de dados** para facil
 ```sql
 -- 🔁 Restaura o banco a partir do arquivo .bak
 RESTORE DATABASE [DB_VACINACAO]
-FROM DISK = 'D:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup\DB_VACINACAO_FULL_2025-10-30.bak' -- ⚠️ Verifique o caminho
-WITH REPLACE,       -- Sobrescreve o banco existente (se houver)
-     RECOVERY,      -- Deixa o banco pronto para uso
-     STATS = 10;    -- Exibe o progresso da restauração
+FROM DISK = 'C:\SeuDiretorio\DB_VACINACAO_FULL_2025-10-30.bak' -- ⚠️ Verifique o caminho
+WITH 
+    MOVE 'DB_VACINACAO' TO 'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\DB_VACINACAO.mdf', -- Verifique se o caminho para o .mdf exista
+    MOVE 'DB_VACINACAO_log'  TO 'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\DB_VACINACAO_log.ldf', -- Verifique se o caminho para o .ldf exista
+    REPLACE,    -- Sobrescreve o banco existente (se houver)
+    RECOVERY,   -- Deixa o banco pronto para uso
+    STATS = 10  -- Exibe o progresso da restauração
 GO
 ```
 
